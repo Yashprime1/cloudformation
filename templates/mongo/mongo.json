@@ -36,7 +36,7 @@
                             "",
                             [
                                 "#!/bin/bash",    
-                                "sudo apt-get update -y,
+                                "sudo apt-get update -y",
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
@@ -78,7 +78,7 @@
                             "",
                             [
                                 "#!/bin/bash",    
-                                "sudo apt-get update -y,
+                                "sudo apt-get update -y",
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
@@ -120,7 +120,7 @@
                             "",
                             [
                                 "#!/bin/bash",    
-                                "sudo apt-get update -y,
+                                "sudo apt-get update -y",
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
