@@ -7,27 +7,14 @@
                 "stackname":"mum-network",
                 "template":"templates/network/network.json",
                 "parameters":[
-                    {
-                        "ParameterKey":"VpcCidrPrefix",
-                        "ParameterValue":"10.11",
-                        "ResolvedValue": "string"
-                    },
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
+            
                 ]
             },
             {
                 "stackname":"mum-mongo",
                 "template":"templates/mongo/mongo.json",
                 "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
+          
                 ]
             }
         ]

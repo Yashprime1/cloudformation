@@ -3,7 +3,7 @@
     "Paramaters":{
         "RegionPrefix":{
             "Type":"String",
-            "Default":""
+            "Default":"mum"
         }
     },
     "Resources":{

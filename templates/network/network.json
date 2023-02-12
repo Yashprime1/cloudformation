@@ -3,11 +3,11 @@
     "Paramaters":{
         "VpcCidrPrefix":{
             "Type":"String",
-            "Default":""
+            "Default":"10.11"
         },
         "RegionPrefix":{
             "Type":"String",
-            "Default":""
+            "Default":"mum"
         }
     },
     "Resources":{
