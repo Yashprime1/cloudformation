@@ -55,7 +55,8 @@
                                     "Action": [
                                                 "ec2:Describe*",
                                                 "ec2-instance-connect:SendSSHPublicKey"
-                                        ]
+                                        ],
+                                    "Resource": "*"
                                  }
                                 ]
                                 }
