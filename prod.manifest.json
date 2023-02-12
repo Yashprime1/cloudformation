@@ -21,7 +21,7 @@
             },
             {
                 "stackname":"mum-security-group",
-                "template":"templates/security-groups/security-group.json",
+                "template":"templates/security-groups/security-groups.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
