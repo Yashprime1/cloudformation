@@ -13,7 +13,7 @@
     "Mappings": {
         "AWSAMIMapping": {
            "ap-south-1": {
-              "HVM64": "ami-0b69ea66ff7391e8"
+              "HVM64": "ami-0912f71e06545ad88"
            },
            "ap-northeast-2": {
               "HVM64": "ami-0739c1a1119b2c1b9"
