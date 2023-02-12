@@ -1,11 +1,7 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Paramaters":{
-        "VpcCidrPrefix":{
-            "Type":"String",
-            "Default":""
-        },
-        "ReegionPrefix":{
+        "RegionPrefix":{
             "Type":"String",
             "Default":""
         }

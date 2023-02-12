@@ -5,7 +5,7 @@
             "Type":"String",
             "Default":""
         },
-        "ReegionPrefix":{
+        "RegionPrefix":{
             "Type":"String",
             "Default":""
         }
