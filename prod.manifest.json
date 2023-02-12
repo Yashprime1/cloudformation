@@ -5,11 +5,31 @@
         "Stacks":[
             {
                 "stackname":"mum-network",
-                "template":"templates/network/network.json"
+                "template":"templates/network/network.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"VpcCidrPrefixe",
+                        "ParameterValue":"10.11"
+                    },
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum"
+                    }
+                ]
             },
             {
                 "stackname":"mum-network",
-                "template":"templates/mongo/mongo.json"
+                "template":"templates/mongo/mongo.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"VpcCidrPrefixe",
+                        "ParameterValue":"10.11"
+                    },
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum"
+                    }
+                ]
             }
         ]
     }
