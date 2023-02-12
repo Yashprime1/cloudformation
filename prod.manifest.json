@@ -8,7 +8,7 @@
                 "template":"templates/network/network.json",
                 "parameters":[
                     {
-                        "ParameterKey":"VpcCidrPrefixe",
+                        "ParameterKey":"VpcCidrPrefix",
                         "ParameterValue":"10.11"
                     },
                     {
@@ -18,7 +18,7 @@
                 ]
             },
             {
-                "stackname":"mum-network",
+                "stackname":"mum-mongo",
                 "template":"templates/mongo/mongo.json",
                 "parameters":[
                     {
