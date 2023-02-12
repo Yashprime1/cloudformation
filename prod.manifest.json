@@ -9,11 +9,13 @@
                 "parameters":[
                     {
                         "ParameterKey":"VpcCidrPrefix",
-                        "ParameterValue":"10.11"
+                        "ParameterValue":"10.11",
+                        "ResolvedValue": "string"
                     },
                     {
                         "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum"
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
                     }
                 ]
             },
@@ -23,7 +25,8 @@
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum"
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
                     }
                 ]
             }

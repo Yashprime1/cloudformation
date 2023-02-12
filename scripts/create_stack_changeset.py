@@ -57,6 +57,7 @@ ir_client = boto3.client('cloudformation',
 
 def getStackChangeSet(stacks_regionwise,type):
     changesetids = []
+    print(stacks_regionwise)
     for region,stacks in stacks_regionwise.items():
         if region=="ap-south-1":
             client = mu_client
@@ -73,6 +74,8 @@ def getStackChangeSet(stacks_regionwise,type):
             print(os.getcwd()+"/"+path)
             with open(os.getcwd()+"/"+path) as template_file:
                 template_data = json.load(template_file)
+            print
+            print(name,parameters)
             changeset = client.create_change_set(
                 StackName=name,
                 TemplateBody=json.dumps(template_data),
