@@ -1,7 +1,11 @@
 #!/usr/bin/python3
-import sys
-sys.path.append('/home/yashprime/.local/lib/python3.10/site-packages')
+
 #################################  Configuration ##################################
+import subprocess
+subprocess.call("pip3 install boto3", shell=True)
+subprocess.call("pip3 install python-dotenv", shell=True)
+subprocess.call("pip3 install prettytable", shell=True)
+
 import boto3
 import os
 from botocore.config import Config
