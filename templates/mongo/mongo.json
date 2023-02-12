@@ -64,6 +64,17 @@
                 ]
             }
         },
+        "MongoInstacneIamProfile":{
+            "Type":"AWS::IAM::InstanceProfile",
+            "Properties":{
+                "Path":"/",
+                "Roles":[
+                    {
+                        "Ref":"MongoInstacneIamRole"
+                    }
+                ]
+            }
+        }
         "MongoInstancePrimary":{
             "Type":"AWS::EC2::Instance",
             "Properties":{
@@ -76,9 +87,7 @@
             },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
-                    "Roles":[{
-                        "Ref": "MongoInstacneIamRole"
-                    }]
+                    "Ref": "MongoInstacneIamProfile"
                 },
                 "UserData":{
                     "Fn::Base64":{
@@ -131,9 +140,7 @@
             },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
-                    "Roles":[{
-                        "Ref": "MongoInstacneIamRole"
-                    }]
+                    "Ref": "MongoInstacneIamProfile"
                 },
                 "UserData":{
                     "Fn::Base64":{
@@ -186,7 +193,7 @@
             },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
-                    "Ref": "MongoInstacneIamRole"
+                    "Ref": "MongoInstacneIamProfile"
                 },
                 "UserData":{
                     "Fn::Base64":{
