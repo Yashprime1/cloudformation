@@ -64,6 +64,22 @@
                         ]
                     }
                 },
+                "NetworkInterfaces": [ {
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [     {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }],
+                    "SubnetId":  {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                            }
+                    }
+                  } ],
                 "Tags":[
                     {
                         "Key":"Name",
@@ -112,6 +128,22 @@
                         ]
                     }
                 },
+                "NetworkInterfaces": [ {
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [     {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }],
+                    "SubnetId":  {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                            }
+                    }
+                  } ],
                 "Tags":[
                     {
                         "Key":"Name",
@@ -160,6 +192,22 @@
                         ]
                     }
                 },
+                "NetworkInterfaces": [ {
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [     {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }],
+                    "SubnetId":  {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
+                            }
+                    }
+                  } ],
                 "Tags":[
                     {
                         "Key":"Name",
