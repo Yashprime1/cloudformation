@@ -209,25 +209,41 @@
     },
     "Outputs":{
         "RegionVPCId":{
-            "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]},
+            "Export":{
+                "Name":{
+                    "Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]
+                }
+            },
             "Value":{
                 "Ref":"RegionVPC"
             }
         },
         "RegionPublicSubnet1Id":{
-          "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-1-id"]]},
+            "Export":{
+                "Name":{
+                    "Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-1-id"]]
+                }
+            },
             "Value":{
                 "Ref":"RegionPublicSubnet1"
             }
         },
         "RegionPublicSubnet2Id":{    
-            "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-2-id"]]},
+            "Export":{
+                "Name":{
+                    "Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-2-id"]]
+                }
+            },
             "Value":{
                 "Ref":"RegionPublicSubnet2"
             }
         },
         "RegionPublicSubnet3Id":{
-            "Name":{"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-3-id"]]},
+            "Export":{
+                "Name":{
+                    "Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-3-id"]]
+                }
+            },
             "Value":{
                 "Ref":"RegionPublicSubnet3"
             }
