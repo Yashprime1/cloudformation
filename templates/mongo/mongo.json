@@ -88,7 +88,7 @@
                                             "ec2:DescribeTransitGatewayRouteTables",
                                             "ec2:DescribeTransitGatewayVpcAttachments",
                                             "ec2:DescribeTransitGatewayVpcAttachmentPropagations",
-                                            "ec2:DescribeTransitGateway
+                                            "ec2:DescribeTransitGateway"
                                         ]
                                  }
                                 }
