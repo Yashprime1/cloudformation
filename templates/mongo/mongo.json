@@ -53,48 +53,15 @@
                                 {
                                     "Effect": "Allow",
                                     "Action": [
-                                            "ec2:Describe*",
-                                            "ec2:AttachVolume",
-                                            "ec2:DetachVolume",
-                                            "ec2:CreateVolume",
-                                            "ec2:DeleteVolume",
-                                            "ec2:DescribeVolumes",
-                                            "ec2:DescribeSnapshots",
-                                            "ec2:CreateSnapshot",
-                                            "ec2:DeleteSnapshot",
-                                            "ec2:DescribeTags",
-                                            "ec2:CreateTags",
-                                            "ec2:DeleteTags",
-                                            "ec2:DescribeInstances",
-                                            "ec2:DescribeSecurityGroups",
-                                            "ec2:DescribeKeyPairs",
-                                            "ec2:DescribeAvailabilityZones",
-                                            "ec2:DescribeRegions",
-                                            "ec2:DescribeImages",
-                                            "ec2:DescribeVpcs",
-                                            "ec2:DescribeSubnets",
-                                            "ec2:DescribeNetworkInterfaces",
-                                            "ec2:DescribeNetworkAcls",
-                                            "ec2:DescribeRouteTables",
-                                            "ec2:DescribeInternetGateways",
-                                            "ec2:DescribeVpcEndpoints",
-                                            "ec2:DescribeVpcEndpointServices",
-                                            "ec2:DescribeVpcEndpointConnections",
-                                            "ec2:DescribeVpcPeeringConnections",
-                                            "ec2:DescribePrefixLists",
-                                            "ec2:DescribeNetworkInsightsPaths",
-                                            "ec2:DescribeNetworkInsightsAnalyses",
-                                            "ec2:DescribeTransitGatewayAttachments",
-                                            "ec2:DescribeTransitGatewayRouteTables",
-                                            "ec2:DescribeTransitGatewayVpcAttachments",
-                                            "ec2:DescribeTransitGatewayVpcAttachmentPropagations",
-                                            "ec2:DescribeTransitGateway"
+                                                "ec2:Describe*",
+                                                "ec2-instance-connect:SendSSHPublicKey",
                                         ]
                                  }
+                                ]
                                 }
-                            }
+                    }
                 ]
-                        }
+            }
         },
         "MongoInstancePrimary":{
             "Type":"AWS::EC2::Instance",
