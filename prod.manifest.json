@@ -1,0 +1,36 @@
+{
+    "Regions":[
+        {
+            "Name":"mumbai",
+            "StackPrefix":"mum",
+            "Stacks":[
+                {
+                    "Name":"mum-network",
+                    "TemplatePath":"templates/network/network.json",
+                    "Parameters":[]
+                },
+                {
+                    "Name":"mum-mongo",
+                    "TemplatePath":"templates/mongo/mongo.json",
+                    "Parameters":[]
+                }
+            ]
+        },
+        {
+            "Name":"seoul",
+            "StackPrefix":"seo",
+            "Stacks":[
+                {
+                    "Name":"seo-network",
+                    "TemplatePath":"templates/network/network.json",
+                    "Parameters":[]
+                },
+                {
+                    "Name":"seo-mongo",
+                    "TemplatePath":"templates/mongo/mongo.json",
+                    "Parameters":[]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,236 @@
+{
+    "AWSTemplateFormatVersion":"2010-09-09",
+    "Paramaters":{
+        "VpcCidrPrefix":{
+            "Type":"String",
+            "Default":""
+        },
+        "ReegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }
+    },
+    "Resources":{
+        "RegionVPC":{
+            "Type":"AWS::EC2::VPC",
+            "Properties":{
+                "CidrBlock": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref":"VpcCidrPrefix"
+                            },
+                            ".0.0/16"
+                        ]
+                    ]
+                },
+                "EnableDnsSupport":true,
+                "EnableDnsHostnames":true,
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"StackPrefix"
+                                    },
+                                    "-vpc"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPublicSubnet1":{
+            "Type":"AWS::EC2::Subnet",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "CidrBlock":{
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref":"VpcCidrPrefix"
+                            },
+                            ".1.0/24"
+                        ]
+                    ]
+                },
+                "AvailabilityZone":{
+                    "Fn::Select": [
+                        0,
+                        {
+                            "Fn::GetAZs": {"Ref":"AWS::Region"}
+                        }
+                    ]
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-public-subnet-1"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPublicSubnet2":{
+            "Type":"AWS::EC2::Subnet",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "CidrBlock":{
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref":"VpcCidrPrefix"
+                            },
+                            ".2.0/24"
+                        ]
+                    ]
+                },
+                "AvailabilityZone":{
+                    "Fn::Select": [
+                        0,
+                        {
+                            "Fn::GetAZs": {"Ref":"AWS::Region"}
+                        }
+                    ]
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-public-subnet-2"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPublicSubnet3":{
+            "Type":"AWS::EC2::Subnet",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "CidrBlock":{
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref":"VpcCidrPrefix"
+                            },
+                            ".3.0/24"
+                        ]
+                    ]
+                },
+                "AvailabilityZone":{
+                    "Fn::Select": [
+                        0,
+                        {
+                            "Fn::GetAZs": {"Ref":"AWS::Region"}
+                        }
+                    ]
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-public-subnet-3"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionInternetGateway":{
+            "Type":"AWS::EC2::InternetGateway",
+            "Properties":{
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-internet-gateway"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionGatewayAttachment":{
+            "Type":"AWS::EC2::VPCGatewayAttachment",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "InternetGatewayId":{
+                    "Ref":"RegionInternetGateway"
+                }
+            }
+        }
+    }
+    "Outputs":{
+        "RegionVPCId":{
+            "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]},
+            "Value":{
+                "Ref":"RegionVPC"
+            }
+        },
+        "RegionPublicSubnet1Id":{
+          "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-1-id"]]},
+            "Value":{
+                "Ref":"RegionPublicSubnet1"
+            }
+        },
+        "RegionPublicSubnet2Id":{    
+            "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-2-id"]]}
+            "Value":{
+                "Ref":"RegionPublicSubnet2"
+            }
+        },
+        "RegionPublicSubnet3Id":{
+            "Name":{"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-3-id"]]}
+            "Value":{
+                "Ref":"RegionPublicSubnet3"
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "AWSTemplateFormatVersion":"2010-09-09",
+    "Paramaters":{
+        "ReegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }
+    },
+    "Resources":{
+        "MongoInstanceSecurityGroup":{
+            "Type":"AWS::EC2::SecurityGroup",
+            "Properties":{
+                "GroupDescription":"MongoDB Instance Security Group",
+                "VpcId":{
+                    "Fn::ImportValue": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]}
+                }
+            }
+        }
+    }
+    "Outputs":{
+        "MongoInstanceSecurityGroupId":{
+            "Description":"MongoDB Instance Security Group Id",
+            "Name":{
+                "Fn::Join":[
+                    "-",
+                    [
+                        {
+                            "Ref":"RegionPrefix"
+                        },
+                        "MongoInstanceSecurityGroupId"
+                    ]
+                ]
+            },
+            "Value":{
+                "Ref":"MongoInstanceSecurityGroup"
+            }
+        }
+    }
+}

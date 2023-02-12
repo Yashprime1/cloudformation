@@ -1,0 +1,105 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Paramaters":{
+        "VpcCidrPrefix":{
+            "Type":"String",
+            "Default":""
+        },
+        "ReegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }
+    },
+    "Resources":{
+        "MongoInstancePrimary":{
+            "Type":"AWS::EC2::Instance",
+            "Properties":{
+                "ImageId":"ami-0b69ea66ff7391e80",
+                "InstanceType":"t2.micro",
+                "SecurityGroupIds":[{"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId}" }],
+                "SubnetId":{"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-public-subnet-1-id"} }",
+                "UserData":{
+                    "Fn::Base64":{
+                        "Fn::Join":[
+                            "",
+                            [
+                                "#!/bin/bash",    
+                                "sudo apt-get update -y
+                                "sudo amazon-linux-extras install docker -y"
+                                "sudo systemctl start docker"
+                                "docker pull mongo"
+                                "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
+                            ]
+                        ]
+                    }
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"MongoInstance"
+                    }
+                ]
+            }
+        },
+        "MongoInstanceSecondary01":{
+            "Type":"AWS::EC2::Instance",
+            "Properties":{
+                "ImageId":"ami-0b69ea66ff7391e80",
+                "InstanceType":"t2.micro",
+                "SecurityGroupIds":[{"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId}"}],
+                "SubnetId": {"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-public-subnet-2-id"} },
+                "UserData":{
+                    "Fn::Base64":{
+                        "Fn::Join":[
+                            "",
+                            [
+                                "#!/bin/bash",    
+                                "sudo apt-get update -y
+                                "sudo amazon-linux-extras install docker -y"
+                                "sudo systemctl start docker"
+                                "docker pull mongo"
+                                "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
+                            ]
+                        ]
+                    }
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"MongoInstanceSecondary01"
+                    }
+                ]
+            }
+        },
+        "MongoInstanceSecondary02":{
+            "Type":"AWS::EC2::Instance",
+            "Properties":{
+                "ImageId":"ami-0b69ea66ff7391e80",
+                "InstanceType":"t2.micro",
+                "SecurityGroupIds":[{"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId}" }],
+                "SubnetId": {"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-public-subnet-3-id"} },
+                "UserData":{
+                    "Fn::Base64":{
+                        "Fn::Join":[
+                            "",
+                            [
+                                "#!/bin/bash",    
+                                "sudo apt-get update -y
+                                "sudo amazon-linux-extras install docker -y"
+                                "sudo systemctl start docker"
+                                "docker pull mongo"
+                                "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
+                            ]
+                        ]
+                    }
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"MongoInstanceSecondary02"
+                    }
+                ]
+            }
+        }
+    }
+}
