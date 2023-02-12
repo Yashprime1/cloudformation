@@ -36,10 +36,10 @@
                             "",
                             [
                                 "#!/bin/bash",    
-                                "sudo apt-get update -y
-                                "sudo amazon-linux-extras install docker -y"
-                                "sudo systemctl start docker"
-                                "docker pull mongo"
+                                "sudo apt-get update -y,
+                                "sudo amazon-linux-extras install docker -y",
+                                "sudo systemctl start docker",
+                                "docker pull mongo",
                                 "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
                             ]
                         ]
@@ -78,10 +78,10 @@
                             "",
                             [
                                 "#!/bin/bash",    
-                                "sudo apt-get update -y
-                                "sudo amazon-linux-extras install docker -y"
-                                "sudo systemctl start docker"
-                                "docker pull mongo"
+                                "sudo apt-get update -y,
+                                "sudo amazon-linux-extras install docker -y",
+                                "sudo systemctl start docker",
+                                "docker pull mongo",
                                 "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
                             ]
                         ]
@@ -120,10 +120,10 @@
                             "",
                             [
                                 "#!/bin/bash",    
-                                "sudo apt-get update -y
-                                "sudo amazon-linux-extras install docker -y"
-                                "sudo systemctl start docker"
-                                "docker pull mongo"
+                                "sudo apt-get update -y,
+                                "sudo amazon-linux-extras install docker -y",
+                                "sudo systemctl start docker",
+                                "docker pull mongo",
                                 "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
                             ]
                         ]
