@@ -57,7 +57,10 @@
                         ]
                     }
                 },
-                "CidrIp":"0.0.0,0/0",
+                "CidrIp":"0.0.0.0/0",
+                "IpProtocol":"tcp",
+                "FromPort":"27017",
+                "ToPort":"27017"
             }
         }
     }
