@@ -22,10 +22,6 @@
                 "template":"templates/mongo/mongo.json",
                 "parameters":[
                     {
-                        "ParameterKey":"VpcCidrPrefixe",
-                        "ParameterValue":"10.11"
-                    },
-                    {
                         "ParameterKey":"RegionPrefix",
                         "ParameterValue":"mum"
                     }
