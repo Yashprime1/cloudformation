@@ -20,6 +20,28 @@
                 ]
             },
             {
+                "stackname":"mum-security-group",
+                "template":"templates/security-groups/security-group.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
+                "stackname":"mum-mongo-security-group-ingress",
+                "template":"templates/security-groups/ingress/MongoInstanceSecurityGroup.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
                 "stackname":"mum-mongo",
                 "template":"templates/mongo/mongo.json",
                 "parameters":[
