@@ -71,6 +71,7 @@ def getStackChangeSet(stacks_regionwise,type):
                 TemplateBody=json.dumps(template_data),
                 Parameters=parameters,
                 ChangeSetType=type,
+                CAPABILITY_IAM=True,
                 ChangeSetName=name+str(randint(0, 1000000)),
             )
             table = PrettyTable(["Action","Logical ID","Resource Type","Replacement"])
