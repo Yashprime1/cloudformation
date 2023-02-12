@@ -75,7 +75,7 @@
             },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
-                    'Ref': 'MongoInstacneIamRole
+                    'Ref': 'MongoInstacneIamRole"
                 },
                 "UserData":{
                     "Fn::Base64":{
@@ -128,7 +128,7 @@
             },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
-                    'Ref': 'MongoInstacneIamRole
+                    'Ref': 'MongoInstacneIamRole"
                 },
                 "UserData":{
                     "Fn::Base64":{
@@ -181,7 +181,7 @@
             },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
-                    'Ref': 'MongoInstacneIamRole
+                    'Ref': 'MongoInstacneIamRole"
                 },
                 "UserData":{
                     "Fn::Base64":{
