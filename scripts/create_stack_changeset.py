@@ -68,7 +68,8 @@ def getStackChangeSet(stacks_regionwise,type):
             name = stack["stackname"]
             path = stack["template"]
             parameters =  stack["parameters"]
-            print(parameters)
+            parameters.append({})
+            parameters = parameters[:-1]
             print(os.getcwd()+"/"+path)
             with open(os.getcwd()+"/"+path) as template_file:
                 template_data = json.load(template_file)
