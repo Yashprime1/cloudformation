@@ -35,14 +35,6 @@
                ]
             },
                 "InstanceType":"t2.micro",
-                "SecurityGroupIds":[
-                    {
-                        "Fn::ImportValue": 
-                            {
-                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
-                            }
-                    }
-                ],
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -93,14 +85,6 @@
                ]
             },
                 "InstanceType":"t2.micro",
-                "SecurityGroupIds":[
-                    {
-                        "Fn::ImportValue": 
-                            {
-                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
-                            }
-                    }
-                ],
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -151,14 +135,6 @@
                ]
             },
                 "InstanceType":"t2.micro",
-                "SecurityGroupIds":[
-                    {
-                        "Fn::ImportValue": 
-                            {
-                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
-                            }
-                    }
-                ],
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
