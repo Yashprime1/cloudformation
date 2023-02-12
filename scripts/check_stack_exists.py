@@ -1,13 +1,6 @@
 #!/usr/bin/python3
 
 #################################  Configuration ##################################
-import subprocess
-subprocess.call("apt-get update", shell=True)
-subprocess.call("apt-get install python3-pip", shell=True)
-subprocess.call("pip3 install boto3", shell=True)
-subprocess.call("pip3 install python-dotenv", shell=True)
-subprocess.call("pip3 install prettytable", shell=True)
-
 import boto3
 import os
 from botocore.config import Config
