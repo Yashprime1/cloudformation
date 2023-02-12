@@ -43,12 +43,6 @@
                             }
                     }
                 ],
-                "SubnetId":{
-                    "Fn::ImportValue": 
-                        {
-                            "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
-                        }
-                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -107,12 +101,6 @@
                             }
                     }
                 ],
-                "SubnetId":{
-                    "Fn::ImportValue": 
-                        {
-                            "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
-                        }
-                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -171,12 +159,6 @@
                             }
                     }
                 ],
-                "SubnetId":{
-                    "Fn::ImportValue": 
-                        {
-                            "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
-                        }
-                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
