@@ -107,6 +107,9 @@
                ]
             },
                 "InstanceType":"t2.micro",
+                "IamInstanceProfile": {
+                    'Ref': 'MongoInstacneIamRole
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -157,6 +160,9 @@
                ]
             },
                 "InstanceType":"t2.micro",
+                "IamInstanceProfile": {
+                    'Ref': 'MongoInstacneIamRole
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -207,6 +213,9 @@
                ]
             },
                 "InstanceType":"t2.micro",
+                "IamInstanceProfile": {
+                    'Ref': 'MongoInstacneIamRole
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
