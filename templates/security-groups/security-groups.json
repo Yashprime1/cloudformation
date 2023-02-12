@@ -16,20 +16,22 @@
                 }
             }
         }
-    }
+    },
     "Outputs":{
         "MongoInstanceSecurityGroupId":{
             "Description":"MongoDB Instance Security Group Id",
-            "Name":{
-                "Fn::Join":[
-                    "-",
-                    [
-                        {
-                            "Ref":"RegionPrefix"
-                        },
-                        "MongoInstanceSecurityGroupId"
+            "Export":{
+                "Name":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "MongoInstanceSecurityGroupId"
+                        ]
                     ]
-                ]
+                }
             },
             "Value":{
                 "Ref":"MongoInstanceSecurityGroup"
