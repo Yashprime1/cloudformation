@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+import sys
+sys.path.append('/home/yashprime/.local/lib/python3.10/site-packages')
 
 #################################  Configuration ##################################
 
