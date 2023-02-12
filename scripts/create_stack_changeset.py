@@ -67,14 +67,15 @@ def getStackChangeSet(stacks_regionwise,type):
         for stack in stacks:
             name = stack["stackname"]
             path = stack["template"]
-            paramaeters =  stack["parameters"]
+            parameters =  stack["parameters"]
+            print(parameters)
             print(os.getcwd()+"/"+path)
             with open(os.getcwd()+"/"+path) as template_file:
                 template_data = json.load(template_file)
             changeset = client.create_change_set(
                 StackName=name,
                 TemplateBody=json.dumps(template_data),
-                Parameters=paramaeters,
+                Parameters=parameters,
                 ChangeSetType=type,
                 ChangeSetName=name+str(randint(0, 1000000)),
             )
