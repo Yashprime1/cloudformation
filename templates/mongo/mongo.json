@@ -16,8 +16,20 @@
             "Properties":{
                 "ImageId":"ami-0b69ea66ff7391e80",
                 "InstanceType":"t2.micro",
-                "SecurityGroupIds":[{"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId}" }],
-                "SubnetId":{"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-public-subnet-1-id"} }",
+                "SecurityGroupIds":[
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }
+                ],
+                "SubnetId":{
+                    "Fn::ImportValue": 
+                        {
+                            "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                        }
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -36,7 +48,7 @@
                 "Tags":[
                     {
                         "Key":"Name",
-                        "Value":"MongoInstance"
+                        "Value":"MongoInstancePrimary"
                     }
                 ]
             }
@@ -46,8 +58,20 @@
             "Properties":{
                 "ImageId":"ami-0b69ea66ff7391e80",
                 "InstanceType":"t2.micro",
-                "SecurityGroupIds":[{"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId}"}],
-                "SubnetId": {"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-public-subnet-2-id"} },
+                "SecurityGroupIds":[
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }
+                ],
+                "SubnetId":{
+                    "Fn::ImportValue": 
+                        {
+                            "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                        }
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -76,8 +100,20 @@
             "Properties":{
                 "ImageId":"ami-0b69ea66ff7391e80",
                 "InstanceType":"t2.micro",
-                "SecurityGroupIds":[{"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId}" }],
-                "SubnetId": {"Fn::ImportValue": {"Fn::Sub": "${RegionPrefix}-public-subnet-3-id"} },
+                "SecurityGroupIds":[
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }
+                ],
+                "SubnetId":{
+                    "Fn::ImportValue": 
+                        {
+                            "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
+                        }
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[

@@ -206,7 +206,7 @@
                 }
             }
         }
-    }
+    },
     "Outputs":{
         "RegionVPCId":{
             "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]},
@@ -221,13 +221,13 @@
             }
         },
         "RegionPublicSubnet2Id":{    
-            "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-2-id"]]}
+            "Name": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-2-id"]]},
             "Value":{
                 "Ref":"RegionPublicSubnet2"
             }
         },
         "RegionPublicSubnet3Id":{
-            "Name":{"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-3-id"]]}
+            "Name":{"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-public-subnet-3-id"]]},
             "Value":{
                 "Ref":"RegionPublicSubnet3"
             }
