@@ -206,6 +206,147 @@
                 }
             }
         }
+        "RegionPublicSubnet1RouteTable":{
+            "Type":"AWS::EC2::RouteTable",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-public-subnet-1-route-table"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPublicSubnet1RouteTableAssociation":{   
+            "Type":"AWS::EC2::SubnetRouteTableAssociation",
+            "Properties":{
+                "SubnetId":{
+                    "Ref":"RegionPublicSubnet1"
+                },
+                "RouteTableId":{
+                    "Ref":"RegionPublicSubnet1RouteTable"
+                }
+            }
+        },
+        "RegionPublicSubnet2RouteTable": {
+            "Type":"AWS::EC2::RouteTable",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-public-subnet-2-route-table"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPublicSubnet2RouteTableAssociation":{   
+            "Type":"AWS::EC2::SubnetRouteTableAssociation",
+            "Properties":{
+                "SubnetId":{
+                    "Ref":"RegionPublicSubnet2"
+                },
+                "RouteTableId":{
+                    "Ref":"RegionPublicSubnet2RouteTable"
+                }
+            }
+        },
+        "RegionPublicSubnet3RouteTable": {
+            "Type":"AWS::EC2::RouteTable",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-public-subnet-3-route-table"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPublicSubnet3RouteTableAssociation":{   
+            "Type":"AWS::EC2::SubnetRouteTableAssociation",
+            "Properties":{
+                "SubnetId":{
+                    "Ref":"RegionPublicSubnet3"
+                },
+                "RouteTableId":{
+                    "Ref":"RegionPublicSubnet3RouteTable"
+                }
+            }
+        },
+        "RegionPublicSubnet1RouteTableInternetGatewayRoute": {
+            "Type":"AWS::EC2::Route",
+            "Properties":{
+                "RouteTableId":{
+                    "Ref":"RegionPublicSubnet1RouteTable"
+                },
+                "DestinationCidrBlock":"0.0.0.0/0", 
+                "GatewayId":{
+                    "Ref":"RegionInternetGateway"
+                }
+            }
+        },
+        "RegionPublicSubnet2RouteTableInternetGatewayRoute": {
+            "Type":"AWS::EC2::Route",
+            "Properties":{
+                "RouteTableId":{
+                    "Ref":"RegionPublicSubnet2RouteTable"
+                },
+                "DestinationCidrBlock":"0.0.0.0/0", 
+                "GatewayId":{
+                    "Ref":"RegionInternetGateway"
+                }
+            }
+        },
+        "RegionPublicSubnet3RouteTableInternetGatewayRoute": {
+            "Type":"AWS::EC2::Route",
+            "Properties":{
+                "RouteTableId":{
+                    "Ref":"RegionPublicSubnet3RouteTable"
+                },
+                "DestinationCidrBlock":"0.0.0.0/0", 
+                "GatewayId":{
+                    "Ref":"RegionInternetGateway"
+                }
+            }
+        }
     },
     "Outputs":{
         "RegionVPCId":{
