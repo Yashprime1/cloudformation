@@ -53,7 +53,7 @@
                                 {
                                     "Effect": "Allow",
                                     "Action": [
-                                                "ec2:Describe*",
+                                                "ec2:DescribeInstances",
                                                 "ec2-instance-connect:SendSSHPublicKey"
                                         ],
                                     "Resource": "*"
