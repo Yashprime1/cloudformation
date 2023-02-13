@@ -237,32 +237,8 @@
                     "Ref":"RegionPublicSubnet1"
                 },
                 "RouteTableId":{
-                    "Ref":"RegionPublicSubnet1RouteTable"
+                    "Ref":"RegionPublicSubnetRouteTable"
                 }
-            }
-        },
-        "RegionPublicSubnet2RouteTable": {
-            "Type":"AWS::EC2::RouteTable",
-            "Properties":{
-                "VpcId":{
-                    "Ref":"RegionVPC"
-                },
-                "Tags":[
-                    {
-                        "Key":"Name",
-                        "Value":{
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref":"RegionPrefix"
-                                    },
-                                    "-public-subnet-2-route-table"
-                                ]
-                            ]
-                        }
-                    }
-                ]
             }
         },
         "RegionPublicSubnet2RouteTableAssociation":{   
@@ -272,32 +248,8 @@
                     "Ref":"RegionPublicSubnet2"
                 },
                 "RouteTableId":{
-                    "Ref":"RegionPublicSubnet2RouteTable"
+                    "Ref":"RegionPublicSubnetRouteTable"
                 }
-            }
-        },
-        "RegionPublicSubnet3RouteTable": {
-            "Type":"AWS::EC2::RouteTable",
-            "Properties":{
-                "VpcId":{
-                    "Ref":"RegionVPC"
-                },
-                "Tags":[
-                    {
-                        "Key":"Name",
-                        "Value":{
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref":"RegionPrefix"
-                                    },
-                                    "-public-subnet-3-route-table"
-                                ]
-                            ]
-                        }
-                    }
-                ]
             }
         },
         "RegionPublicSubnet3RouteTableAssociation":{   
@@ -307,7 +259,7 @@
                     "Ref":"RegionPublicSubnet3"
                 },
                 "RouteTableId":{
-                    "Ref":"RegionPublicSubnet3RouteTable"
+                    "Ref":"RegionPublicSubnetRouteTable"
                 }
             }
         },
@@ -315,7 +267,7 @@
             "Type":"AWS::EC2::Route",
             "Properties":{
                 "RouteTableId":{
-                    "Ref":"RegionPublicSubnet1RouteTable"
+                    "Ref":"RegionPublicSubnetRouteTable"
                 },
                 "DestinationCidrBlock":"0.0.0.0/0", 
                 "GatewayId":{
@@ -327,7 +279,7 @@
             "Type":"AWS::EC2::Route",
             "Properties":{
                 "RouteTableId":{
-                    "Ref":"RegionPublicSubnet2RouteTable"
+                    "Ref":"RegionPublicSubnetRouteTable"
                 },
                 "DestinationCidrBlock":"0.0.0.0/0", 
                 "GatewayId":{
@@ -339,7 +291,7 @@
             "Type":"AWS::EC2::Route",
             "Properties":{
                 "RouteTableId":{
-                    "Ref":"RegionPublicSubnet3RouteTable"
+                    "Ref":"RegionPublicSubnetRouteTable"
                 },
                 "DestinationCidrBlock":"0.0.0.0/0", 
                 "GatewayId":{
