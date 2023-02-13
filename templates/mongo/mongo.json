@@ -54,9 +54,10 @@
                                     "Effect": "Allow",
                                     "Action": [
                                                 "ec2:DescribeInstances",
-                                                "ec2-instance-connect:SendSSHPublicKey"
+                                                "ec2-instance-connect:SendSSHPublicKey",
+                                                "ssm:StartSession"
                                         ],
-                                    "Resource": "arn:aws:ec2:{'Ref':'AWS::Region'}:{'Ref':'AWS::AccountId'}:instance/*"
+                                    "Resource": "arn:aws:ec2:*:*:instance/*"
                                  }
                                 ]
                                 }
