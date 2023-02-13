@@ -90,6 +90,62 @@
                 "IamInstanceProfile": {
                     "Ref": "MongoInstacneIamProfile"
                 },
+                "Metadata": {
+                    "AWS::CloudFormation::Init": {
+                        "configSets": {
+                            "default": [
+                                "session_manager_access"
+                            ]
+                        },
+                        "session_manager_access": {
+                            "packages": {
+                                "yum": {
+                                    "aws-cli": []
+                                }
+                            },
+                            "files": {
+                                "/etc/aws-ssm/instance-identity": {
+                                    "content": {
+                                        "Fn::Sub": {
+                                            "Fn::Join": [
+                                                "",
+                                                [
+                                                    "{",
+                                                    "  \"document\": \"",
+                                                    {
+                                                        "Fn::GetAtt": [
+                                                            "AWS::CloudFormation::Macro",
+                                                            "Transform"
+                                                        ]
+                                                    },
+                                                    "\"",
+                                                    "}"
+                                                ]
+                                            ]
+                                        }
+                                    },
+                                    "mode": "000400",
+                                    "owner": "root",
+                                    "group": "root"
+                                }
+                            },
+                            "commands": {
+                                "01_session_manager_start": {
+                                    "command": {
+                                        "Fn::Sub": [
+                                            "aws ssm start-session --target ${InstanceId}",
+                                            {
+                                                "InstanceId": {
+                                                    "Ref": "AWS::InstanceId"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -97,8 +153,6 @@
                             [
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
-                                "sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm",
-                                "sudo systemctl start amazon-ssm-agent",
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
@@ -145,6 +199,62 @@
                 "IamInstanceProfile": {
                     "Ref": "MongoInstacneIamProfile"
                 },
+                "Metadata": {
+                    "AWS::CloudFormation::Init": {
+                        "configSets": {
+                            "default": [
+                                "session_manager_access"
+                            ]
+                        },
+                        "session_manager_access": {
+                            "packages": {
+                                "yum": {
+                                    "aws-cli": []
+                                }
+                            },
+                            "files": {
+                                "/etc/aws-ssm/instance-identity": {
+                                    "content": {
+                                        "Fn::Sub": {
+                                            "Fn::Join": [
+                                                "",
+                                                [
+                                                    "{",
+                                                    "  \"document\": \"",
+                                                    {
+                                                        "Fn::GetAtt": [
+                                                            "AWS::CloudFormation::Macro",
+                                                            "Transform"
+                                                        ]
+                                                    },
+                                                    "\"",
+                                                    "}"
+                                                ]
+                                            ]
+                                        }
+                                    },
+                                    "mode": "000400",
+                                    "owner": "root",
+                                    "group": "root"
+                                }
+                            },
+                            "commands": {
+                                "01_session_manager_start": {
+                                    "command": {
+                                        "Fn::Sub": [
+                                            "aws ssm start-session --target ${InstanceId}",
+                                            {
+                                                "InstanceId": {
+                                                    "Ref": "AWS::InstanceId"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -152,8 +262,6 @@
                             [
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
-                                "sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm",
-                                "sudo systemctl start amazon-ssm-agent",
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
@@ -200,6 +308,62 @@
                 "IamInstanceProfile": {
                     "Ref": "MongoInstacneIamProfile"
                 },
+                "Metadata": {
+                    "AWS::CloudFormation::Init": {
+                        "configSets": {
+                            "default": [
+                                "session_manager_access"
+                            ]
+                        },
+                        "session_manager_access": {
+                            "packages": {
+                                "yum": {
+                                    "aws-cli": []
+                                }
+                            },
+                            "files": {
+                                "/etc/aws-ssm/instance-identity": {
+                                    "content": {
+                                        "Fn::Sub": {
+                                            "Fn::Join": [
+                                                "",
+                                                [
+                                                    "{",
+                                                    "  \"document\": \"",
+                                                    {
+                                                        "Fn::GetAtt": [
+                                                            "AWS::CloudFormation::Macro",
+                                                            "Transform"
+                                                        ]
+                                                    },
+                                                    "\"",
+                                                    "}"
+                                                ]
+                                            ]
+                                        }
+                                    },
+                                    "mode": "000400",
+                                    "owner": "root",
+                                    "group": "root"
+                                }
+                            },
+                            "commands": {
+                                "01_session_manager_start": {
+                                    "command": {
+                                        "Fn::Sub": [
+                                            "aws ssm start-session --target ${InstanceId}",
+                                            {
+                                                "InstanceId": {
+                                                    "Ref": "AWS::InstanceId"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
@@ -207,8 +371,6 @@
                             [
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
-                                "sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm",
-                                "sudo systemctl start amazon-ssm-agent",
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
