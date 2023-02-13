@@ -97,6 +97,7 @@
                             [
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
+                                "sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm"
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
@@ -150,6 +151,7 @@
                             [
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
+                                "sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm",
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
@@ -203,6 +205,7 @@
                             [
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
+                                "sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm",
                                 "sudo amazon-linux-extras install docker -y",
                                 "sudo systemctl start docker",
                                 "docker pull mongo",
