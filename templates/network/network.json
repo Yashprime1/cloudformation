@@ -205,7 +205,7 @@
                     "Ref":"RegionInternetGateway"
                 }
             }
-        }
+        },
         "RegionPublicSubnet1RouteTable":{
             "Type":"AWS::EC2::RouteTable",
             "Properties":{
