@@ -206,7 +206,7 @@
                 }
             }
         },
-        "RegionPublicSubnet1RouteTable":{
+        "RegionPublicSubnetRouteTable":{
             "Type":"AWS::EC2::RouteTable",
             "Properties":{
                 "VpcId":{
@@ -222,12 +222,24 @@
                                     {
                                         "Ref":"RegionPrefix"
                                     },
-                                    "-public-subnet-1-route-table"
+                                    "-public-subnet-route-table"
                                 ]
                             ]
                         }
                     }
                 ]
+            }
+        },
+        "RegionPublicSubnetRouteTableInternetGatewayRoute": {
+            "Type":"AWS::EC2::Route",
+            "Properties":{
+                "RouteTableId":{
+                    "Ref":"RegionPublicSubnetRouteTable"
+                },
+                "DestinationCidrBlock":"0.0.0.0/0", 
+                "GatewayId":{
+                    "Ref":"RegionInternetGateway"
+                }
             }
         },
         "RegionPublicSubnet1RouteTableAssociation":{   
@@ -260,42 +272,6 @@
                 },
                 "RouteTableId":{
                     "Ref":"RegionPublicSubnetRouteTable"
-                }
-            }
-        },
-        "RegionPublicSubnet1RouteTableInternetGatewayRoute": {
-            "Type":"AWS::EC2::Route",
-            "Properties":{
-                "RouteTableId":{
-                    "Ref":"RegionPublicSubnetRouteTable"
-                },
-                "DestinationCidrBlock":"0.0.0.0/0", 
-                "GatewayId":{
-                    "Ref":"RegionInternetGateway"
-                }
-            }
-        },
-        "RegionPublicSubnet2RouteTableInternetGatewayRoute": {
-            "Type":"AWS::EC2::Route",
-            "Properties":{
-                "RouteTableId":{
-                    "Ref":"RegionPublicSubnetRouteTable"
-                },
-                "DestinationCidrBlock":"0.0.0.0/0", 
-                "GatewayId":{
-                    "Ref":"RegionInternetGateway"
-                }
-            }
-        },
-        "RegionPublicSubnet3RouteTableInternetGatewayRoute": {
-            "Type":"AWS::EC2::Route",
-            "Properties":{
-                "RouteTableId":{
-                    "Ref":"RegionPublicSubnetRouteTable"
-                },
-                "DestinationCidrBlock":"0.0.0.0/0", 
-                "GatewayId":{
-                    "Ref":"RegionInternetGateway"
                 }
             }
         }
