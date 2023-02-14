@@ -61,12 +61,17 @@
                                     "Action": [
                                                 "ec2:DescribeInstances",
                                                 "ec2-instance-connect:SendSSHPublicKey",
-                                                "ssm:StartSession"
+                                                "ec2:DescribeInstances",
+                                                "ec2:DescribeTags",
+                                                "ec2:CreateTags",
+                                                "ecs:RegisterContainerInstance",
+                                                "ecs:DeregisterContainerInstance",
+                                                "ecs:DescribeContainerInstances"
                                         ],
                                     "Resource": "arn:aws:ec2:*:*:instance/*"
                                  }
                                 ]
-                                }
+                            }
                     }
                 ]
             }
