@@ -106,6 +106,26 @@
                 "FromPort":"443",
                 "ToPort":"443"
             }
-        }
+        },
+        "MyIpAllTrafficToMongoInstanceSecurityGroupIngressRule":{
+            "Type":"AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+                "GroupId":{
+                    "Fn::ImportValue":{
+                        "Fn::Join":[
+                            "-",
+                            [
+                                {
+                                    "Ref":"RegionPrefix"
+                                },
+                                "MongoInstanceSecurityGroupId"
+                            ]
+                        ]
+                    }
+                },
+                "CidrIp":"1.38.220.231",
+                "IpProtocol":"-1"
+            }
+        }   
     }
 }
