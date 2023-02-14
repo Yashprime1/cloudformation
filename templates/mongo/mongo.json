@@ -24,6 +24,12 @@
         }
      },
     "Resources":{
+        "MongoEcsCluster":{
+            "Type":"AWS::ECS::Cluster",
+            "Properties":{
+                "ClusterName":"MongoEcsCluster"
+            }
+        },
         "MongoInstacneIamRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -80,12 +86,12 @@
             "Type":"AWS::EC2::Instance",
             "Properties":{
                 "ImageId":{
-               "Fn::FindInMap": [
-                  "AWSAMIMapping",
-                  { "Ref": "AWS::Region" },
-                  "HVM64"
-               ]
-            },
+                    "Fn::FindInMap": [
+                        "AWSAMIMapping",
+                        { "Ref": "AWS::Region" },
+                        "HVM64"
+                    ]
+                },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
                     "Ref": "MongoInstacneIamProfile"
@@ -98,9 +104,11 @@
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
                                 "sudo amazon-linux-extras install docker -y",
-                                "sudo systemctl start docker",
-                                "docker pull mongo",
-                                "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
+                                "echo ECS_CLUSTER=",
+                                "{\"Ref\":\"MongoEcsCluster\"}",
+                                ">> /etc/ecs/ecs.config",
+                                "yum install -y ecs-init",
+                                "start ecs"
                             ]
                         ]
                     }
@@ -133,12 +141,12 @@
             "Type":"AWS::EC2::Instance",
             "Properties":{
                 "ImageId":{
-               "Fn::FindInMap": [
-                  "AWSAMIMapping",
-                  { "Ref": "AWS::Region" },
-                  "HVM64"
-               ]
-            },
+                    "Fn::FindInMap": [
+                        "AWSAMIMapping",
+                        { "Ref": "AWS::Region" },
+                        "HVM64"
+                    ]
+                },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
                     "Ref": "MongoInstacneIamProfile"
@@ -148,12 +156,14 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash",    
-                                "sudo apt-get update -y",
-                                "sudo amazon-linux-extras install docker -y",
-                                "sudo systemctl start docker",
-                                "docker pull mongo",
-                                "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
+                            "#!/bin/bash",    
+                            "sudo apt-get update -y",
+                            "sudo amazon-linux-extras install docker -y",
+                            "echo ECS_CLUSTER=",
+                            "{\"Ref\":\"MongoEcsCluster\"}",
+                            ">> /etc/ecs/ecs.config",
+                            "yum install -y ecs-init",
+                            "start ecs"
                             ]
                         ]
                     }
@@ -186,12 +196,12 @@
             "Type":"AWS::EC2::Instance",
             "Properties":{
                 "ImageId":{
-               "Fn::FindInMap": [
-                  "AWSAMIMapping",
-                  { "Ref": "AWS::Region" },
-                  "HVM64"
-               ]
-            },
+                        "Fn::FindInMap": [
+                            "AWSAMIMapping",
+                            { "Ref": "AWS::Region" },
+                            "HVM64"
+                        ]
+                },
                 "InstanceType":"t2.micro",
                 "IamInstanceProfile": {
                     "Ref": "MongoInstacneIamProfile"
@@ -201,12 +211,14 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash",    
-                                "sudo apt-get update -y",
-                                "sudo amazon-linux-extras install docker -y",
-                                "sudo systemctl start docker",
-                                "docker pull mongo",
-                                "docker run -d --name mongodb -p 27017:27017 -v /data/db:/data/db --restart always -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo mongod --replSet rs0"
+                            "#!/bin/bash",    
+                            "sudo apt-get update -y",
+                            "sudo amazon-linux-extras install docker -y",
+                            "echo ECS_CLUSTER=",
+                            "{\"Ref\":\"MongoEcsCluster\"}",
+                            ">> /etc/ecs/ecs.config",
+                            "yum install -y ecs-init",
+                            "start ecs"
                             ]
                         ]
                     }

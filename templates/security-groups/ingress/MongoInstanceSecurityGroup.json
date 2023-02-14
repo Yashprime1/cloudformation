@@ -84,6 +84,28 @@
                 "FromPort":"22",
                 "ToPort":"22"
             }
+        },
+        "PublicTrafficToMongoInstanceSecurityGroupSSHIngressRule":{
+            "Type":"AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+                "GroupId":{
+                    "Fn::ImportValue":{
+                        "Fn::Join":[
+                            "-",
+                            [
+                                {
+                                    "Ref":"RegionPrefix"
+                                },
+                                "MongoInstanceSecurityGroupId"
+                            ]
+                        ]
+                    }
+                },
+                "CidrIp":"0.0.0.0/0",
+                "IpProtocol":"tcp",
+                "FromPort":"443",
+                "ToPort":"443"
+            }
         }
     }
 }
