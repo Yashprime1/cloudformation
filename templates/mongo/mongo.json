@@ -104,6 +104,7 @@
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
                                 "sudo amazon-linux-extras install docker -y",
+                                "mkdir -p /etc/ecs",
                                 "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config",
                                 "yum install -y ecs-init",
                                 "start ecs"
@@ -157,6 +158,8 @@
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
                                 "sudo amazon-linux-extras install docker -y",
+                                "mkdir -p /etc/ecs",
+                                "mkdir -p /etc/ecs",
                                 "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config",
                                 "yum install -y ecs-init",
                                 "start ecs"
@@ -210,6 +213,7 @@
                                 "#!/bin/bash",    
                                 "sudo apt-get update -y",
                                 "sudo amazon-linux-extras install docker -y",
+                                "mkdir -p /etc/ecs",
                                 "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config",
                                 "yum install -y ecs-init",
                                 "start ecs"
