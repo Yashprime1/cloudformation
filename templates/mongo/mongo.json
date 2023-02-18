@@ -113,9 +113,9 @@
                             "",
                             [
                                 "#!/bin/bash\nset -e\n",    
-                                "sudo amazon-linux-extras install ecs\n",
-                                "sudo systemctl start ecs\n",
-                                "sudo systemctl enable ecs\n",
+                                "amazon-linux-extras install ecs\n",
+                                "systemctl start ecs\n",
+                                "systemctl enable ecs\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
                             ]
                         ]
@@ -168,9 +168,9 @@
                             "",
                             [
                                 "#!/bin/bash\nset -e\n",    
-                                "sudo amazon-linux-extras install ecs\n",
-                                "sudo systemctl start ecs\n",
-                                "sudo systemctl enable ecs\n",
+                                "amazon-linux-extras install ecs\n",
+                                "systemctl start ecs\n",
+                                "systemctl enable ecs\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
                             ]
                         ]
@@ -223,9 +223,9 @@
                             "",
                             [
                                 "#!/bin/bash\nset -e\n",    
-                                "sudo amazon-linux-extras install ecs\n",
-                                "sudo systemctl start ecs\n",
-                                "sudo systemctl enable ecs\n",
+                                "amazon-linux-extras install ecs\n",
+                                "systemctl start ecs\n",
+                                "systemctl enable ecs\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
                             ]
                         ]
