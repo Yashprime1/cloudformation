@@ -87,6 +87,12 @@
                 ]
             }
         },
+        "MongoInstanceKeyPair": {
+            "Type": "AWS::EC2::KeyPair",
+            "Properties": {
+                "KeyName": "MyKeyPair"
+            }
+        },
         "MongoInstancePrimary":{
             "Type":"AWS::EC2::Instance",
             "Properties":{
@@ -116,6 +122,9 @@
                             ]
                         ]
                     }
+                },
+                "KeyName": {
+                    "Ref": "MongoInstanceKeyPair"
                 },
                 "NetworkInterfaces": [ {
                     "AssociatePublicIpAddress": "true",
@@ -172,6 +181,9 @@
                         ]
                     }
                 },
+                "KeyName": {
+                    "Ref": "MongoInstanceKeyPair"
+                },
                 "NetworkInterfaces": [ {
                     "AssociatePublicIpAddress": "true",
                     "DeviceIndex": "0",
@@ -225,6 +237,9 @@
                             ]
                         ]
                     }
+                },
+                "KeyName": {
+                    "Ref": "MongoInstanceKeyPair"
                 },
                 "NetworkInterfaces": [ {
                     "AssociatePublicIpAddress": "true",
