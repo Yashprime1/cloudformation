@@ -113,9 +113,9 @@
                             "",
                             [
                                 "#!/bin/bash",    
-                                "sudo apt-get update -y",
-                                "sudo amazon-linux-extras install docker -y",
-                                "mkdir -p /etc/ecs",
+                                "sudo yum install -y ecs-init",
+                                "sudo systemctl start ecs",
+                                "sudo systemctl enable ecs",
                                 "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config",
                                 "yum install -y ecs-init",
                                 "start ecs"
