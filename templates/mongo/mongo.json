@@ -110,13 +110,13 @@
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
-                            " && ",
+                            "",
                             [
-                                "#!/bin/bash",    
-                                "sudo yum install -y ecs-init",
-                                "sudo systemctl start ecs",
-                                "sudo systemctl enable ecs",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config"
+                                "#!/bin/bash;",    
+                                "sudo amazon-linux-extras install ecs;",
+                                "sudo systemctl start ecs;",
+                                "sudo systemctl enable ecs;",
+                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config;"
                             ]
                         ]
                     }
@@ -165,13 +165,13 @@
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
-                            " && ",
+                            "",
                             [
-                                "#!/bin/bash",    
-                                "sudo yum install -y ecs-init",
-                                "sudo systemctl start ecs",
-                                "sudo systemctl enable ecs",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config"
+                                "#!/bin/bash;",    
+                                "sudo amazon-linux-extras install ecs;",
+                                "sudo systemctl start ecs;",
+                                "sudo systemctl enable ecs;",
+                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config;"
                             ]
                         ]
                     }
@@ -220,13 +220,13 @@
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
-                            " && ",
+                            "",
                             [
-                                "#!/bin/bash",    
-                                "sudo yum install -y ecs-init",
-                                "sudo systemctl start ecs",
-                                "sudo systemctl enable ecs",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config"
+                                "#!/bin/bash;",    
+                                "sudo amazon-linux-extras install ecs;",
+                                "sudo systemctl start ecs;",
+                                "sudo systemctl enable ecs;",
+                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config;"
                             ]
                         ]
                     }
