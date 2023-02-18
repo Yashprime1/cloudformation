@@ -112,11 +112,11 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash;",    
-                                "sudo amazon-linux-extras install ecs;",
-                                "sudo systemctl start ecs;",
-                                "sudo systemctl enable ecs;",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config;"
+                                "#!/bin/bash\nset -e\n",    
+                                "sudo amazon-linux-extras install ecs\n",
+                                "sudo systemctl start ecs\n",
+                                "sudo systemctl enable ecs\n",
+                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
                             ]
                         ]
                     }
@@ -167,11 +167,11 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash;",    
-                                "sudo amazon-linux-extras install ecs;",
-                                "sudo systemctl start ecs;",
-                                "sudo systemctl enable ecs;",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config;"
+                                "#!/bin/bash\nset -e\n",    
+                                "sudo amazon-linux-extras install ecs\n",
+                                "sudo systemctl start ecs\n",
+                                "sudo systemctl enable ecs\n",
+                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
                             ]
                         ]
                     }
@@ -222,11 +222,11 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash;",    
-                                "sudo amazon-linux-extras install ecs;",
-                                "sudo systemctl start ecs;",
-                                "sudo systemctl enable ecs;",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config;"
+                                "#!/bin/bash\nset -e\n",    
+                                "sudo amazon-linux-extras install ecs\n",
+                                "sudo systemctl start ecs\n",
+                                "sudo systemctl enable ecs\n",
+                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
                             ]
                         ]
                     }
