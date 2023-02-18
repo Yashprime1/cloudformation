@@ -110,7 +110,7 @@
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
-                            "\n",
+                            " && ",
                             [
                                 "#!/bin/bash",    
                                 "sudo yum install -y ecs-init",
@@ -165,7 +165,7 @@
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
-                            "\n",
+                            " && ",
                             [
                                 "#!/bin/bash",    
                                 "sudo yum install -y ecs-init",
@@ -220,7 +220,7 @@
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
-                            "\n",
+                            " && ",
                             [
                                 "#!/bin/bash",    
                                 "sudo yum install -y ecs-init",
