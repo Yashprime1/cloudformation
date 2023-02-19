@@ -114,10 +114,10 @@
                             [
                                 "#!/bin/bash\nset -euxo\n",    
                                 "yum update\n",
-                                "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo\n",
-                                "yum install -y docker-ce\n",
+                                "amazon-linux-extras install docker\n",
+                                "yum install -y ecs-init\n",
                                 "systemctl start docker\n",
-                                "amazon-linux-extras install ecs\n",
+                                "systemctl enable docker\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
@@ -173,10 +173,10 @@
                             [
                                 "#!/bin/bash\nset -euxo\n",    
                                 "yum update\n",
-                                "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo\n",
-                                "yum install -y docker-ce\n",
+                                "amazon-linux-extras install docker\n",
+                                "yum install -y ecs-init\n",
                                 "systemctl start docker\n",
-                                "amazon-linux-extras install ecs\n",
+                                "systemctl enable docker\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
@@ -230,15 +230,15 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash\nset -euxo\n",   
+                                "#!/bin/bash\nset -euxo\n",    
                                 "yum update\n",
-                                "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo\n",
-                                "yum install -y docker-ce\n",
+                                "amazon-linux-extras install docker\n",
+                                "yum install -y ecs-init\n",
                                 "systemctl start docker\n",
-                                "amazon-linux-extras install ecs\n",
+                                "systemctl enable docker\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
-                                "echo ECS_CLUSTER=MongoEcsCluster > /etc/ecs/ecs.config\n"
+                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"    
                             ]
                         ]
                     }
