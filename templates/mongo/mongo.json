@@ -222,7 +222,11 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash\nset -euxo\n",    
+                                "#!/bin/bash\nset -euxo\n",   
+                                "yum update\n",
+                                "sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo",
+                                "sudo yum install -y docker-ce",
+                                "sudo systemctl start docker",
                                 "amazon-linux-extras install ecs\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
