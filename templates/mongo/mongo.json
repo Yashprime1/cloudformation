@@ -8,16 +8,12 @@
         "RegionPrefix":{
             "Type":"String",
             "Default":""
-        },
-        "LatestECSOptimizedAMI":{
-            "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
-            "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
         }
     },
     "Mappings": {
         "AWSAMIMapping": {
            "ap-south-1": {
-              "HVM64": {"Ref":"LatestECSOptimizedAMI"}
+              "HVM64" : "ami-0d192d7b37f96a4e5"}
            },
            "ap-northeast-2": {
               "HVM64": "ami-0994dc69c39c35834"
@@ -116,15 +112,7 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash\nset -euxo\n",
-                                "yum-config-manager --save --setopt=docker-ce-stable.skip_if_unavailable=true\n",    
-                                "yum update\n",
-                                "amazon-linux-extras install docker\n",
-                                "yum install -y ecs-init\n",
-                                "systemctl start docker\n",
-                                "systemctl enable --now --no-block docker\n",
-                                "systemctl start ecs\n",
-                                "systemctl enable --now --no-block ecs\n",
+                                "#!/bin/bash\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
                             ]
                         ]
@@ -153,126 +141,6 @@
                     {
                         "Key":"Name",
                         "Value":"MongoInstancePrimary"
-                    }
-                ]
-            }
-        },
-        "MongoInstanceSecondary01":{
-            "Type":"AWS::EC2::Instance",
-            "Properties":{
-                "ImageId":{
-                    "Fn::FindInMap": [
-                        "AWSAMIMapping",
-                        { "Ref": "AWS::Region" },
-                        "HVM64"
-                    ]
-                },
-                "InstanceType":"t2.micro",
-                "IamInstanceProfile": {
-                    "Ref": "MongoInstacneIamProfile"
-                },
-                "UserData":{
-                    "Fn::Base64":{
-                        "Fn::Join":[
-                            "",
-                            [
-                                "#!/bin/bash\nset -euxo\n",
-                                "yum-config-manager --save --setopt=docker-ce-stable.skip_if_unavailable=true\n",    
-                                "yum update\n",
-                                "amazon-linux-extras install docker\n",
-                                "yum install -y ecs-init\n",
-                                "systemctl start docker\n",
-                                "systemctl enable --now --no-block docker\n",
-                                "systemctl start ecs\n",
-                                "systemctl enable --now --no-block ecs\n",
-                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
-                            ]
-                        ]
-                    }
-                },
-                "KeyName": {
-                    "Ref": "MongoInstanceKeyPair"
-                },
-                "NetworkInterfaces": [ {
-                    "AssociatePublicIpAddress": "true",
-                    "DeviceIndex": "0",
-                    "GroupSet": [     {
-                        "Fn::ImportValue": 
-                            {
-                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
-                            }
-                    }],
-                    "SubnetId":  {
-                        "Fn::ImportValue": 
-                            {
-                                "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
-                            }
-                    }
-                  } ],
-                "Tags":[
-                    {
-                        "Key":"Name",
-                        "Value":"MongoInstanceSecondary01"
-                    }
-                ]
-            }
-        },
-        "MongoInstanceSecondary02":{
-            "Type":"AWS::EC2::Instance",
-            "Properties":{
-                "ImageId":{
-                        "Fn::FindInMap": [
-                            "AWSAMIMapping",
-                            { "Ref": "AWS::Region" },
-                            "HVM64"
-                        ]
-                },
-                "InstanceType":"t2.micro",
-                "IamInstanceProfile": {
-                    "Ref": "MongoInstacneIamProfile"
-                },
-                "UserData":{
-                    "Fn::Base64":{
-                        "Fn::Join":[
-                            "",
-                            [
-                                "#!/bin/bash\nset -euxo\n",
-                                "yum-config-manager --save --setopt=docker-ce-stable.skip_if_unavailable=true\n",    
-                                "yum update\n",
-                                "amazon-linux-extras install docker\n",
-                                "yum install -y ecs-init\n",
-                                "systemctl start docker\n",
-                                "systemctl enable --now --no-block docker\n",
-                                "systemctl start ecs\n",
-                                "systemctl enable --now --no-block ecs\n",
-                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
-                            ]
-                        ]
-                    }
-                },
-                "KeyName": {
-                    "Ref": "MongoInstanceKeyPair"
-                },
-                "NetworkInterfaces": [ {
-                    "AssociatePublicIpAddress": "true",
-                    "DeviceIndex": "0",
-                    "GroupSet": [     {
-                        "Fn::ImportValue": 
-                            {
-                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
-                            }
-                    }],
-                    "SubnetId":  {
-                        "Fn::ImportValue": 
-                            {
-                                "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
-                            }
-                    }
-                  } ],
-                "Tags":[
-                    {
-                        "Key":"Name",
-                        "Value":"MongoInstanceSecondary02"
                     }
                 ]
             }
