@@ -8,12 +8,16 @@
         "RegionPrefix":{
             "Type":"String",
             "Default":""
+        },
+        "LatestECSOptimizedAMI":{
+            "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+            "Default": "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
         }
     },
     "Mappings": {
         "AWSAMIMapping": {
            "ap-south-1": {
-              "HVM64": "ami-0e742cca61fb65051"
+              "HVM64": {"Ref":"LatestECSOptimizedAMI"}
            },
            "ap-northeast-2": {
               "HVM64": "ami-0994dc69c39c35834"
