@@ -116,7 +116,7 @@
                                 "amazon-linux-extras install ecs\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
+                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
                             ]
                         ]
                     }
@@ -171,7 +171,7 @@
                                 "amazon-linux-extras install ecs\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
+                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
                             ]
                         ]
                     }
@@ -226,7 +226,7 @@
                                 "amazon-linux-extras install ecs\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
-                                "echo ECS_CLUSTER=MongoEcsCluster>> /etc/ecs/ecs.config\n"
+                                "echo ECS_CLUSTER=MongoEcsCluster > /etc/ecs/ecs.config\n"
                             ]
                         ]
                     }
