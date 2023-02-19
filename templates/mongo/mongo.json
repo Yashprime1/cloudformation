@@ -172,14 +172,15 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash\nset -euxo\n",    
+                                "#!/bin/bash\nset -euxo\n",
+                                "yum-config-manager --save --setopt=docker-ce-stable.skip_if_unavailable=true\n",    
                                 "yum update\n",
                                 "amazon-linux-extras install docker\n",
                                 "yum install -y ecs-init\n",
                                 "systemctl start docker\n",
-                                "systemctl enable docker\n",
+                                "systemctl enable --now --no-block docker\n",
                                 "systemctl start ecs\n",
-                                "systemctl enable ecs\n",
+                                "systemctl enable --now --no-block ecs\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
                             ]
                         ]
@@ -231,15 +232,16 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash\nset -euxo\n",    
+                                "#!/bin/bash\nset -euxo\n",
+                                "yum-config-manager --save --setopt=docker-ce-stable.skip_if_unavailable=true\n",    
                                 "yum update\n",
                                 "amazon-linux-extras install docker\n",
                                 "yum install -y ecs-init\n",
                                 "systemctl start docker\n",
-                                "systemctl enable docker\n",
+                                "systemctl enable --now --no-block docker\n",
                                 "systemctl start ecs\n",
-                                "systemctl enable ecs\n",
-                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"    
+                                "systemctl enable --now --no-block ecs\n",
+                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
                             ]
                         ]
                     }
