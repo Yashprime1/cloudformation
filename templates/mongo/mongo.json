@@ -112,7 +112,7 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash\nset -e\n",    
+                                "#!/bin/bash\nset -euxo\n",    
                                 "amazon-linux-extras install ecs\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
@@ -167,7 +167,7 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash\nset -e\n",    
+                                "#!/bin/bash\nset -euxo\n",    
                                 "amazon-linux-extras install ecs\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
@@ -222,7 +222,7 @@
                         "Fn::Join":[
                             "",
                             [
-                                "#!/bin/bash\nset -e\n",    
+                                "#!/bin/bash\nset -euxo\n",    
                                 "amazon-linux-extras install ecs\n",
                                 "systemctl start ecs\n",
                                 "systemctl enable ecs\n",
