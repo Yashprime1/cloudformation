@@ -68,7 +68,10 @@
                                                 "ecs:DeregisterContainerInstance",
                                                 "ecs:DescribeContainerInstances"
                                         ],
-                                    "Resource": "arn:aws:ec2:*:*:instance/*"
+                                    "Resource": [
+                                        "arn:aws:ec2:*:*:instance/*",
+                                        "arn:aws:ecs:*:*:cluster/*"
+                                    ]
                                  }
                                 ]
                             }
