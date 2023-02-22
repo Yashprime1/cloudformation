@@ -13,7 +13,7 @@
     "Mappings": {
         "AWSAMIMapping": {
            "ap-south-1": {
-              "HVM64" : "ami-0d192d7b37f96a4e5"
+              "HVM64" : "ami-0e742cca61fb65051"
            },
            "ap-northeast-2": {
               "HVM64": "ami-0994dc69c39c35834"
@@ -113,6 +113,11 @@
                             "",
                             [
                                 "#!/bin/bash\n",
+                                "sudo yum update -y\n",
+                                "sudo amazon-linux-extras install docker\n",
+                                "sudo service docker start\n",
+                                "sudo docker ps\n",
+                                "docker run --name ecs-agent --detach=true --restart=on-failure:10  --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/var/log/ecs:/log --volume=/var/lib/ecs/data:/data --volume=/etc/ecs:/etc/ecs --net=host amazon/amazon-ecs-agent:latest",
                                 "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n"
                             ]
                         ]
@@ -145,5 +150,6 @@
                 ]
             }
         }
+        
     }
 }
