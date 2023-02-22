@@ -119,7 +119,7 @@
                                 "sudo docker ps\n",
                                 "docker run --name ecs-agent --detach=true --restart=on-failure:10  --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/var/log/ecs:/log --volume=/var/lib/ecs/data:/data --volume=/etc/ecs:/etc/ecs --net=host amazon/amazon-ecs-agent:latest\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n",
-                                "sudo service docker restart\n",
+                                "sudo docker restart ecs-agent\n",
                             ]
                         ]
                     }
