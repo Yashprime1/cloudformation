@@ -230,7 +230,7 @@
                   },
                 "Name" : "SP"
               }
-        }
+        },
         "BatchFargateJobQueue": {
             "Type": "AWS::Batch::JobQueue",
             "Properties": {
