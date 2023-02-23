@@ -20,6 +20,55 @@
         }
      },
     "Resources":{
+        "BatchInstanceIamRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Path": "/",
+                "Policies": [
+                    {
+                        "PolicyName": "MongoInstanceIamRolePolicy",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                                "ec2:DescribeInstances",
+                                                "ec2-instance-connect:SendSSHPublicKey",
+                                                "ec2:DescribeInstances",
+                                                "ec2:DescribeTags",
+                                                "ec2:CreateTags",
+                                                "ecs:RegisterContainerInstance",
+                                                "ecs:DeregisterContainerInstance",
+                                                "ecs:DescribeContainerInstances"
+                                        ],
+                                    "Resource": [
+                                        "arn:aws:ec2:*:*:instance/*",
+                                        "arn:aws:ecs:*:*:cluster/*"
+                                    ]
+                                 }
+                                ]
+                            }
+                    }
+                ]
+            }
+        },
         "BatchFargateComputeEnvironment": {
             "Type": "AWS::Batch::ComputeEnvironment",
             "Properties": {
@@ -66,6 +115,9 @@
                         ]
                     },
                     "InstanceTypes" : [ "t2.micro" ],
+                    "InstanceRole" : {
+                        "Ref": "BatchInstanceIamRole"
+                    },                    
                     "Tags" : {"logical-id":"BatchFargateComputeEnvironment"}
                 },
                 "State": "ENABLED"

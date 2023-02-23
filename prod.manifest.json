@@ -42,17 +42,6 @@
                 ]
             },
             {
-                "stackname":"mum-mongo",
-                "template":"templates/mongo/mongo.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
                 "stackname":"mum-batch",
                 "template":"templates/mongo/batch.json",
                 "parameters":[
