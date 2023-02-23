@@ -101,9 +101,7 @@
                     "LogConfiguration": {
                         "LogDriver": "awslogs",
                         "Options": {
-                            "awslogs-group": {
-                                "Ref": "BatchLogGroup"
-                            },
+                            "awslogs-group": "BatchLogGroup",
                             "awslogs-region": {
                                 "Ref": "AWS::Region"
                             },
