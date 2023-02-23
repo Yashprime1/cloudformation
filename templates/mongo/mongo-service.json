@@ -1,0 +1,108 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters":{
+        "VpcCidrPrefix":{
+            "Type":"String",
+            "Default":""
+        },
+        "RegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }
+    },
+    "Resources":{
+        "MongoEcsCluster":{
+            "Type":"AWS::ECS::Cluster",
+            "Properties":{
+                "ClusterName":"MongoEcsCluster"
+            }
+        },
+        "MongoEcsTaskDefinition" : {
+            "Type" : "AWS::ECS::TaskDefinition",
+            "Properties" : {
+                "ContainerDefinitions" : [
+                    {
+                        "Name" : "MongoEcsTaskDefinition",
+                        "Image" : "mongo",
+                        "MemoryReservation" : 512,
+                        "PortMappings" : [
+                            {
+                                "ContainerPort" : 27017,
+                                "HostPort" : 27017
+                            }
+                        ],
+                        "Environment" : [
+                            {
+                                "Name" : "MONGO_INITDB_ROOT_USERNAME",
+                                "Value" : "root"
+                            },
+                            {
+                                "Name" : "MONGO_INITDB_ROOT_PASSWORD",
+                                "Value" : "secret"
+                            }
+                        ],
+                        "LogConfiguration" : {
+                            "LogDriver" : "awslogs",
+                            "Options" : {
+                                "awslogs-group" : "MongoEcsTaskDefinition",
+                                "awslogs-region" : {"Ref": "AWS::Region"},
+                                "awslogs-stream-prefix" : "MongoEcsTaskDefinition"
+                            }
+                        }
+                    }
+                ],
+                "Family" : "MongoEcsTaskDefinition",
+                "NetworkMode" : "awsvpc",
+                "RequiresCompatibilities" : [ "EC2" ]
+            }
+        },
+        "MongoEcsService":{
+            "Type":"AWS::ECS::Service",
+            "Properties":{
+                "Cluster":{"Ref":"MongoEcsCluster"},
+                "DesiredCount":1,
+                "LaunchType":"EC2",
+                "TaskDefinition":{"Ref":"MongoEcsTaskDefinition"},
+                'PlacementConstraints':[
+                    {% comment %} placing it on MongoInstancePrimary {% endcomment %}
+                    {
+                        'Type':'memberOf',
+                        'Expression':'attribute:ecs.instance-type =~ t2.micro'
+                    }
+                ],
+                "NetworkConfiguration":{
+                    "AwsvpcConfiguration":{
+                        "AssignPublicIp":"ENABLED",
+                        "SecurityGroups":[
+                            {
+                                "Fn::ImportValue":
+                                    {
+                                        "Fn::Sub":"${RegionPrefix}-MongoEcsSecurityGroup"
+                                    }
+                            }
+                        ],
+                        "Subnets":[
+                            {
+                                "Fn::ImportValue":
+                                    {
+                                        "Fn::Sub":"${RegionPrefix}-PublicSubnet1"
+                                    }
+                            },
+                            {
+                                "Fn::ImportValue":
+                                    {"Fn::Sub":"${RegionPrefix}-PublicSubnet2"}
+                            },
+                            {
+                                "Fn::ImportValue":
+                                    {
+                                        "Fn::Sub":"${RegionPrefix}-PublicSubnet3"
+                                    }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+
+    }
+}

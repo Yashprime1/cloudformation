@@ -43,7 +43,7 @@
             },
             {
                 "stackname":"mum-mongo",
-                "template":"templates/mongo/mongo.json",
+                "template":"templates/mongo/batch.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",

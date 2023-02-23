@@ -1,0 +1,132 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters":{
+        "VpcCidrPrefix":{
+            "Type":"String",
+            "Default":""
+        },
+        "RegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }
+    },
+    "Mappings": {
+        "AWSAMIMapping": {
+           "ap-south-1": {
+              "HVM64" : "ami-0e742cca61fb65051"
+           },
+           "ap-northeast-2": {
+              "HVM64": "ami-0994dc69c39c35834"
+           },
+           "eu-west-1": {
+              "HVM64": "ami-04bf55d5e589debe9"
+           }
+        }
+     },
+    "Resources":{
+        "BatchFargateComputeEnvironment": {
+            "Type": "AWS::Batch::ComputeEnvironment",
+            "Properties": {
+                "Type": "MANAGED",
+                "ComputeResources": {
+                    "MinvCpus" : 0,
+                    "DesiredvCpus" : 1,
+                    "MaxvCpus": 2,
+                    "SecurityGroupIds": [
+                        {
+                            "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                        }
+                    ],
+                    "Type": "EC2",
+                    "Subnets": [
+                        {
+                            "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                            }
+                        },
+                        {
+                            "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                            }
+                        },
+                        {
+                            "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
+                            }
+                        }
+                    ],
+                    "Ec2KeyPair" : "",
+                    "ImageId":{
+                        "Fn::FindInMap": [
+                            "AWSAMIMapping",
+                            { "Ref": "AWS::Region" },
+                            "HVM64"
+                        ]
+                    },
+                    "InstanceTypes" : [ "t2.micro" ],
+                    "Tags" : {"logical-id":"BatchFargateComputeEnvironment"}
+                },
+                "State": "ENABLED"
+            }
+        },
+        "BatchFargateJobQueue": {
+            "Type": "AWS::Batch::JobQueue",
+            "Properties": {
+                "ComputeEnvironmentOrder": [
+                    {
+                        "Order": 1,
+                        "ComputeEnvironment": {
+                            "Ref": "BatchFargateComputeEnvironment"
+                        }
+                    }
+                ],
+                "State": "ENABLED",
+                "Priority": 1,
+                "Tags":
+                {
+                    "logical-id": "BatchFargateJobQueue"
+                }
+            }
+        }
+        "BatchJobDefinition":{
+            "Type": "AWS::Batch::JobDefinition",
+            "Properties": {
+                "Type": "container",
+                "ContainerProperties": {
+                    "Image": "hello-world",
+                    "Memory": 512,
+                    "Vcpus": 1,
+                    "LogConfiguration": {
+                        "LogDriver": "awslogs",
+                        "Options": {
+                            "awslogs-group": {
+                                "Ref": "BatchLogGroup"
+                            },
+                            "awslogs-region": {
+                                "Ref": "AWS::Region"
+                            },
+                            "awslogs-stream-prefix": "Batch"
+                        }
+                    },
+                    "User" : "Batch",
+                },
+                "RetryStrategy": {
+                    "Attempts": 1
+                },
+                "Tags":
+                {
+                    "logical-id": "BatchJobDefinition"
+                }
+                "PlatformCapabilities" : [ "EC2" ],
+                "PropagateTags" : true,
+                "SchedulingPriority" : 1,
+            }
+        }
+    }
+}
