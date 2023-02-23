@@ -114,7 +114,7 @@
                             "HVM64"
                         ]
                     },
-                    "InstanceTypes" : [ "t2.micro" ],
+                    "InstanceTypes" : [ "m6g.medium" ],
                     "InstanceRole" : {
                         "Ref": "BatchInstanceIamRole"
                     },                    
