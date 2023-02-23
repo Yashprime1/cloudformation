@@ -223,6 +223,14 @@
                 "State": "ENABLED"
             }
         },
+        "BatchFargateSchedulingPolicy":{
+            "Type" : "AWS::Batch::SchedulingPolicy",
+            "Properties" : {
+                "FairsharePolicy" : {
+                  },
+                "Name" : "SP"
+              }
+        }
         "BatchFargateJobQueue": {
             "Type": "AWS::Batch::JobQueue",
             "Properties": {
@@ -239,7 +247,10 @@
                 "Tags":
                 {
                     "logical-id": "BatchFargateJobQueue"
-                }
+                },
+                "SchedulingPolicyArn": {
+                    "Ref": "BatchFargateSchedulingPolicy"
+                } 
             }
         },
         "BatchJobDefinition":{
