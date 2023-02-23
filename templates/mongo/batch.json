@@ -110,7 +110,7 @@
                             "awslogs-stream-prefix": "Batch"
                         }
                     },
-                    "User" : "Batch",
+                    "User" : "Batch"
                 },
                 "RetryStrategy": {
                     "Attempts": 1
@@ -121,7 +121,7 @@
                 }
                 "PlatformCapabilities" : [ "EC2" ],
                 "PropagateTags" : true,
-                "SchedulingPriority" : 1,
+                "SchedulingPriority" : 1
             }
         }
     }
