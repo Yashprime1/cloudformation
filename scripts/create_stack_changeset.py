@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+# Enable shell options
+import subprocess
+subprocess.check_call(["set", "-euxo", "pipefail"])
 #################################  Configuration ##################################
 import json
 import boto3
