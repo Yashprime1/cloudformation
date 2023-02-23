@@ -89,7 +89,7 @@
                     "logical-id": "BatchFargateJobQueue"
                 }
             }
-        }
+        },
         "BatchJobDefinition":{
             "Type": "AWS::Batch::JobDefinition",
             "Properties": {
