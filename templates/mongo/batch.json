@@ -23,50 +23,147 @@
         "BatchInstanceIamRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
-                "AssumeRolePolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
+              "AssumeRolePolicyDocument": {
+                "Statement": [
+                  {
+                    "Sid": "",
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
                         {
-                            "Effect": "Allow",
-                            "Principal": {
-                                "Service": [
-                                    "ec2.amazonaws.com"
-                                ]
-                            },
-                            "Action": [
-                                "sts:AssumeRole"
+                          "Fn::Join": [
+                            ".",
+                            [
+                              "ec2",
+                              "amazonaws.com"
                             ]
+                          ]
                         }
-                    ]
-                },
-                "Path": "/",
-                "Policies": [
-                    {
-                        "PolicyName": "MongoInstanceIamRolePolicy",
-                        "PolicyDocument": {
-                            "Version": "2012-10-17",
-                            "Statement": [
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                                "ec2:DescribeInstances",
-                                                "ec2-instance-connect:SendSSHPublicKey",
-                                                "ec2:DescribeInstances",
-                                                "ec2:DescribeTags",
-                                                "ec2:CreateTags",
-                                                "ecs:RegisterContainerInstance",
-                                                "ecs:DeregisterContainerInstance",
-                                                "ecs:DescribeContainerInstances"
-                                        ],
-                                    "Resource": [
-                                        "arn:aws:ec2:*:*:instance/*",
-                                        "arn:aws:ecs:*:*:cluster/*"
-                                    ]
-                                 }
-                                ]
-                            }
-                    }
+                      ]
+                    },
+                    "Action": "sts:AssumeRole"
+                  }
                 ]
+              },
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    "BatchInstanceIamRole"
+                  ]
+                ]
+              }
+            }
+          },
+        "BatchInstanceIamPolicy": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+              "PolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "ecs:CreateCluster",
+                      "ecs:DeregisterContainerInstance",
+                      "ecs:DiscoverPollEndpoint",
+                      "ecs:Poll",
+                      "ecs:RegisterContainerInstance",
+                      "ecs:StartTelemetrySession",
+                      "ecs:UpdateContainerInstancesState",
+                      "ecs:Submit*",
+                      "ecr:GetAuthorizationToken",
+                      "logs:CreateLogStream",
+                      "logs:PutLogEvents"
+                    ],
+                    "Resource": "*"
+                  },
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "s3:ListBucket",
+                      "s3:GetObject",
+                      "s3:GetObjectVersion"
+                    ],
+                    "Resource": "*"
+                  },
+                  {
+                    "Sid": "AllowSsmAgentToFunction",
+                    "Effect": "Allow",
+                    "Action": [
+                      "ec2messages:*",
+                      "ssm:ListAssociations",
+                      "ssm:ListInstanceAssociations"
+                    ],
+                    "Resource": "*"
+                  },
+                  {
+                    "Sid": "AllowTwoWayWebsocketChannelComminicationBetweenTheClientBrowserOrCliAndRemoteManagedInstance",
+                    "Effect": "Allow",
+                    "Action": [
+                      "ssmmessages:*",
+                      "ssm:UpdateInstanceInformation"
+                    ],
+                    "Resource": "*"
+                  },
+                  {
+                    "Sid": "AllowSsmToGetS3EncryptionConfiguration",
+                    "Effect": "Allow",
+                    "Action": [
+                      "s3:GetEncryptionConfiguration"
+                    ],
+                    "Resource": "*"
+                  },
+                  {
+                    "Sid": "AllowSSMAgentToGetKMSGeneratedDataKeyWhenAccessingS3Bucket",
+                    "Effect": "Allow",
+                    "Action": [
+                      "kms:GenerateDataKey",
+                      "kms:Decrypt"
+                    ],
+                    "Resource": "*"
+                  },
+                  {
+                    "Sid": "AllowBootstrapViaCloudInitToBeAbleToDescribeTags",
+                    "Effect": "Allow",
+                    "Action": [
+                      "ec2:DescribeTags"
+                    ],
+                    "Resource": "*"
+                  }
+                ]
+              },
+              "PolicyName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    "BatchInstanceIamPolicy"
+                  ]
+                ]
+              },
+              "Roles": [
+                {
+                  "Ref": "BatchInstanceIamRole"
+                }
+              ]
+            }
+          },
+        "BatchInstanceIamInstanceProfile": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "Properties": {
+              "Path": "/",
+              "Roles": [
+                {
+                  "Ref": "BatchInstanceIamRole"
+                }
+              ]
             }
         },
         "BatchFargateComputeEnvironment": {
@@ -115,9 +212,12 @@
                         ]
                     },
                     "InstanceTypes" : [ "m6g.medium" ],
-                    "InstanceRole" : {
-                        "Ref": "BatchInstanceIamRole"
-                    },                    
+                    "InstanceRole": {
+                        "Fn::GetAtt": [
+                          "BatchInstanceIamInstanceProfile",
+                          "Arn"
+                        ]
+                    },         
                     "Tags" : {"logical-id":"BatchFargateComputeEnvironment"}
                 },
                 "State": "ENABLED"
