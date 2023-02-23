@@ -258,7 +258,8 @@
             "Properties": {
                 "Type": "container",
                 "ContainerProperties": {
-                    "Image": "hello-world",
+                    "Image": "public.ecr.aws/awsbatch/quickstart-awscli:latest",
+                    "command": [ "aws", "--version" ],
                     "Memory": 512,
                     "Vcpus": 1,
                     "LogConfiguration": {
