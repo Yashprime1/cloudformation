@@ -118,7 +118,7 @@
                 "Tags":
                 {
                     "logical-id": "BatchJobDefinition"
-                }
+                },
                 "PlatformCapabilities" : [ "EC2" ],
                 "PropagateTags" : true,
                 "SchedulingPriority" : 1
