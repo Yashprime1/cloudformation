@@ -166,6 +166,24 @@
               ]
             }
         },
+        "BatchFargeteLaunchTemplate":{
+            "Type": "AWS::EC2::LaunchTemplate",
+            "Properties": {
+                "LaunchTemplateName": "BatchFargeteLaunchTemplate",
+                "LaunchTemplateData": {
+                    "InstanceType": "m6g.medium",
+                    "KeyName": "",
+                    "SecurityGroupIds": [
+                        {
+                            "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
         "BatchFargateComputeEnvironment": {
             "Type": "AWS::Batch::ComputeEnvironment",
             "Properties": {
@@ -183,6 +201,11 @@
                         }
                     ],
                     "Type": "EC2",
+                    "LaunchTemplate":{
+                        "LaunchTemplateId": {
+                            "Ref": "BatchFargeteLaunchTemplate"
+                        }
+                    }
                     "Subnets": [
                         {
                             "Fn::ImportValue": 
