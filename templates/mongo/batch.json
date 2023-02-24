@@ -166,6 +166,12 @@
               ]
             }
         },
+        "BatchEc2KeyPair":{
+            "Type" : "AWS::EC2::KeyPair",
+            "Properties" : {
+                "KeyName" : "BatchEc2KeyPair"
+            }
+        },
         "BatchComputeEnvironmentEc2LaunchTemplate":{
             "Type": "AWS::EC2::LaunchTemplate",
             "Properties": {
@@ -182,7 +188,7 @@
                         }
                     ],
                     "InstanceType": "m6g.medium",
-                    "KeyName": "",
+                    "KeyName":  {"Ref": "BatchEc2KeyPair"},
                     "SecurityGroupIds": [
                         {
                             "Fn::ImportValue": 
@@ -242,7 +248,7 @@
                             }
                         }
                     ],
-                    "Ec2KeyPair" : "",
+                    "Ec2KeyPair" : {"Ref":"BatchEc2KeyPair"},
                     "InstanceTypes" : [ "m6g.medium" ],
                     "InstanceRole": {
                         "Fn::GetAtt": [
