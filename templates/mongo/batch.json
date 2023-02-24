@@ -293,7 +293,17 @@
                     "ExecutionRoleArn" : {"Ref":"BatchInstanceIamRole"},
                     "LogConfiguration": {
                         "LogDriver": "awslogs"
-                    }
+                    },
+                    "ResourceRequirements": [
+                        {
+                            "Type": "VCPU",
+                            "Value": "1"
+                        },
+                        {
+                            "Type": "MEMORY",
+                            "Value": "512"
+                        }
+                    ],
                 },
                 "RetryStrategy": {
                     "Attempts": 1
