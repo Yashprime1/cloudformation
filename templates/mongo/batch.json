@@ -302,7 +302,7 @@
                             "Name" : "dude",
                             "Value" : "venky"
                         }
-                    ]
+                    ],
                     "Memory": 512,
                     "Vcpus": 1,
                     "LogConfiguration": {
