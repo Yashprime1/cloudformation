@@ -290,7 +290,7 @@
                             "Value" : "venky"
                         }
                     ],
-                    "ExecutionRoleArn" : {"Ref":"BatchInstanceIamRole"},
+                    "ExecutionRoleArn" : {"Fn::GetAtt" : ["BatchInstanceIamRole", "Arn"]},
                     "LogConfiguration": {
                         "LogDriver": "awslogs"
                     },
