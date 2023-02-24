@@ -205,7 +205,7 @@
                         "LaunchTemplateId": {
                             "Ref": "BatchFargeteLaunchTemplate"
                         }
-                    }
+                    },
                     "Subnets": [
                         {
                             "Fn::ImportValue": 
