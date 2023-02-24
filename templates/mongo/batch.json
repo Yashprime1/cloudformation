@@ -182,7 +182,7 @@
                             "DeviceName": "/dev/xvda",
                             "Ebs": {
                                 "DeleteOnTermination": true,
-                                "VolumeSize": 8,
+                                "VolumeSize": 30,
                                 "VolumeType": "gp2"
                             }
                         }
