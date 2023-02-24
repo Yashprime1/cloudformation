@@ -296,7 +296,7 @@
             "Properties": {
                 "Type": "container",
                 "ContainerProperties": {
-                    "Image": "public.ecr.aws/awsbatch/quickstart-awscli:latest",
+                    "Image": "yashprime07/mydude:latest",
                     "Command": [ "aws", "--version" ],
                     "Memory": 512,
                     "Vcpus": 1,
