@@ -187,7 +187,7 @@
                             }
                         }
                     ],
-                    "InstanceType": "m6g.medium",
+                    "InstanceType": "c4.large",
                     "KeyName":  {"Ref": "BatchEc2KeyPair"},
                     "SecurityGroupIds": [
                         {
@@ -249,7 +249,7 @@
                         }
                     ],
                     "Ec2KeyPair" : {"Ref":"BatchEc2KeyPair"},
-                    "InstanceTypes" : [ "m6g.medium" ],
+                    "InstanceTypes" : [ "c4.large" ],
                     "InstanceRole": {
                         "Fn::GetAtt": [
                           "BatchInstanceIamInstanceProfile",
