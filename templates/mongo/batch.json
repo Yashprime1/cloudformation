@@ -294,6 +294,9 @@
                     "LogConfiguration": {
                         "LogDriver": "awslogs"
                     },
+                    "NetworkConfiguration": {
+                        "AssignPublicIp": "ENABLED"
+                    },
                     "ResourceRequirements": [
                         {
                             "Type": "VCPU",
