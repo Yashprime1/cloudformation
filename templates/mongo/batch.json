@@ -294,7 +294,7 @@
                 {
                     "logical-id": "BatchJobDefinition"
                 },
-                "PlatformCapabilities" : [ "EC2" ],
+                "PlatformCapabilities" : [ "FARGATE" ],
                 "PropagateTags" : true,
                 "SchedulingPriority" : 1
             }
