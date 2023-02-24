@@ -297,7 +297,7 @@
                     "ResourceRequirements": [
                         {
                             "Type": "VCPU",
-                            "Value": "1"
+                            "Value": "0.25"
                         },
                         {
                             "Type": "MEMORY",
