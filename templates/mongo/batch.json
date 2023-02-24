@@ -297,7 +297,12 @@
                 "Type": "container",
                 "ContainerProperties": {
                     "Image": "yashprime07/mydude:latest",
-                    "Command": [ "aws", "--version" ],
+                    "Environment":[
+                        {
+                            "Name" : "dude",
+                            "Value" : "venky"
+                        }
+                    ]
                     "Memory": 512,
                     "Vcpus": 1,
                     "LogConfiguration": {
