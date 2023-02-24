@@ -204,13 +204,6 @@
                         }
                     ],
                     "Ec2KeyPair" : "",
-                    "ImageId":{
-                        "Fn::FindInMap": [
-                            "AWSAMIMapping",
-                            { "Ref": "AWS::Region" },
-                            "HVM64"
-                        ]
-                    },
                     "InstanceTypes" : [ "m6g.medium" ],
                     "InstanceRole": {
                         "Fn::GetAtt": [
