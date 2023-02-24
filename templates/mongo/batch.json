@@ -171,6 +171,16 @@
             "Properties": {
                 "LaunchTemplateName": "BatchComputeEnvironmentEc2LaunchTemplate",
                 "LaunchTemplateData": {
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "DeleteOnTermination": true,
+                                "VolumeSize": 8,
+                                "VolumeType": "gp2"
+                            }
+                        }
+                    ],
                     "InstanceType": "m6g.medium",
                     "KeyName": "",
                     "SecurityGroupIds": [
@@ -181,17 +191,7 @@
                             }
                         }
                     ]
-                },
-                "BlockDeviceMappings": [
-                {
-                    "DeviceName": "/dev/xvda",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "VolumeSize": 8,
-                        "VolumeType": "gp2"
-                    }
                 }
-              ]
             }
         },
         "BatchFargateComputeEnvironment": {
