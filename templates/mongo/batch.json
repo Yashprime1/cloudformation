@@ -303,7 +303,7 @@
                             "Type": "MEMORY",
                             "Value": "512"
                         }
-                    ],
+                    ]
                 },
                 "RetryStrategy": {
                     "Attempts": 1
