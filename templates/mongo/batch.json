@@ -38,6 +38,15 @@
                               "amazonaws.com"
                             ]
                           ]
+                        },
+                        {
+                          "Fn::Join": [
+                            ".",
+                            [
+                              "ecs-tasks",
+                              "amazonaws.com"
+                            ]
+                          ]
                         }
                       ]
                     },
@@ -281,8 +290,7 @@
                             "Value" : "venky"
                         }
                     ],
-                    "Memory": 512,
-                    "Vcpus": 1,
+                    "ExecutionRoleArn" : {"Ref":"BatchInstanceIamRole"},
                     "LogConfiguration": {
                         "LogDriver": "awslogs"
                     }
