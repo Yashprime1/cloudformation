@@ -166,10 +166,10 @@
               ]
             }
         },
-        "BatchFargeteLaunchTemplate":{
+        "BatchComputeEnvironmentEc2LaunchTemplate":{
             "Type": "AWS::EC2::LaunchTemplate",
             "Properties": {
-                "LaunchTemplateName": "BatchFargeteLaunchTemplate",
+                "LaunchTemplateName": "BatchComputeEnvironmentEc2LaunchTemplate",
                 "LaunchTemplateData": {
                     "InstanceType": "m6g.medium",
                     "KeyName": "",
@@ -203,8 +203,14 @@
                     "Type": "EC2",
                     "LaunchTemplate":{
                         "LaunchTemplateId": {
-                            "Ref": "BatchFargeteLaunchTemplate"
-                        }
+                            "Ref": "BatchComputeEnvironmentEc2LaunchTemplate"
+                        },
+                        "Version": {
+                            "Fn::GetAtt": [
+                              "BatchComputeEnvironmentEc2LaunchTemplate",
+                              "LatestVersionNumber"
+                            ]
+                          }
                     },
                     "Subnets": [
                         {
