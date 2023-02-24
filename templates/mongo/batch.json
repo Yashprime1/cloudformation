@@ -205,8 +205,6 @@
             "Properties": {
                 "Type": "MANAGED",
                 "ComputeResources": {
-                    "MinvCpus" : 0,
-                    "DesiredvCpus" : 1,
                     "MaxvCpus": 2,
                     "SecurityGroupIds": [
                         {
@@ -216,18 +214,7 @@
                             }
                         }
                     ],
-                    "Type": "EC2",
-                    "LaunchTemplate":{
-                        "LaunchTemplateId": {
-                            "Ref": "BatchComputeEnvironmentEc2LaunchTemplate"
-                        },
-                        "Version": {
-                            "Fn::GetAtt": [
-                              "BatchComputeEnvironmentEc2LaunchTemplate",
-                              "LatestVersionNumber"
-                            ]
-                          }
-                    },
+                    "Type": "FARGATE",
                     "Subnets": [
                         {
                             "Fn::ImportValue": 
@@ -247,16 +234,7 @@
                                 "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
                             }
                         }
-                    ],
-                    "Ec2KeyPair" : {"Ref":"BatchEc2KeyPair"},
-                    "InstanceTypes" : [ "c4.large" ],
-                    "InstanceRole": {
-                        "Fn::GetAtt": [
-                          "BatchInstanceIamInstanceProfile",
-                          "Arn"
-                        ]
-                    },         
-                    "Tags" : {"logical-id":"BatchFargateComputeEnvironment"}
+                    ]
                 },
                 "State": "ENABLED"
             }
