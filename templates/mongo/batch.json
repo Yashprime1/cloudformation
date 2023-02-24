@@ -314,8 +314,7 @@
                             },
                             "awslogs-stream-prefix": "Batch"
                         }
-                    },
-                    "User" : "batch"
+                    }
                 },
                 "RetryStrategy": {
                     "Attempts": 1
