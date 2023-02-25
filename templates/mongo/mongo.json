@@ -63,7 +63,9 @@
                                                 "ecs:RegisterContainerInstance",
                                                 "ecs:DeregisterContainerInstance",
                                                 "ecs:DescribeContainerInstances",
-                                                "ecs:DiscoverPollEndpoint"
+                                                "ecs:DiscoverPollEndpoint",
+                                                "ecs:*",
+                                                "ec2:*"
                                         ],
                                     "Resource": [
                                         "arn:aws:ec2:*:*:instance/*",
