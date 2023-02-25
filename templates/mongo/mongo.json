@@ -68,8 +68,9 @@
                     {
                         "Type":"memberOf",
                         "Expression":{
-                                        "Fn::join:
-                                            [   "",
+                                        "Fn::join":
+                                            [
+                                                "",
                                                 [
                                                     "ec2InstanceId",
                                                     "==",
