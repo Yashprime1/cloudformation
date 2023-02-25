@@ -91,7 +91,6 @@
                                     }
                     }
                 ],
-                "ServiceName":"MongoPrimaryEcsService",
                 "TaskDefinition":{
                     "Ref":"MongoEcsTaskDefinition"
                 }
@@ -126,7 +125,6 @@
                                     }
                     }
                 ],
-                "ServiceName":"MongoSecondary01EcsService",
                 "TaskDefinition":{
                     "Ref":"MongoEcsTaskDefinition"
                 }
@@ -161,7 +159,6 @@
                                     }
                     }
                 ],
-                "ServiceName":"MongoSecondary02EcsService",
                 "TaskDefinition":{
                     "Ref":"MongoEcsTaskDefinition"
                 }
