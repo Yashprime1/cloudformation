@@ -34,7 +34,7 @@
                     {
                         "Name":"MongoEcsContainer",
                         "Image":"mongo",
-                        "command": [
+                        "Command": [
                             "mongod",
                             "--replSet",
                             "myReplicaSet"
