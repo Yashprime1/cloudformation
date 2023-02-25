@@ -70,7 +70,7 @@
                 },
                 "DesiredCount":1,
                 "LaunchType":"EC2",
-                "DeploymnetController": "ECS",
+                "DeploymentController": "ECS",
                 "DeploymentConfiguration": {
                     "MaximumPercent": 100,
                     "MinimumHealthyPercent": 0
@@ -105,7 +105,7 @@
                 },
                 "DesiredCount":1,
                 "LaunchType":"EC2",
-                "DeploymnetController": "ECS",
+                "DeploymentController": "ECS",
                 "DeploymentConfiguration": {
                     "MaximumPercent": 100,
                     "MinimumHealthyPercent": 0
@@ -140,7 +140,7 @@
                 },
                 "DesiredCount":1,
                 "LaunchType":"EC2",
-                "DeploymnetController": "ECS",
+                "DeploymentController": "ECS",
                 "DeploymentConfiguration": {
                     "MaximumPercent": 100,
                     "MinimumHealthyPercent": 0
