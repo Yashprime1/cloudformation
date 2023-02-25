@@ -35,9 +35,8 @@
                         "Name":"MongoEcsContainer",
                         "Image":"mongo",
                         "Command": [
-                            "mongod",
                             "--replSet",
-                            "myReplicaSet"
+                            "rs0"
                         ],
                         "PortMappings":[
                             {
