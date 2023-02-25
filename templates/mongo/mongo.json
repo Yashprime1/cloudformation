@@ -113,13 +113,11 @@
                             [
                                 "#!/bin/bash\n",
                                 "sudo yum update -y\n",
-                                "sudo amazon-linux-extras install docker\n",
-                                "sudo service docker start\n",
-                                "sudo docker ps\n",
-                                "docker run --name ecs-agent --detach=true --restart=on-failure:10  --volume=/var/run/docker.sock:/var/run/docker.sock --volume=/var/log/ecs:/log --volume=/var/lib/ecs/data:/data --volume=/etc/ecs:/etc/ecs --net=host amazon/amazon-ecs-agent:latest\n",
+                                "sudo amazon-linux-extras disable docker\n",
+                                "sudo amazon-linux-extras install -y ecs; sudo systemctl enable --now ecs\n",
                                 "sudo touch /etc/ecs/ecs.config\n",
                                 "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n",
-                                "sudo docker restart ecs-agent\n"
+                                "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
                             ]
                         ]
                     }
