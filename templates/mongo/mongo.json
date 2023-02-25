@@ -67,7 +67,16 @@
                 "PlacementConstraints":[
                     {
                         "Type":"memberOf",
-                        "Expression":"ec2InstanceId == {\"Ref\" : \"MongoInstancePrimary\"}"
+                        "Expression":{
+                                        "Fn::join:
+                                            [   "",
+                                                [
+                                                    "ec2InstanceId",
+                                                    "==",
+                                                    {"Ref" : "MongoInstancePrimary"}
+                                                ]
+                                            ]
+                                    }
                     }
                 ],
                 "ServiceName":"MongoEcsService",
