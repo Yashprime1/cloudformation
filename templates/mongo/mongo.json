@@ -68,7 +68,7 @@
                     {
                         "Type":"memberOf",
                         "Expression":{
-                                        "Fn::join":
+                                        "Fn::Join":
                                             [
                                                 "",
                                                 [
