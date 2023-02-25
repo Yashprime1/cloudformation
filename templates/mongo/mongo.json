@@ -45,11 +45,9 @@
                         "LogConfiguration":{
                             "LogDriver":"awslogs",
                             "Options":{
-                                "awslogs-group":"/ecs/MongoEcsCluster",
                                 "awslogs-region":{
                                     "Ref":"AWS::Region"
-                                },
-                                "awslogs-stream-prefix":"ecs"
+                                }
                             }
                         }
                     }
