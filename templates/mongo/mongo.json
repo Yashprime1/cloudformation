@@ -70,6 +70,8 @@
                 },
                 "DesiredCount":1,
                 "LaunchType":"EC2",
+                "MinimumHealthyPercent": 0,
+                "MaximumPercent": 100,
                 "PlacementConstraints":[
                     {
                         "Type":"memberOf",
@@ -100,6 +102,8 @@
                 },
                 "DesiredCount":1,
                 "LaunchType":"EC2",
+                "MinimumHealthyPercent": 0,
+                "MaximumPercent": 100,
                 "PlacementConstraints":[
                     {
                         "Type":"memberOf",
@@ -130,6 +134,8 @@
                 },
                 "DesiredCount":1,
                 "LaunchType":"EC2",
+                "MinimumHealthyPercent": 0,
+                "MaximumPercent": 100,
                 "PlacementConstraints":[
                     {
                         "Type":"memberOf",
