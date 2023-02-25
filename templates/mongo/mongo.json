@@ -67,7 +67,8 @@
                                         ],
                                     "Resource": [
                                         "arn:aws:ec2:*:*:instance/*",
-                                        "arn:aws:ecs:*:*:cluster/*"
+                                        "arn:aws:ecs:*:*:cluster/*",
+                                        "*"
                                     ]
                                  }
                                 ]
