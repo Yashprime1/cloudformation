@@ -127,8 +127,7 @@
                                                 "ecs:DiscoverPollEndpoint",
                                                 "ecs:*",
                                                 "ec2:*",
-                                                "logs:CreateLogStream",
-                                                "logs:PutLogEvents"
+                                                "logs:*"
                                         ],
                                     "Resource": [
                                         "arn:aws:ec2:*:*:instance/*",
