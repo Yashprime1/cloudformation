@@ -26,6 +26,29 @@
                 "ClusterName":"MongoEcsCluster"
             }
         },
+        "MongoEcsTaskDefinition":{
+            "Type":"AWS::ECS::TaskDefinition",
+            "Properties":{
+                "Family":"MongoEcsTaskDefinition",
+                "ContainerDefinitions":[
+                    {
+                        "Name":"MongoEcsContainer",
+                        "Image":"mongo",
+                        "PortMappings":[
+                            {
+                                "ContainerPort":27017,
+                                "HostPort":27017
+                            }
+                        ],
+                        "Memory":512,
+                        "Cpu":256,
+                        "LogConfiguration":{
+                            "LogDriver":"awslogs"
+                        }
+                    }
+                ]
+            }
+        },
         "MongoPrimaryEcsService":{
             "Type":"AWS::ECS::Service",
             "Properties":{
