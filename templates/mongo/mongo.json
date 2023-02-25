@@ -81,7 +81,67 @@
                                     }
                     }
                 ],
-                "ServiceName":"MongoEcsService",
+                "ServiceName":"MongoPrimaryEcsService",
+                "TaskDefinition":{
+                    "Ref":"MongoEcsTaskDefinition"
+                }
+            }
+        },
+        "MongoSecondary01EcsService":{
+            "Type":"AWS::ECS::Service",
+            "Properties":{
+                "Cluster":{
+                    "Ref":"MongoEcsCluster"
+                },
+                "DesiredCount":1,
+                "LaunchType":"EC2",
+                "PlacementConstraints":[
+                    {
+                        "Type":"memberOf",
+                        "Expression":{
+                                        "Fn::Join":
+                                            [
+                                                "",
+                                                [
+                                                    "ec2InstanceId",
+                                                    "==",
+                                                    {"Ref" : "MongoInstanceSecondary01"}
+                                                ]
+                                            ]
+                                    }
+                    }
+                ],
+                "ServiceName":"MongoSecondary01EcsService",
+                "TaskDefinition":{
+                    "Ref":"MongoEcsTaskDefinition"
+                }
+            }
+        },
+        "MongoSecondary02EcsService":{
+            "Type":"AWS::ECS::Service",
+            "Properties":{
+                "Cluster":{
+                    "Ref":"MongoEcsCluster"
+                },
+                "DesiredCount":1,
+                "LaunchType":"EC2",
+                "PlacementConstraints":[
+                    {
+                        "Type":"memberOf",
+                        "Expression":{
+                                        "Fn::Join":
+                                            [
+                                                "",
+                                                [
+                                                    "ec2InstanceId",
+                                                    "==",
+                                                    {"Ref" : "MongoInstanceSecondary02"}
+                                                ]
+                                            ]
+                                    }
+                    }
+                ],
+                "ServiceName":"MongoSecondary02EcsService",
                 "TaskDefinition":{
                     "Ref":"MongoEcsTaskDefinition"
                 }
@@ -213,7 +273,118 @@
                     }
                 ]
             }
+        },
+        "MongoInstanceSecondary01":{
+            "Type":"AWS::EC2::Instance",
+            "Properties":{
+                "ImageId":{
+                    "Fn::FindInMap": [
+                        "AWSAMIMapping",
+                        { "Ref": "AWS::Region" },
+                        "HVM64"
+                    ]
+                },
+                "InstanceType":"t2.micro",
+                "IamInstanceProfile": {
+                    "Ref": "MongoInstacneIamProfile"
+                },
+                "UserData":{
+                    "Fn::Base64":{
+                        "Fn::Join":[
+                            "",
+                            [
+                                "#!/bin/bash\n",
+                                "mkdir -p /etc/ecs\n",  
+                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n",
+                                "amazon-linux-extras install -y ecs\n",
+                                "systemctl enable --now --no-block ecs\n",
+                                "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
+                            ]
+                        ]
+                    }
+                },
+                "KeyName": {
+                    "Ref": "MongoInstanceKeyPair"
+                },
+                "NetworkInterfaces": [ {
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [     {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }],
+                    "SubnetId":  {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                            }
+                    }
+                  } ],
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"MongoInstanceSecondary01"
+                    }
+                ]
+            }
+        },
+        "MongoInstanceSecondary02":{
+            "Type":"AWS::EC2::Instance",
+            "Properties":{
+                "ImageId":{
+                    "Fn::FindInMap": [
+                        "AWSAMIMapping",
+                        { "Ref": "AWS::Region" },
+                        "HVM64"
+                    ]
+                },
+                "InstanceType":"t2.micro",
+                "IamInstanceProfile": {
+                    "Ref": "MongoInstacneIamProfile"
+                },
+                "UserData":{
+                    "Fn::Base64":{
+                        "Fn::Join":[
+                            "",
+                            [
+                                "#!/bin/bash\n",
+                                "mkdir -p /etc/ecs\n",  
+                                "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n",
+                                "amazon-linux-extras install -y ecs\n",
+                                "systemctl enable --now --no-block ecs\n",
+                                "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
+                            ]
+                        ]
+                    }
+                },
+                "KeyName": {
+                    "Ref": "MongoInstanceKeyPair"
+                },
+                "NetworkInterfaces": [ {
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [     {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }],
+                    "SubnetId":  {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                            }
+                    }
+                  } ],
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"MongoInstanceSecondary02"
+                    }
+                ]
+            }
         }
-        
     }
 }
