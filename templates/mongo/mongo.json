@@ -112,9 +112,10 @@
                             "",
                             [
                                 "#!/bin/bash\n",
+                                "mkdir -p /etc/ecs\n",  
                                 "echo ECS_CLUSTER=MongoEcsCluster >> /etc/ecs/ecs.config\n",
                                 "amazon-linux-extras install -y ecs\n",
-                                "systemctl start ecs\n",
+                                "systemctl enable --now --no-block ecs\n",
                                 "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
                             ]
                         ]
