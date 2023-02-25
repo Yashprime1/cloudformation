@@ -125,7 +125,9 @@
                                                 "ecs:DescribeContainerInstances",
                                                 "ecs:DiscoverPollEndpoint",
                                                 "ecs:*",
-                                                "ec2:*"
+                                                "ec2:*",
+                                                "logs:CreateLogStream",
+                                                "logs:PutLogEvents"
                                         ],
                                     "Resource": [
                                         "arn:aws:ec2:*:*:instance/*",
