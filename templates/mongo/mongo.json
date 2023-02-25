@@ -26,6 +26,26 @@
                 "ClusterName":"MongoEcsCluster"
             }
         },
+        "MongoPrimaryEcsService":{
+            "Type":"AWS::ECS::Service",
+            "Properties":{
+                "Cluster":{
+                    "Ref":"MongoEcsCluster"
+                },
+                "DesiredCount":1,
+                "LaunchType":"EC2",
+                "PlacementConstraints":[
+                    {
+                        "Type":"memberOf",
+                        "Expression":"ec2InstanceId == {\"Ref\" : \"MongoInstancePrimary\"}"
+                    }
+                ],
+                "ServiceName":"MongoEcsService",
+                "TaskDefinition":{
+                    "Ref":"MongoEcsTaskDefinition"
+                }
+            }
+        },
         "MongoInstacneIamRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
