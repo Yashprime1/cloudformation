@@ -34,6 +34,11 @@
                     {
                         "Name":"MongoEcsContainer",
                         "Image":"mongo",
+                        "command": [
+                            "mongod",
+                            "--replSet",
+                            "myReplicaSet"
+                        ],
                         "PortMappings":[
                             {
                                 "ContainerPort":27017,
