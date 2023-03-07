@@ -173,17 +173,19 @@
                 "NetworkConfiguration":{
                     "AwsvpcConfiguration" :{
                         "AssignPublicIp" : "ENABLED",
-                        "SecurityGroups" : [ 
-                            "Fn::ImportValue":{
-                                "Fn::Join":[
-                                    "-",
-                                    [
-                                        {
-                                            "Ref":"RegionPrefix"
-                                        },
-                                        "IRISInstanceSecurityGroupId"
+                        "SecurityGroups" : [
+                            { 
+                                "Fn::ImportValue":{
+                                    "Fn::Join":[
+                                        "-",
+                                        [
+                                            {
+                                                "Ref":"RegionPrefix"
+                                            },
+                                            "IRISInstanceSecurityGroupId"
+                                        ]
                                     ]
-                                ]
+                                }
                             }
                         ],
                         "Subnets" : [ 
