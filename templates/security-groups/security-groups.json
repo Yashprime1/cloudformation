@@ -15,6 +15,24 @@
                     "Fn::ImportValue": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]}
                 }
             }
+        },
+        "IRISInstanceSecurityGroup":{
+            "Type":"AWS::EC2::SecurityGroup",
+            "Properties":{
+                "GroupDescription":"IRIS Instance Security Group",
+                "VpcId":{
+                    "Fn::ImportValue": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]}
+                }
+            }
+        },
+        "IRISLoadBalancerSecurityGroup":{
+            "Type":"AWS::EC2::SecurityGroup",
+            "Properties":{
+                "GroupDescription":"IRIS Load Balancer Security Group",
+                "VpcId":{
+                    "Fn::ImportValue": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]}
+                }
+            }
         }
     },
     "Outputs":{
@@ -35,6 +53,44 @@
             },
             "Value":{
                 "Ref":"MongoInstanceSecurityGroup"
+            }
+        },
+        "IRISInstanceSecurityGroupId":{
+            "Description":"IRIS Instance Security Group Id",
+            "Export":{
+                "Name":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "IRISInstanceSecurityGroupId"
+                        ]
+                    ]
+                }
+            },
+            "Value":{
+                "Ref":"IRISInstanceSecurityGroup"
+            }
+        },
+        "IRISLoadBalancerSecurityGroupId":{
+            "Description":"IRIS Load Balancer Security Group Id",
+            "Export":{
+                "Name":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "IRISLoadBalancerSecurityGroupId"
+                        ]
+                    ]
+                }
+            },
+            "Value":{
+                "Ref":"IRISLoadBalancerSecurityGroup"
             }
         }
     }

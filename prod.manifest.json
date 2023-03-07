@@ -31,8 +31,8 @@
                 ]
             },
             {
-                "stackname":"mum-mongo-security-group-ingress",
-                "template":"templates/security-groups/ingress/MongoInstanceSecurityGroup.json",
+                "stackname":"mum-iris-instance-security-group-ingress",
+                "template":"templates/security-groups/ingress/IRISInstanceSecurityGroup.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
@@ -42,8 +42,30 @@
                 ]
             },
             {
-                "stackname":"mum-mongo",
-                "template":"templates/mongo/mongo.json",
+                "stackname":"mum-iris-loadbalancer-security-group-ingress",
+                "template":"templates/security-groups/ingress/IRISLoadBalancerSecurityGroup.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
+                "stackname":"mum-splunk",
+                "template":"templates/splunk/splunk.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
+                "stackname":"mum-splunk-service",
+                "template":"templates/splunk/splunk-service.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
