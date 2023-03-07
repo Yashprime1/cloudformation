@@ -130,7 +130,7 @@
                     },
                     {
                         "Key":"Task Definition Name",
-                        "Value":{"Fn::Join':['-',[{"Ref":"RegionPrefix"},"IrisTaskDefinition"]]}
+                        "Value":{"Fn::Join":["-",[{"Ref":"RegionPrefix"},"IrisTaskDefinition"]]}
                     }
                 ],
                 "ExecutionRoleArn":{},
