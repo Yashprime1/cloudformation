@@ -133,8 +133,8 @@
                         "Value":{"Fn::Join":["-",[{"Ref":"RegionPrefix"},"IrisTaskDefinition"]]}
                     }
                 ],
-                "ExecutionRoleArn":{},
-                "TaskRoleArn":{}
+                "ExecutionRoleArn":{"Fn::GetAtt":["IrisTaskExecutionIamRole","Arn"] },
+                "TaskRoleArn":{"Fn::GetAtt":["IrisTaskIamRole","Arn"]}
             }
         },
         "IrisEcsCluster":{
