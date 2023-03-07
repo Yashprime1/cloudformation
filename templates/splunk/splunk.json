@@ -41,7 +41,7 @@
                                     {
                                         "Ref":"RegionPrefix"
                                     },
-                                    "IRISloadBalancerSecurityGroupId"
+                                    "IRISLoadBalancerSecurityGroupId"
                                 ]
                             ]
                         }
