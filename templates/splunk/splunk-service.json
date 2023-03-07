@@ -108,14 +108,14 @@
                     {
                         "Name":"Iris",
                         "Image":"yashprime07/dream-saprx:latest",
-                        "Cpu":0.5,
+                        "Cpu":512,
                         "Environment":[
                             {
                                 "Name":"Friend",
                                 "Value":"Iris"
                             }
                         ],
-                        "Essential":true,
+                        "Essential":"true",
                         "Memory":512
                     }
                 ],
@@ -163,8 +163,8 @@
                 "DeploymentController":{
                     "Type":"ECS"
                 },
-                "EnableECSManagedTags":true,
-                "EnableExecuteCommand":true,     
+                "EnableECSManagedTags":"true",
+                "EnableExecuteCommand":"true",     
                 "DesiredCount":1,
                 "LaunchType":"EC2",
                 "SchedulingStrategy":"REPLICA",
