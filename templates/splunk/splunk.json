@@ -33,16 +33,18 @@
                     }
                 ],
                 "SecurityGroups": [ 
-                    "Fn::ImportValue":{
-                        "Fn::Join":[
-                            "-",
-                            [
-                                {
-                                    "Ref":"RegionPrefix"
-                                },
-                                "IRISloadBalancerSecurityGroupId"
+                    {
+                        "Fn::ImportValue":{
+                            "Fn::Join":[
+                                "-",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "IRISloadBalancerSecurityGroupId"
+                                ]
                             ]
-                        ]
+                        }
                     }
                 ]
             }
