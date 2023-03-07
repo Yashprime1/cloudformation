@@ -5,7 +5,7 @@
             "Type":"String",
             "Default":""
         }
-    }
+    },
     "Resources":{
         "IrisTaskExecutionIamRole":{
             "Type":"AWS::IAM::Role",
