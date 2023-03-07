@@ -1,0 +1,74 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Parameters" : {
+        "RegionPrefix": {
+            "Type": "String",
+            "Default": ""
+        }
+    },
+    "Resources" : { 
+        "IrisLoadBalancer":{
+            "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+            "Properties": {
+                "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisLoadBalancer" ] ] },
+                "Scheme": "internet-facing",
+                "Subnets": [
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                            }
+                    },
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                            }
+                    },
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
+                            }
+                    }
+                ],
+                "SecurityGroups": [ 
+                    "Fn::ImportValue":{
+                        "Fn::Join":[
+                            "-",
+                            [
+                                {
+                                    "Ref":"RegionPrefix"
+                                },
+                                "IRISloadBalancerSecurityGroupId"
+                            ]
+                        ]
+                    }
+                ]
+            }
+        }
+        "IrisTargetGroup":{
+            "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+            "Properties": {
+                "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisTargetGroup" ] ] },
+                "Port": 3000,
+                "Protocol": "TCP",
+                "VpcId": { "Fn::ImportValue" : { "Fn::Join" : [ "-", [ { "Ref" : "RegionPrefix" }, "vpc","id" ] ] } }
+            }
+        },
+        "IrisListener":{
+            "Type": "AWS::ElasticLoadBalancingV2::Listener",
+            "Properties": {
+                "DefaultActions": [
+                    {
+                        "Type": "forward",
+                        "TargetGroupArn": { "Ref" : "IrisTargetGroup" }
+                    }
+                ],
+                "LoadBalancerArn": { "Ref" : "IrisLoadBalancer" },
+                "Port": 80,
+                "Protocol": "HTTP"
+            }
+        }
+    }
+}
