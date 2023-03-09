@@ -59,7 +59,7 @@
                         }
                     }
                 ],
-                "NetworkMode":"host",
+                "NetworkMode":"host"
             }
         },
         "MongoPrimaryEcsService":{
