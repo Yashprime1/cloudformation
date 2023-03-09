@@ -209,6 +209,13 @@
                         ]
                       }
                 },
+                "LoadBalancer":[
+                    {
+                        "ContainerName":"Iris",
+                        "ContainerPort":3000,
+                        "TargetGroupArn":{"Fn::ImportValue":{"Fn::Join":["-",[{"Ref":"RegionPrefix"},"IrisTargetGroupArn"]]}}
+                    }
+                ]
                 "Tags":[
                     {
                         "Key":"Name",

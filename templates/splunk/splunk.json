@@ -72,5 +72,17 @@
                 "Protocol": "HTTP"
             }
         }
+    },
+    "Outputs":{
+        "IrisLoadBalancerDNSName":{
+            "Export": { "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisLoadBalancerDNSName" ] ] } },
+            "Value": { "Fn::GetAtt" : [ "IrisLoadBalancer", "DNSName" ] },
+            "Description": "DNS name of the Iris load balancer"
+        },
+        "IrisTargetGroup":{
+            "Export": { "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisTargetGroup" ] ] } },
+            "Value": { "Ref" : "IrisTargetGroup" },
+            "Description": "ARN of the Iris target group"
+        }
     }
 }
