@@ -32,7 +32,18 @@
             },
             {
                 "stackname":"mum-s3",
-                "template":"templates/splunk/s3.json",
+                "template":"templates//.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
+                "stackname":"mum-s3",
+                "template":"templates/prometheus/prometheus.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
