@@ -31,18 +31,7 @@
                 ]
             },
             {
-                "stackname":"mum-s3",
-                "template":"templates//.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
-                "stackname":"mum-s3",
+                "stackname":"mum-prometheus",
                 "template":"templates/prometheus/prometheus.json",
                 "parameters":[
                     {
