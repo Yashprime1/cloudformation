@@ -54,7 +54,7 @@
             "Properties": {
                 "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisTargetGroup" ] ] },
                 "Port": 3000,
-                "Protocol": "TCP",
+                "Protocol": "HTTP",
                 "VpcId": { "Fn::ImportValue" : { "Fn::Join" : [ "-", [ { "Ref" : "RegionPrefix" }, "vpc","id" ] ] } }
             }
         },
