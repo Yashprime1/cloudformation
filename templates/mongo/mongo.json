@@ -4,7 +4,7 @@
         "RegionPrefix":{
             "Type":"String",
             "Default":""
-        }
+        }        
     },
     "Mappings": {
         "AWSAMIMapping": {
@@ -20,6 +20,40 @@
         }
      },
     "Resources":{
+        "MongoPrivateDnsNamespace": {
+            "Type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+            "Properties": {
+              "Name": "mongo.internal",
+              "Vpc": {
+                        "Fn::ImportValue":
+                            {
+                                "Fn::Join": 
+                                    ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]
+                            }
+                     }
+            }
+          },
+          "MongoDiscoveryService": {
+            "Type": "AWS::ServiceDiscovery::Service",
+            "Properties": {
+              "DnsConfig": {
+                "RoutingPolicy": "MULTIVALUE",
+                "DnsRecords": [
+                  {
+                    "TTL": 60,
+                    "Type": "SRV"
+                  }
+                ]
+              },
+              "HealthCheckCustomConfig": {
+                "FailureThreshold": 1
+              },
+              "Name": "mongo-service",
+              "NamespaceId": {
+                "Ref": "MongoPrivateDnsNamespace"
+              }
+            }
+        },
         "MongoEcsCluster":{
             "Type":"AWS::ECS::Cluster",
             "Properties":{
@@ -90,6 +124,19 @@
                                             ]
                                     }
                     }
+                ],
+                "ServiceRegistries":
+                [
+                {
+                    "RegistryArn": {
+                    "Fn::GetAtt": [
+                        "MongoDiscoveryService",
+                        "Arn"
+                    ]
+                    },
+                    "ContainerName" : "MongoEcsContainer",
+                    "ContainerPort" : 27017
+                }
                 ],
                 "TaskDefinition":{
                     "Ref":"MongoEcsTaskDefinition"
