@@ -31,8 +31,8 @@
                 ]
             },
             {
-                "stackname":"mum-prometheus",
-                "template":"templates/prometheus/prometheus.json",
+                "stackname":"mum-mongo",
+                "template":"templates/mongo/mongo.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
