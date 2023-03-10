@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# Feature 2 comment
 #################################  Configuration ##################################
 import json
 import sys
