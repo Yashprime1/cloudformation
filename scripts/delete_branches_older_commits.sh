@@ -23,6 +23,7 @@ do
         if [$? -ne 0]
         then
             echo "Failed to delete $branch"
+            exit 1
         else
             echo "Successfully deleted $branch"
         fi
