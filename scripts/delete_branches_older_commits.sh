@@ -21,7 +21,7 @@ do
     if [ $difference_in_days -ge $max_difference_days ]
     then
         echo "Deleting $branch" 
-        git push origin --delete $branch
+        git push -d $branch
         if [ $? -ne 0 ]
         then
             echo "Failed to delete $branch"
