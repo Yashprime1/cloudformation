@@ -29,7 +29,7 @@ do
             echo "Failed to delete $branch"
             exit 1
         else
-            echo "Successfully deleted $branch"
+            echo "Successfully deleted the $branch"
         fi
     else
         echo "Skipped $branch since latest-commit:$latest_commit_id is not greater than $max_difference_days days (currently just $difference_in_days days behind today)"
