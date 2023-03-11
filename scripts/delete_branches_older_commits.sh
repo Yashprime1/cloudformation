@@ -21,6 +21,7 @@ do
     if [ $difference_in_days -ge $max_difference_days ]
     then
         echo "Deleting $branch" 
+        echo $branch | awk -F '/' '{print $2}'
         git push -d $(echo $branch | awk -F '/' '{print $2}')
         if [ $? -ne 0 ]
         then
