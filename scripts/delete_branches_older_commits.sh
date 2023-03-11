@@ -1,2 +1,2 @@
 #!/bin/bash
-git branch -r --merged
+git --version
