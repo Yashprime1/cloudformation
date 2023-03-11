@@ -20,7 +20,7 @@ do
     then
         echo "Deleting $branch" 
         git push origin --delete $branch
-        if [$? -ne 0]
+        if [ $? -ne 0 ]
         then
             echo "Failed to delete $branch"
             exit 1
