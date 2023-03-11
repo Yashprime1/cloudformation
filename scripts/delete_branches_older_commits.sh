@@ -1,5 +1,7 @@
 #!/bin/bash
 echo "Starting script"
+git config --global user.email "shettyyashdeep@gmail.com"
+git config --global user.name "Yash"
 max_difference_days=0
 merged_branches=$(git checkout main | git pull | git branch  -r --merged | grep -v "main$")
 for branch in ${merged_branches}
