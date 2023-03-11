@@ -10,8 +10,8 @@ do
     latest_commit_timestamp=$(git show --format="%aI" $latest_commit_id | head -1)
     latest_commit_timestamp=$(date -u -d "$latest_commit_timestamp" +"%Y-%m-%dT%H:%M:%SZ")
     current_timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-    echo $latest_commit_timestamp
-    echo $current_timestamp
+    echo "Latest commit timestamp - $latest_commit_timestamp" 
+    echo "Current timestamp - $current_timestamp"
     latest_commit_timestamp_in_seconds=$(date -d $latest_commit_timestamp +%s)
     current_timestamp_in_seconds=$(date -d $current_timestamp +%s)
     difference_in_seconds=$(($current_timestamp_in_seconds-$latest_commit_timestamp_in_seconds))
