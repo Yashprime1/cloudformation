@@ -2,5 +2,5 @@
 echo "Starting script"
 git status
 git checkout main
-git pull
+git pull origin main
 git branch -r 
