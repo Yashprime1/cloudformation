@@ -1,4 +1,2 @@
-git status
-git checkout main 
-git pull
-git branch -r --merged
+branch="main"
+branches_merged=$(git branch -r --merged) 
