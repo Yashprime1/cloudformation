@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Starting script"
-max_difference_days=90
+max_difference_days=1
 merged_branches=$(git checkout main | git pull | git branch  -r --merged | grep -v "main$")
 for branch in ${merged_branches}
 do
