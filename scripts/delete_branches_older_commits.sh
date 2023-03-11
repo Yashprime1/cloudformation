@@ -22,7 +22,7 @@ do
     then
         echo "Deleting $branch" 
         echo $branch | awk -F '/' '{print $2}'
-        git push -d $(echo $branch | awk -F '/' '{print $2}')
+        git push origin -d $(echo $branch | awk -F '/' '{print $2}')
         if [ $? -ne 0 ]
         then
             echo "Failed to delete $branch"
