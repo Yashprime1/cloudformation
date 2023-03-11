@@ -1,1 +1,3 @@
-echo "hello"
+cd ..
+pwd
+ls -a
