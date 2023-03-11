@@ -1,2 +1,1 @@
-branch="main"
-branches_merged=$(git branch -r --merged) 
+git status
