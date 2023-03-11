@@ -6,5 +6,5 @@ git pull origin main
 branches=$(git branch -r --merged | grep -v "main$")
 for branch in ${branches}
 do
-    
+    echo $branch
 done
