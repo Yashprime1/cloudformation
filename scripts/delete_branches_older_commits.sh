@@ -27,6 +27,6 @@ do
             echo "Successfully deleted $branch"
         fi
     else
-        echo "Skipped $branch since latest-commit:$latest_commit_id is not greater than $max_difference_days days"
+        echo "Skipped $branch since latest-commit:$latest_commit_id is not greater than $max_difference_days days (currently just $difference_in_days behind today)"
     fi
 done
