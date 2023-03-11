@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Starting script"
 git remote -v
+git config --global credential.helper store
 max_difference_days=0
 git branch --set-upstream-to=origin/main
 merged_branches=$(git checkout main | git pull | git branch  -r --merged | grep -v "main$")
