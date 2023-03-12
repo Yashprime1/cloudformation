@@ -1,4 +1,5 @@
 #!/bin/bash
+set -xo
 echo "Starting script"
 git remote -v
 max_difference_days=0
