@@ -1,9 +1,9 @@
 #!/bin/bash
-set -xo pipefail
 echo "Starting script"
 git remote -v
 max_difference_days=0
-merged_branches=$(git pull | git branch  -r --merged | grep -v "main$")
+git remote set-url origin git@github.com:Yashprime1/cloudformation.git
+merged_branches=$(git branch origin main -r --merged | grep -v "main$")
 for branch in ${merged_branches}
 do
     echo "Checking latest commit timestamp for $branch :"
@@ -21,14 +21,13 @@ do
     if [ $difference_in_days -ge $max_difference_days ]
     then
         echo "Deleting $branch" 
-        echo $branch | awk -F '/' '{print $2}'
-        git push origin -d $(echo $branch | awk -F '/' '{print $2}')
+        git push origin --delete $branch
         if [ $? -ne 0 ]
         then
             echo "Failed to delete $branch"
             exit 1
         else
-            echo "Successfully deleted the $branch"
+            echo "Successfully deleted $branch"
         fi
     else
         echo "Skipped $branch since latest-commit:$latest_commit_id is not greater than $max_difference_days days (currently just $difference_in_days days behind today)"
