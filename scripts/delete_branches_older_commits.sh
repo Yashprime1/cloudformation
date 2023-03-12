@@ -3,7 +3,6 @@ set -xo
 echo "Starting script"
 git remote -v
 max_difference_days=0
-git remote set-url origin git@github.com:Yashprime1/cloudformation.git
 merged_branches=$(git branch origin main -r --merged | grep -v "main$")
 for branch in ${merged_branches}
 do
