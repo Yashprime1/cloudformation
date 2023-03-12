@@ -1,8 +1,10 @@
 #!/bin/bash
 set -xo
 echo "Starting script"
+git remote set-url origin https://$GITHUB_ACCESS_TOKEN@@github.com/Yashprime1/cloudformation.git
 git remote -v
 max_difference_days=0
+
 merged_branches=$(git fetch --prune | git branch -r --merged | grep -v "main$")
 for branch in ${merged_branches}
 do
