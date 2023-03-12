@@ -1,8 +1,8 @@
 #!/bin/bash
 set -xo
 echo "Starting script"
-echo ${bamboo.GITHUB_ACCESS_TOKEN}
-git remote set-url origin https://${bamboo.GITHUB_ACCESS_TOKEN}@github.com/Yashprime1/cloudformation.git
+echo ${bamboo.GAT}
+git remote set-url origin https://${bamboo.GAT}@github.com/Yashprime1/cloudformation.git
 git remote -v
 max_difference_days=0
 
