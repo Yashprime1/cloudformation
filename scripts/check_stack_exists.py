@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+
+# Feature 3 comment - it wont be merged
 #################################  Configuration ##################################
 import boto3
 import os
