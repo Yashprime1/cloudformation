@@ -3,7 +3,7 @@ set -xo
 echo "Starting script"
 git remote -v
 max_difference_days=0
-merged_branches=$(git branch -r --merged | grep -v "main$")
+merged_branches=$(git fetch --prune | git branch -r --merged | grep -v "main$")
 for branch in ${merged_branches}
 do
     echo "Checking latest commit timestamp for $branch :"
