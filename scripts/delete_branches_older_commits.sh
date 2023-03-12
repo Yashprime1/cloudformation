@@ -1,8 +1,8 @@
 #!/bin/bash
 set -xo
 echo "Starting script"
-echo ${bamboo.GAT}
-git remote set-url origin https://${bamboo.GAT}@github.com/Yashprime1/cloudformation.git
+echo "${bamboo.GAT}"
+git remote set-url origin "https://${bamboo.GAT}@github.com/Yashprime1/cloudformation.git"
 git remote -v
 max_difference_days=0
 
