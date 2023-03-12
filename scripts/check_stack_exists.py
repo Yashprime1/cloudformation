@@ -2,6 +2,7 @@
 
 
 # Feature 3 comment - it wont be merged
+# Feature 4 added
 #################################  Configuration ##################################
 import boto3
 import os
