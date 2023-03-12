@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 # Feature 1 comment - updated
+# Feature 5 added  
 #################################  Configuration ##################################
 import json
 import boto3
