@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set -xo pipefail
 echo "Starting script"
 git remote -v
 max_difference_days=0
