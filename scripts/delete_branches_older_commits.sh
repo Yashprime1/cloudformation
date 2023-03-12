@@ -1,10 +1,9 @@
 #!/bin/bash
+set -euxo pipefail
 echo "Starting script"
 git remote -v
-git config --global credential.helper store
 max_difference_days=0
-git branch --set-upstream-to=origin/main
-merged_branches=$(git checkout main | git pull | git branch  -r --merged | grep -v "main$")
+merged_branches=$(git checkout main && git pull && git branch  -r --merged && grep -v "main$")
 for branch in ${merged_branches}
 do
     echo "Checking latest commit timestamp for $branch :"
