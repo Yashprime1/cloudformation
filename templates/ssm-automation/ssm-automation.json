@@ -14,17 +14,6 @@
                     "schemaVersion": "2.2",
                     "description": "Document to cleanup ultron branches",
                     "parameters": {
-                        "s3bucket": {
-                        "type": "String",
-                        "default": {
-                            "Ref": "RuncommandAutomationScriptsS3Bucket"
-                        },
-                        "allowedValues": [
-                            {
-                            "Ref": "RuncommandAutomationScriptsS3Bucket"
-                            }
-                        ]
-                        }
                     },
                     "mainSteps": [
                         {
