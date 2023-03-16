@@ -31,8 +31,8 @@
                 ]
             },
             {
-                "stackname":"mum-mongo",
-                "template":"templates/mongo/mongo.json",
+                "stackname":"mum-ssm-automation",
+                "template":"templates/ssm-automation/ssm-automation.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
