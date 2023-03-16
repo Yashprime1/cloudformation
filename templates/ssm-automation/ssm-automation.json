@@ -6,7 +6,136 @@
             "Default":""
         }
     },
-    "Resources":{
+    "Mappings": {
+        "AWSAMIMapping": {
+           "ap-south-1": {
+              "HVM64" : "ami-0d81306eddc614a45"
+           },
+           "ap-northeast-2": {
+              "HVM64": "ami-0994dc69c39c35834"
+           },
+           "eu-west-1": {
+              "HVM64": "ami-04bf55d5e589debe9"
+           }
+        }
+     },
+    "Resources":{        
+        "EC2InstacneIamRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Path": "/",
+                "Policies": [
+                    {
+                        "PolicyName": "EC2InstanceIamRolePolicy",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                                "ec2:DescribeInstances",
+                                                "ec2-instance-connect:SendSSHPublicKey",
+                                                "ec2:DescribeInstances",
+                                                "ec2:DescribeTags",
+                                                "ec2:CreateTags",
+                                                "ecs:RegisterContainerInstance",
+                                                "ecs:DeregisterContainerInstance",
+                                                "ecs:DescribeContainerInstances",
+                                                "ecs:DiscoverPollEndpoint",
+                                                "ecs:*",
+                                                "ec2:*",
+                                                "logs:*"
+                                        ],
+                                    "Resource": [
+                                        "arn:aws:ec2:*:*:instance/*",
+                                        "arn:aws:ecs:*:*:cluster/*",
+                                        "*"
+                                    ]
+                                }
+                                ]
+                            }
+                    }
+                ]
+            }
+        },
+        "EC2InstacneIamProfile":{
+            "Type":"AWS::IAM::InstanceProfile",
+            "Properties":{
+                "Path":"/",
+                "Roles":[
+                    {
+                        "Ref":"MongoInstacneIamRole"
+                    }
+                ]
+            }
+        },  
+        "EC2InstanceKeyPair": {
+            "Type": "AWS::EC2::KeyPair",
+            "Properties": {
+                "KeyName": "MyKeyPair"
+            }
+        },
+        "EC2InstancePrimary":{
+            "Type":"AWS::EC2::Instance",
+            "Properties":{
+                "ImageId":{
+                    "Fn::FindInMap": [
+                        "AWSAMIMapping",
+                        { "Ref": "AWS::Region" },
+                        "HVM64"
+                    ]
+                },
+                "InstanceType":"t2.micro",
+                "IamInstanceProfile": {
+                    "Ref": "EC2InstacneIamProfile"
+                },
+                "KeyName": {
+                    "Ref": "EC2InstanceKeyPair"
+                },
+                "NetworkInterfaces": [ {
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [     {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }],
+                    "SubnetId":  {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                            }
+                    }
+                  } ],
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"EC2InstancePrimary"
+                    },
+                    {
+                        "Key":"role",
+                        "Value":"compute"
+                    }
+                ]
+            }
+        },
         "UltronBranchCleanupSsmDocument": {
             "Type": "AWS::SSM::Document",
             "Properties": {
@@ -55,7 +184,7 @@
                     {
                         "Key": "tag:role",
                         "Values": [
-                            "Compute"
+                            "compute"
                         ]
                     }
                 ],
