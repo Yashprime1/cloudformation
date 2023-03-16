@@ -80,7 +80,7 @@
                 "Path":"/",
                 "Roles":[
                     {
-                        "Ref":"MongoInstacneIamRole"
+                        "Ref":"EC2InstacneIamRole"
                     }
                 ]
             }
