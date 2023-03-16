@@ -41,7 +41,7 @@
             "Type": "AWS::SSM::MaintenanceWindow",
             "Properties":{
                 "Name": "UltronBranchCleanupMaintenanceWindow",
-                "Schedule": "cron(* */2 * * * *)",
+                "Schedule": "cron(* */2 * * ? *)",
                 "Duration": 4,
                 "Cutoff": 1,
                 "AllowUnassociatedTargets": false
