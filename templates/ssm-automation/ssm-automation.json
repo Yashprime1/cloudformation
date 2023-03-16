@@ -1,0 +1,81 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters":{
+        "RegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }
+    },
+    "Resources":{
+        "UltronBranchCleanupSsmDocument": {
+            "Type": "AWS::SSM::Document",
+            "Properties": {
+                "Content": {
+                    "schemaVersion": "2.2",
+                    "description": "Document to cleanup ultron branches",
+                    "parameters": {
+                        "s3bucket": {
+                        "type": "String",
+                        "default": {
+                            "Ref": "RuncommandAutomationScriptsS3Bucket"
+                        },
+                        "allowedValues": [
+                            {
+                            "Ref": "RuncommandAutomationScriptsS3Bucket"
+                            }
+                        ]
+                        }
+                    },
+                    "mainSteps": [
+                        {
+                        "inputs": {
+                            "runCommand": [
+                              "echo \"Cleaning up ultron branches\" >> /tmp/ultron_cleanup.log",
+                            ]
+                        },
+                        "name": "ExecutingCleanupScript",
+                        "action": "aws:runShellScript",
+                        "onFailure": "Abort"
+                        }
+                    ]
+                },
+                "DocumentType": "Command",
+                "Tags": [
+                    {
+                        "Key": "Team",
+                        "Value": "DevOps"
+                    }
+                ]
+            }
+        },
+        "UltronBranchCleanupSsmMaintenanceWindow": {
+            "Type": "AWS::SSM::MaintenanceWindow",
+            "Properties":{
+                "Name": "UltronBranchCleanupMaintenanceWindow",
+                "Schedule": "cron(0 0 ? * SUN *)",
+                "Duration": 4,
+                "Cutoff": 1,
+                "AllowUnassociatedTargets": false
+            }
+        },
+        "UltronBranchCleanupSSMAssociation": {
+            "Type": "AWS::SSM::Association",
+            "Properties": {
+                "AssociationName": "UltronBranchCleanupAssociation",
+                "Targets": [
+                    {
+                        "Key": "tag:role",
+                        "Values": [
+                            "Compute"
+                        ]
+                    }
+                ],
+                "ScheduleExpression": "cron(0 0 ? * SUN *)",
+                "DocumentVersion": "$LATEST",
+                "Name": {
+                   "Ref": "UltronBranchCleanupSsmDocument"
+                }
+            }
+        }
+    }
+}
