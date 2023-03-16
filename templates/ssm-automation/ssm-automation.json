@@ -30,7 +30,7 @@
                         {
                         "inputs": {
                             "runCommand": [
-                              "echo \"Cleaning up ultron branches\" >> /tmp/ultron_cleanup.log",
+                              "echo \"Cleaning up ultron branches\" >> /tmp/ultron_cleanup.log"
                             ]
                         },
                         "name": "ExecutingCleanupScript",
