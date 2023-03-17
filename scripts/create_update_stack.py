@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-# Added featrure 8
+# Added featrure 8 
+# Added feature x
 #################################  Configuration ##################################
 import json
 import sys
