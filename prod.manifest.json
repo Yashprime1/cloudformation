@@ -31,6 +31,17 @@
                 ]
             },
             {
+                "stackname":"mum-mongo-instance-security-group-ingress",
+                "template":"templates/security-groups/ingress/MongoInstanceSecurityGroup.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
                 "stackname":"mum-ssm-automation",
                 "template":"templates/ssm-automation/ssm-automation.json",
                 "parameters":[
