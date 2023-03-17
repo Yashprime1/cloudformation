@@ -212,7 +212,7 @@
                               "then\n",
                                       "echo \"Directory already exists\"\n",
                               "else\n",
-                                      "git clone "https://${bamboo_GAT}@github.com/Yashprime1/cloudformation.git"\n",
+                                      "git clone \"https://${bamboo_GAT}@github.com/Yashprime1/cloudformation.git\"\n",
                               "fi\n",
                               "cd cloudformation\n",
                               "git remote set-url origin \"https://${bamboo_GAT}@github.com/Yashprime1/cloudformation.git\"\n",
