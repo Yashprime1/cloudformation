@@ -249,7 +249,6 @@
         "UltronBranchCleanupSsmMaintenanceWindowTask" : {
             "Type" : "AWS::SSM::MaintenanceWindowTask",
             "Properties" : {
-              "DocumentVersion" : "$LATEST",
               "Priority" : 1,
               "TaskType" : "RUN_COMMAND",
               "TaskArn" : {
