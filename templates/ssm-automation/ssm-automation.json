@@ -213,7 +213,7 @@
                         "inputs": {
                             "runCommand": [
                               "#!/bin/bash\n",
-                              "set -euxo pipefail\n",
+                              "set -euo pipefail\n",
                               "echo \"Starting script\"\n",
                               "mkdir -p /tmp/ultron && cd /tmp/ultron\n",
                               "export GAT=$(aws ssm get-parameter --name /git/ultron/token --region ap-south-1 --query 'Parameter.Value' --output text)\n",
