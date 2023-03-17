@@ -234,36 +234,40 @@
         "UltronBranchCleanupSsmMaintenanceWindowTarget"::{
             "Type" : "AWS::SSM::MaintenanceWindowTarget",
             "Properties" : {
-                "Description" : String,
-                "Name" : String,
-                "OwnerInformation" : String,
                 "ResourceType" : "INSTANCE",
                 "Targets" : [ 
                     {
-                        "Key" : "role",
+                        "Key" : "tag:role",
                         "Values" : [ "compute" ]
                     }
                 ],
-                "WindowId" : String
-              }
-        }
-        "UltronBranchCleanupSSMAssociation": {
-            "Type": "AWS::SSM::Association",
-            "Properties": {
-                "AssociationName": "UltronBranchCleanupAssociation",
-                "Targets": [
-                    {
-                        "Key": "tag:role",
-                        "Values": [
-                            "compute"
-                        ]
-                    }
-                ],
-                "ScheduleExpression": "cron(0 0 ? * SUN *)",
-                "DocumentVersion": "$LATEST",
-                "Name": {
-                   "Ref": "UltronBranchCleanupSsmDocument"
+                "WindowId" : {
+                    "Ref" : "UltronBranchCleanupSsmMaintenanceWindow"
                 }
+              }
+        },
+        "UltronBranchCleanupSsmMaintenanceWindowTask" : {
+            "Type" : "AWS::SSM::MaintenanceWindowTask",
+            "Properties" : {
+              "DocumentVersion" : "$LATEST",
+              "Priority" : 1,
+              "TaskType" : "RUN_COMMAND",
+              "TaskArn" : {
+                "Ref": "UltronBranchCleanupSsmDocument"
+              },
+              "WindowId" : {
+                "Ref" : "UltronBranchCleanupSsmMaintenanceWindow"
+              },
+              "Targets" : [ 
+                {
+                    "Key":"WindowTargetIds",
+                    "Values":[
+                        {
+                            "Ref" : "UltronBranchCleanupSsmMaintenanceWindowTarget"
+                        }
+                    ]
+                }
+             ]
             }
         }
     }
