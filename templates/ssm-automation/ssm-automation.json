@@ -216,7 +216,7 @@
                               "#!/bin/bash\n",
                               "set -euo pipefail\n",
                               "echo \"Starting script\"\n",
-                              "export GAT=$(aws ssm get-parameter --name /git/ultron/token --query 'Parameter.Value' --output text)\n",
+                              "export GAT=$(aws ssm get-parameter --name /git/ultron/token --region ap-south-1 --query 'Parameter.Value' --output text)\n",
                               "if [ -d \"cloudformation\" ]\n",
                               "then\n",
                                       "echo \"Directory already exists\"\n",
