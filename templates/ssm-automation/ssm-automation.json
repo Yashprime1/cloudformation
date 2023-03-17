@@ -139,7 +139,7 @@
             "Properties": {
                 "Name": "/git/ultron/token",
                 "Type": "String",
-                "Value": ""
+                "Value": "willbechanged"
             }
         },
         "EC2InstancePrimary":{
