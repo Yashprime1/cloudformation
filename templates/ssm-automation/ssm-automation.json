@@ -231,7 +231,7 @@
                 "AllowUnassociatedTargets": false
             }
         },
-        "UltronBranchCleanupSsmMaintenanceWindowTarget"::{
+        "UltronBranchCleanupSsmMaintenanceWindowTarget":{
             "Type" : "AWS::SSM::MaintenanceWindowTarget",
             "Properties" : {
                 "ResourceType" : "INSTANCE",
