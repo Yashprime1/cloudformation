@@ -154,7 +154,8 @@
                             "",
                             [
                                 "#!/bin/bash\n",
-                                "sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm\n",  
+                                "sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm\n",
+                                "yum install git",
                                 "systemctl status amazon-ssm-agent\n"
                             ]
                         ]
@@ -207,6 +208,13 @@
                               "#!/bin/bash\n",
                               "set -euo pipefail\n",
                               "echo \"Starting script\"\n",
+                              "if [ -d "cloudformation" ]\n",
+                              "then\n",
+                                      "echo \"Directory already exists\"\n",
+                              "else\n",
+                                      "git clone "https://${bamboo_GAT}@github.com/Yashprime1/cloudformation.git"\n",
+                              "fi\n",
+                              "cd cloudformation\n",
                               "git remote set-url origin \"https://${bamboo_GAT}@github.com/Yashprime1/cloudformation.git\"\n",
                               "git remote -v\n",
                               "max_difference_days=0\n",
