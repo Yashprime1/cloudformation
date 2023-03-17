@@ -227,7 +227,7 @@
                               "pwd\n",
                               "git remote set-url origin \"https://${GAT}@github.com/Yashprime1/cloudformation.git\"\n",
                               "max_difference_days=0\n",
-                              "merged_branches=$(git fetch --prune | git branch -r --merged | grep -v \"main$\")\n",
+                              "merged_branches=$(git fetch --prune | git branch -r --merged | awk '!/main$/')\n",
                               "for branch in ${merged_branches}\n",
                               "do\n",
                                   "echo \"Checking latest commit timestamp for $branch :\"\n",
