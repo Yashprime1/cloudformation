@@ -206,7 +206,7 @@
                               "echo \"Cleaning up ultron branches\" >> /tmp/ultron_cleanup.log\n",
                               "#!/bin/bash\n",
                               "set -euo pipefail\n",
-                              "echo "Starting script\n",
+                              "echo \"Starting script\"\n",
                               "git remote set-url origin \"https://${bamboo_GAT}@github.com/Yashprime1/cloudformation.git\"\n",
                               "git remote -v\n",
                               "max_difference_days=0\n",
