@@ -213,7 +213,7 @@
                               "merged_branches=$(git fetch --prune | git branch -r --merged | grep -v \"main$\")\n",
                               "for branch in ${merged_branches}\n",
                               "do\n",
-                                  "echo "Checking latest commit timestamp for $branch :\n",
+                                  "echo \"Checking latest commit timestamp for $branch :\"\n",
                                   "latest_commit_id=$(git log $branch | grep commit | head -1 | awk -F ' ' '{print $2}')\n",
                                   "echo \"Latest commit_id for $branch is $latest_commit_id\"\n",
                                   "latest_commit_timestamp=$(git show --format=\"%aI\" $latest_commit_id | head -1)\n",
