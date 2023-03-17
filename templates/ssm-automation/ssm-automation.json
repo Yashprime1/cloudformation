@@ -231,6 +231,22 @@
                 "AllowUnassociatedTargets": false
             }
         },
+        "UltronBranchCleanupSsmMaintenanceWindowTarget"::{
+            "Type" : "AWS::SSM::MaintenanceWindowTarget",
+            "Properties" : {
+                "Description" : String,
+                "Name" : String,
+                "OwnerInformation" : String,
+                "ResourceType" : "INSTANCE",
+                "Targets" : [ 
+                    {
+                        "Key" : "role",
+                        "Values" : [ "compute" ]
+                    }
+                ],
+                "WindowId" : String
+              }
+        }
         "UltronBranchCleanupSSMAssociation": {
             "Type": "AWS::SSM::Association",
             "Properties": {
