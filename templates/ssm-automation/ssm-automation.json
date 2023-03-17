@@ -208,7 +208,7 @@
                               "#!/bin/bash\n",
                               "set -euo pipefail\n",
                               "echo \"Starting script\"\n",
-                              "if [ -d "cloudformation" ]\n",
+                              "if [ -d \"cloudformation\" ]\n",
                               "then\n",
                                       "echo \"Directory already exists\"\n",
                               "else\n",
