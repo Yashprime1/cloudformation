@@ -80,7 +80,7 @@
             "Description": "DNS name of the Iris load balancer"
         },
         "IrisTargetGroupArn":{
-            "Export": { "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisTargetGroup" ] ] } },
+            "Export": { "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisTargetGroupArn" ] ] } },
             "Value": { "Ref" : "IrisTargetGroup" },
             "Description": "ARN of the Iris target group"
         }
