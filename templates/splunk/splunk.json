@@ -6,7 +6,98 @@
             "Default": ""
         }
     },
+    "Mappings": {
+        "AWSAMIMapping": {
+           "ap-south-1": {
+              "HVM64" : "ami-0d81306eddc614a45"
+           },
+           "ap-northeast-2": {
+              "HVM64": "ami-0994dc69c39c35834"
+           },
+           "eu-west-1": {
+              "HVM64": "ami-04bf55d5e589debe9"
+           }
+        }
+     },
     "Resources" : { 
+        "IrisInstanceKeyPair": {
+            "Type": "AWS::EC2::KeyPair",
+            "Properties": {
+                "KeyName": "MyKeyPair"
+            }
+        },
+        "IrisLaunchConfiguration": {
+            "Type": "AWS::AutoScaling::LaunchConfiguration",
+            "Properties": {
+                "AssociatePublicIpAddress": "true",
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSAMIMapping",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "HVM64"
+                    ]
+                },
+                "InstanceType": "t2.micro",
+                "KeyName": {
+                    "Ref": "IrisInstanceKeyPair"
+                },
+                "SecurityGroups": [
+                    {
+                        "Fn::ImportValue":{
+                            "Fn::Join":[
+                                "-",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "IRISInstanceSecurityGroupId"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+                }
+        },
+        "IrisAutoscalingGroup": {
+            "Type": "AWS::AutoScaling::AutoScalingGroup",
+            "Properties": {
+                "AvailabilityZones": [
+                    {
+                        "Fn::GetAZs":  { "Ref" : "AWS::Region" }
+                    }
+                ],
+                "LaunchConfigurationName": { "Ref" : "IrisLaunchConfiguration" },
+                "MaxSize": "2",
+                "MinSize": "1",
+                "TargetGroupARNs": [
+                    {
+                        "Ref" : "IrisTargetGroup"
+                    }
+                ],
+                "VPCZoneIdentifier": [
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                            }
+                    },
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                            }
+                    },
+                    {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
+                            }
+                    }
+                ]
+            }
+        },  
         "IrisLoadBalancer":{
             "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
             "Properties": {
