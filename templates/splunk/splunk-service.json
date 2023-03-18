@@ -120,12 +120,13 @@
                         "PortMappings":[
                             {
                                 "ContainerPort":3000,
+                                "HostPort":3000,
                                 "Protocol":"tcp"
                             }
                         ]
                     }
                 ],
-                "NetworkMode" : "awsvpc",
+                "NetworkMode" : "host",
                 "RequiresCompatibilities": [
                     "EC2"
                 ],
