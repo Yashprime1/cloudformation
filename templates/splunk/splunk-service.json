@@ -116,7 +116,14 @@
                             }
                         ],
                         "Essential":"true",
-                        "Memory":512
+                        "Memory":512,
+                        "PortMappings":[
+                            {
+                                "ContainerPort":3000,
+                                "HostPort":3000,
+                                "Protocol":"tcp"
+                            }
+                        ]
                     }
                 ],
                 "NetworkMode" : "awsvpc",
