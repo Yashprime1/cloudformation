@@ -120,7 +120,6 @@
                         "PortMappings":[
                             {
                                 "ContainerPort":3000,
-                                "HostPort":3000,
                                 "Protocol":"tcp"
                             }
                         ]
