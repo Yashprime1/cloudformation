@@ -221,7 +221,7 @@
                                             {
                                                 "Ref":"RegionPrefix"
                                             },
-                                            "splunk"
+                                            "splunk",
                                             "IrisTargetGroupArn"
                                         ]
                                     ]
