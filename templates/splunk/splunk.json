@@ -102,7 +102,6 @@
         "IrisLoadBalancer":{
             "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
             "Properties": {
-                "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisLoadBalancer" ] ] },
                 "Scheme": "internet-facing",
                 "Subnets": [
                     {
