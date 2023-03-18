@@ -52,7 +52,6 @@
         "IrisTargetGroup":{
             "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
             "Properties": {
-                "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisTargetGroup" ] ] },
                 "Port": 3000,
                 "Protocol": "HTTP",
                 "TargetType": "ip",
