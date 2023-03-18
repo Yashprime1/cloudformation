@@ -42,8 +42,19 @@
                 ]
             },
             {
-                "stackname":"mum-ssm-automation",
-                "template":"templates/ssm-automation/ssm-automation.json",
+                "stackname":"mum-splunk",
+                "template":"templates/splunk/splunk.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
+                "stackname":"mum-splunk-service",
+                "template":"templates/splunk/splunk-service.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
