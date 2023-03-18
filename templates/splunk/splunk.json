@@ -64,9 +64,7 @@
             "Type": "AWS::AutoScaling::AutoScalingGroup",
             "Properties": {
                 "AvailabilityZones": [
-                    {
-                        "Fn::GetAZs":  { "Ref" : "AWS::Region" }
-                    }
+                    { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }
                 ],
                 "LaunchConfigurationName": { "Ref" : "IrisLaunchConfiguration" },
                 "MaxSize": "2",
