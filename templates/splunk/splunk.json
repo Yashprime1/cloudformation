@@ -79,7 +79,7 @@
             "Value": { "Fn::GetAtt" : [ "IrisLoadBalancer", "DNSName" ] },
             "Description": "DNS name of the Iris load balancer"
         },
-        "IrisTargetGroup":{
+        "IrisTargetGroupArn":{
             "Export": { "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisTargetGroup" ] ] } },
             "Value": { "Ref" : "IrisTargetGroup" },
             "Description": "ARN of the Iris target group"
