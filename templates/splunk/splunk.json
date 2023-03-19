@@ -9,7 +9,7 @@
     "Mappings": {
         "AWSAMIMapping": {
            "ap-south-1": {
-              "HVM64" : "ami-0d81306eddc614a45"
+              "HVM64" : "ami-0e742cca61fb65051"
            },
            "ap-northeast-2": {
               "HVM64": "ami-0994dc69c39c35834"
@@ -153,9 +153,6 @@
                                 {"Ref":"IrisEcsCluster"},
                                 " >> /etc/ecs/ecs.config\n",
                                 "amazon-linux-extras install -y ecs\n",
-                                "echo ECS_ENABLE_TASK_IAM_ROLE=true >> /etc/ecs/ecs.config\n",
-                                "echo ECS_ENABLE_TASK_ENI=true >> /etc/ecs/ecs.config\n",
-                                "echo ECS_ENABLE_DOCKER_REMOTE_API=true >>  /etc/ecs/ecs.config\n",
                                 "systemctl enable --now --no-block ecs\n",
                                 "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
                             ]
