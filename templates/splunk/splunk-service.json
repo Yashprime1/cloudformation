@@ -144,21 +144,6 @@
                 "TaskRoleArn":{"Fn::GetAtt":["IrisTaskIamRole","Arn"]}
             }
         },
-        "IrisEcsCluster":{
-            "Type":"AWS::ECS::Cluster",
-            "Properties":{
-                "Tags":[
-                    {
-                        "Key":"Name",
-                        "Value":"Iris"
-                    },
-                    {
-                        "Key":"Cluster Name",
-                        "Value":{"Fn::Join":["-",[{"Ref":"RegionPrefix"},"IrisEcsCluster"]]}
-                    }
-                ]
-            }
-        },
         "IrisEcsService":{
             "Type":"AWS::ECS::Service",
             "Properties":{

@@ -20,6 +20,21 @@
         }
      },
     "Resources" : { 
+        "IrisEcsCluster":{
+            "Type":"AWS::ECS::Cluster",
+            "Properties":{
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"Iris"
+                    },
+                    {
+                        "Key":"Cluster Name",
+                        "Value":{"Fn::Join":["-",[{"Ref":"RegionPrefix"},"IrisEcsCluster"]]}
+                    }
+                ]
+            }
+        },
         "IrisInstacneIamRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -133,7 +148,10 @@
                             [
                                 "#!/bin/bash\n",
                                 "mkdir -p /etc/ecs\n",  
-                                "echo ECS_CLUSTER=mum-splunk-service-IrisEcsCluster-QyOsYX89pnqk >> /etc/ecs/ecs.config\n",
+                                "echo ECS_CLUSTER",
+                                "=",
+                                {"Ref":"IrisEcsCluster"},
+                                " >> /etc/ecs/ecs.config\n",
                                 "amazon-linux-extras install -y ecs\n",
                                 "systemctl enable --now --no-block ecs\n",
                                 "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
@@ -262,6 +280,11 @@
             "Export": { "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisTargetGroupArn" ] ] } },
             "Value": { "Ref" : "IrisTargetGroup" },
             "Description": "ARN of the Iris target group"
+        },
+        "IrisEcsClusterName":{
+            "Export": { "Name": { "Fn::Join" : [ "-", [ { "Ref" : "AWS::StackName" }, "IrisEcsClusterName" ] ] } },
+            "Value": { "Ref" : "IrisEcsCluster" },
+            "Description": "Name of the Iris Ecs Cluster"
         }
     }
 }
