@@ -126,7 +126,7 @@
                         ]
                     }
                 ],
-                "NetworkMode" : "host",
+                "NetworkMode" : "awsvpc",
                 "RequiresCompatibilities": [
                     "EC2"
                 ],
@@ -170,6 +170,48 @@
                 "DeploymentController":{
                     "Type":"ECS"
                 },            
+                "NetworkingConfiguration":{
+                    "AwsvpcConfiguration":{
+                        "AssignPublicIp":"ENABLED",
+                        "SecurityGroups":[
+                            {
+                                "Fn::ImportValue":{
+                                    "Fn::Join":
+                                        ["-",
+                                            [
+                                                {
+                                                    "Ref":"RegionPrefix"
+                                                },
+                                                "IRISInstanceSecurityGroupId"
+                                            ]
+                                        ]
+                                    }
+                            }
+                        ],
+                        "Subnets":[
+                            {
+                                {
+                                    "Fn::ImportValue": 
+                                        {
+                                            "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                                        }
+                                },
+                                {
+                                    "Fn::ImportValue": 
+                                        {
+                                            "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                                        }
+                                },
+                                {
+                                    "Fn::ImportValue": 
+                                        {
+                                            "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
+                                        }
+                                }
+                            }
+                        ]
+                    }
+                },
                 "EnableECSManagedTags":"true",
                 "EnableExecuteCommand":"true",     
                 "DesiredCount":1,
