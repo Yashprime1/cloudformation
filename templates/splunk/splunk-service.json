@@ -189,7 +189,6 @@
                             }
                         ],
                         "Subnets":[
-                            {
                                 {
                                     "Fn::ImportValue": 
                                         {
@@ -208,7 +207,6 @@
                                             "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
                                         }
                                 }
-                            }
                         ]
                     }
                 },
