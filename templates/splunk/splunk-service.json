@@ -147,7 +147,20 @@
         "IrisEcsService":{
             "Type":"AWS::ECS::Service",
             "Properties":{
-                "Cluster":{"Ref":"IrisEcsCluster"},
+                "Cluster":{
+                    "Fn::ImportValue":{
+                        "Fn::Join":
+                            ["-",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "splunk",
+                                    "IrisEcsClusterName"
+                                ]
+                            ]
+                        }
+                }
                 "DeploymentConfiguration":{
                     "MaximumPercent":100,
                     "MinimumHealthyPercent":0
