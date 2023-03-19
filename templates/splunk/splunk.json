@@ -147,7 +147,7 @@
                 "Port": 3000,
                 "Protocol": "HTTP",
                 "TargetType": "alb",
-                "VpcId": { "Fn::ImportValue" : { "Fn::Join" : [ "-", [ { "Ref" : "RegionPrefix" }, "vpc","id" ] ] } }
+                "VpcId": { "Fn::ImportValue" : { "Fn::Join" : [ "-", [ { "Ref" : "RegionPrefix" }, "vpc","id" ] ] } },
                 "Targets":[
                     {
                         "Id": { "Ref" : "IrisLoadBalancer" },
