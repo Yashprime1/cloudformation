@@ -136,6 +136,7 @@
                                 "echo ECS_CLUSTER=mum-splunk-service-IrisEcsCluster-c2SizcW5hf75 >> /etc/ecs/ecs.config\n",
                                 "amazon-linux-extras install -y ecs\n",
                                 "systemctl enable --now --no-block ecs\n",
+                                "export ECS_ENABLE_TASK_IAM_ROLE=true\n",
                                 "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
                             ]
                         ]
