@@ -170,7 +170,7 @@
                 "DeploymentController":{
                     "Type":"ECS"
                 },            
-                "NetworkingConfiguration":{
+                "NetworkConfiguration":{
                     "AwsvpcConfiguration":{
                         "AssignPublicIp":"ENABLED",
                         "SecurityGroups":[
