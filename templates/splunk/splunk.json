@@ -20,6 +20,71 @@
         }
      },
     "Resources" : { 
+        "IrisInstacneIamRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Path": "/",
+                "Policies": [
+                    {
+                        "PolicyName": "IrisInstanceIamRolePolicy",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                                "ec2:DescribeInstances",
+                                                "ec2-instance-connect:SendSSHPublicKey",
+                                                "ec2:DescribeInstances",
+                                                "ec2:DescribeTags",
+                                                "ec2:CreateTags",
+                                                "ecs:RegisterContainerInstance",
+                                                "ecs:DeregisterContainerInstance",
+                                                "ecs:DescribeContainerInstances",
+                                                "ecs:DiscoverPollEndpoint",
+                                                "ecs:*",
+                                                "ec2:*",
+                                                "logs:*"
+                                        ],
+                                    "Resource": [
+                                        "arn:aws:ec2:*:*:instance/*",
+                                        "arn:aws:ecs:*:*:cluster/*",
+                                        "*"
+                                    ]
+                                 }
+                                ]
+                            }
+                    }
+                ]
+            }
+        },
+        "IrisInstacneIamProfile":{
+            "Type":"AWS::IAM::InstanceProfile",
+            "Properties":{
+                "Path":"/",
+                "Roles":[
+                    {
+                        "Ref":"IrisInstacneIamRole"
+                    }
+                ]
+            }
+        },
         "IrisInstanceKeyPair": {
             "Type": "AWS::EC2::KeyPair",
             "Properties": {
@@ -58,6 +123,9 @@
                         }
                     }
                 ],
+                "IamInstanceProfile": {
+                    "Ref": "IrisInstacneIamProfile"
+                },
                 "UserData":{
                     "Fn::Base64":{
                         "Fn::Join":[
