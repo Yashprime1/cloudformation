@@ -108,7 +108,7 @@
                     {
                         "Name":"Iris",
                         "Image":"yashprime07/dream-saprx:latest",
-                        "Cpu":0.5,
+                        "Cpu":1,
                         "Environment":[
                             {
                                 "Name":"Friend",
