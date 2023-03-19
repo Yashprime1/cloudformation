@@ -227,6 +227,15 @@
         "IrisTargetGroup":{
             "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
             "Properties": {
+                "HealthCheckIntervalSeconds": 30,
+                "HealthCheckPath": "/",
+                "HealthCheckProtocol": "HTTP",
+                "HealthCheckTimeoutSeconds": 5,
+                "HealthyThresholdCount": 2,
+                "Matcher": {
+                    "HttpCode": "200"
+                },
+                "HealthCheckPort":"3000"
                 "Port": 3000,
                 "Protocol": "HTTP",
                 "TargetType": "ip",
