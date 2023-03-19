@@ -40,6 +40,28 @@
                 "FromPort":"3000",
                 "ToPort":"3000"
             }
+        },
+        "PublicSShToIRISInstanceSecurityGroupIngressRule":{
+            "Type":"AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+                "GroupId":{
+                    "Fn::ImportValue":{
+                        "Fn::Join":[
+                            "-",
+                            [
+                                {
+                                    "Ref":"RegionPrefix"
+                                },
+                                "IRISInstanceSecurityGroupId"
+                            ]
+                        ]
+                    }
+                },
+                "CidrIp":"0.0.0.0/0"
+                "IpProtocol":"tcp",
+                "FromPort":"22",
+                "ToPort":"22"
+            }
         }
     }
 }
