@@ -146,8 +146,14 @@
             "Properties": {
                 "Port": 3000,
                 "Protocol": "HTTP",
-                "TargetType": "instance",
+                "TargetType": "alb",
                 "VpcId": { "Fn::ImportValue" : { "Fn::Join" : [ "-", [ { "Ref" : "RegionPrefix" }, "vpc","id" ] ] } }
+                "Targets":[
+                    {
+                        "Id": { "Ref" : "IrisLoadBalancer" },
+                        "Port": 3000
+                    }
+                ]
             }
         },
         "IrisListener":{
