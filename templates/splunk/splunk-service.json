@@ -108,7 +108,7 @@
                     {
                         "Name":"Iris",
                         "Image":"yashprime07/dream-saprx:latest",
-                        "Cpu":1,
+                        "Cpu":0.5,
                         "Environment":[
                             {
                                 "Name":"Friend",
@@ -169,12 +169,7 @@
                 },
                 "DeploymentController":{
                     "Type":"ECS"
-                },
-                "NetworkConfiguration":[
-                    {
-                        "AwsvpcConfiguration" :
-                    }
-                ],            
+                },            
                 "EnableECSManagedTags":"true",
                 "EnableExecuteCommand":"true",     
                 "DesiredCount":1,
