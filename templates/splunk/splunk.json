@@ -229,7 +229,7 @@
             "Properties": {
                 "Port": 3000,
                 "Protocol": "HTTP",
-                "TargetType": "instance",
+                "TargetType": "ip",
                 "VpcId": { "Fn::ImportValue" : { "Fn::Join" : [ "-", [ { "Ref" : "RegionPrefix" }, "vpc","id" ] ] } }
             }
         },
