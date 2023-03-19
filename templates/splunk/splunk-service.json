@@ -108,7 +108,7 @@
                     {
                         "Name":"Iris",
                         "Image":"yashprime07/dream-saprx:latest",
-                        "Cpu":1,
+                        "Cpu":128,
                         "Environment":[
                             {
                                 "Name":"Friend",
@@ -116,7 +116,7 @@
                             }
                         ],
                         "Essential":"true",
-                        "Memory":512,
+                        "Memory":128,
                         "PortMappings":[
                             {
                                 "ContainerPort":3000,
