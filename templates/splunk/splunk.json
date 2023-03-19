@@ -57,8 +57,23 @@
                             ]
                         }
                     }
-                ]
+                ],
+                "UserData":{
+                    "Fn::Base64":{
+                        "Fn::Join":[
+                            "",
+                            [
+                                "#!/bin/bash\n",
+                                "mkdir -p /etc/ecs\n",  
+                                "echo ECS_CLUSTER=mum-splunk-service-IrisEcsCluster-c2SizcW5hf75 >> /etc/ecs/ecs.config\n",
+                                "amazon-linux-extras install -y ecs\n",
+                                "systemctl enable --now --no-block ecs\n",
+                                "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
+                            ]
+                        ]
+                    }
                 }
+            }
         },
         "IrisAutoscalingGroup": {
             "Type": "AWS::AutoScaling::AutoScalingGroup",
