@@ -155,15 +155,6 @@
                 "MaxSize": "2",
                 "MinSize": "1",
                 "DesiredCapacity": "1",
-                "LoadBalancers":[
-                    {
-                        "ContainerName":"Iris",
-                        "ContainerPort":3000,
-                        "TargetGroupArn":{
-                            "Ref":"IrisTargetGroup"
-                        }
-                    }
-                ],
                 "VPCZoneIdentifier": [
                     {
                         "Fn::ImportValue": 
