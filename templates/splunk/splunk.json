@@ -235,7 +235,7 @@
                 "Matcher": {
                     "HttpCode": "200"
                 },
-                "HealthCheckPort":"3000"
+                "HealthCheckPort":"3000",
                 "Port": 3000,
                 "Protocol": "HTTP",
                 "TargetType": "ip",
