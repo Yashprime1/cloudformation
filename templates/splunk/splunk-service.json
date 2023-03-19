@@ -160,7 +160,7 @@
                                 ]
                             ]
                         }
-                }
+                },
                 "DeploymentConfiguration":{
                     "MaximumPercent":100,
                     "MinimumHealthyPercent":0
