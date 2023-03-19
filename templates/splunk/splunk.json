@@ -145,7 +145,7 @@
             "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
             "Properties": {
                 "Port": 3000,
-                "Protocol": "HTTP",
+                "Protocol": "HTTPS",
                 "TargetType": "alb",
                 "VpcId": { "Fn::ImportValue" : { "Fn::Join" : [ "-", [ { "Ref" : "RegionPrefix" }, "vpc","id" ] ] } },
                 "Targets":[
