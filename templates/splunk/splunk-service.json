@@ -172,7 +172,6 @@
                 },            
                 "NetworkConfiguration":{
                     "AwsvpcConfiguration":{
-                        "AssignPublicIp":"ENABLED",
                         "SecurityGroups":[
                             {
                                 "Fn::ImportValue":{
