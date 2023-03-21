@@ -64,19 +64,8 @@
                 ]
             },
             {
-                "stackname":"mum-splunk",
-                "template":"templates/splunk/splunk.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
-                "stackname":"mum-splunk-service",
-                "template":"templates/splunk/splunk-service.json",
+                "stackname":"mum-batch",
+                "template":"templates/batch/batch.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
