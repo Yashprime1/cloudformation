@@ -262,7 +262,7 @@
                           ]
                       }
                   },
-                  "MinvCpus":1
+                  "MinvCpus":1,
                   "MaxvCpus": 2,
                   "SecurityGroupIds": [
                       {
