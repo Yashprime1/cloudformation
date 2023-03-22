@@ -385,7 +385,7 @@
                           "Type": "MEMORY",
                           "Value": "512"
                       }
-                  ]
+                  ],
                   "ReadonlyRootFilesystem": false,
                   "Privileged":false
               },
