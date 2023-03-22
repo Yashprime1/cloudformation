@@ -254,6 +254,16 @@
           "Properties": {
               "Type": "MANAGED",
               "ComputeResources": {
+                  "LaunchTemplate": {
+                      "LaunchTemplateName": "BatchComputeEnvironmentEc2LaunchTemplate",
+                      "Version": {
+                          "Fn::GetAtt": [
+                              "BatchComputeEnvironmentEc2LaunchTemplate",
+                              "LatestVersionNumber"
+                          ]
+                      }
+                  },
+                  "MinvCpus":1,
                   "MaxvCpus": 2,
                   "SecurityGroupIds": [
                       {
@@ -263,7 +273,7 @@
                           }
                       }
                   ],
-                  "Type": "FARGATE",
+                  "Type": "EC2",
                   "Subnets": [
                       {
                           "Fn::ImportValue": 
@@ -283,7 +293,15 @@
                               "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
                           }
                       }
-                  ]
+                  ],
+                  "InstanceRole": {
+                    "Fn::GetAtt": [
+                      "BatchInstanceIamInstanceProfile",
+                      "Arn"
+                    ]
+                  },
+                  "InstanceTypes":[ "c4.large" ],
+                  "AllocationStrategy": "BEST_FIT_PROGRESSIVE"
               },
               "State": "ENABLED"
           }
@@ -392,7 +410,7 @@
               "PropagateTags" : true,
               "SchedulingPriority" : 1
           }
-        }
+      }
     },
     "Outputs":{
         "BatchJobQueueArn":{
