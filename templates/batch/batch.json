@@ -376,8 +376,16 @@
                   "LogConfiguration": {
                       "LogDriver": "awslogs"
                   },
-                  "Vcpus":1,
-                  "Memory":256,
+                  "ResourceRequirements": [
+                      {
+                          "Type": "VCPU",
+                          "Value": "0.25"
+                      },
+                      {
+                          "Type": "MEMORY",
+                          "Value": "512"
+                      }
+                  ]
                   "ReadonlyRootFilesystem": false,
                   "Privileged":false
               },
@@ -388,7 +396,7 @@
               {
                   "logical-id": "BatchEC2JobDefinition"
               },
-              "PlatformCapabilities" : [ "EC2" ],
+              "PlatformCapabilities" : [ "FARGATE" ],
               "PropagateTags" : true,
               "SchedulingPriority" : 1
           }
