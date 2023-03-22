@@ -308,7 +308,7 @@
                       "Arn"
                     ]
                   },
-                  "InstanceTypes":`[ "c4.large" ],
+                  "InstanceTypes":[ "c4.large" ],
                   "AllocationStrategy": "BEST_FIT_PROGRESSIVE"
               },
               "State": "ENABLED"
