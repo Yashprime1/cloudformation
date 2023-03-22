@@ -206,6 +206,7 @@
                             }
                         }
                     ]
+
                 }
             }
         },
@@ -293,15 +294,6 @@
                           }
                       }
                   ],
-                  "ImageId": {
-                    "Fn::FindInMap": [
-                      "AWSAMIMapping",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      "HVM64"
-                    ]
-                  },
                   "InstanceRole": {
                     "Fn::GetAtt": [
                       "BatchInstanceIamInstanceProfile",
