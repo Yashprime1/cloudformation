@@ -308,13 +308,13 @@
                       "Arn"
                     ]
                   },
-                  "InstanceTypes":`[ "c4.large" ]`,
+                  "InstanceTypes":`[ "c4.large" ],
                   "AllocationStrategy": "BEST_FIT_PROGRESSIVE"
               },
               "State": "ENABLED"
           }
       },
-        "BatchFargateSchedulingPolicy":{
+        "BatchSchedulingPolicy":{
             "Type" : "AWS::Batch::SchedulingPolicy",
             "Properties" : {
                 "FairsharePolicy" : {
@@ -322,14 +322,14 @@
                 "Name" : "SP"
               }
         },
-        "BatchFargateJobQueue": {
+        "BatchJobQueue": {
             "Type": "AWS::Batch::JobQueue",
             "Properties": {
                 "ComputeEnvironmentOrder": [
                     {
                         "Order": 1,
                         "ComputeEnvironment": {
-                            "Ref": "BatchFargateComputeEnvironment"
+                            "Ref": "BatchEc2ComputeEnvironment"
                         }
                     }
                 ],
@@ -337,10 +337,10 @@
                 "Priority": 1,
                 "Tags":
                 {
-                    "logical-id": "BatchFargateJobQueue"
+                    "logical-id": "BatchJobQueue"
                 },
                 "SchedulingPolicyArn": {
-                    "Ref": "BatchFargateSchedulingPolicy"
+                    "Ref": "BatchSchedulingPolicy"
                 } 
             }
         },
