@@ -405,8 +405,8 @@
                   "NetworkConfiguration": {
                       "AssignPublicIp": "ENABLED"
                   },
-                  "Vcpus":0.25,
-                  "Memory":512,
+                  "Vcpus":1,
+                  "Memory":256,
                   "ReadonlyRootFilesystem": false,
                   "Privileged":false
               },
