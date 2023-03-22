@@ -344,7 +344,7 @@
                 } 
             }
         },
-        "BatchJobDefinition":{
+        "BatchFargateJobDefinition":{
             "Type": "AWS::Batch::JobDefinition",
             "Properties": {
                 "Type": "container",
@@ -379,7 +379,7 @@
                 },
                 "Tags":
                 {
-                    "logical-id": "BatchJobDefinition"
+                    "logical-id": "BatchFargateJobDefinition"
                 },
                 "PlatformCapabilities" : [ "FARGATE" ],
                 "PropagateTags" : true,
@@ -401,9 +401,6 @@
                   "ExecutionRoleArn" : {"Fn::GetAtt" : ["BatchInstanceIamRole", "Arn"]},
                   "LogConfiguration": {
                       "LogDriver": "awslogs"
-                  },
-                  "NetworkConfiguration": {
-                      "AssignPublicIp": "ENABLED"
                   },
                   "Vcpus":1,
                   "Memory":256,
