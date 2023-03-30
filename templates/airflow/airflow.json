@@ -50,14 +50,7 @@
           },
           "Path": "/"
         }
-      },
-      "BitbucketAccessToken":{
-        "Type" : "AWS::SSM::Parameter",
-        "Properties" : {
-            "Type" : "String",
-            "Value" : "Will be CHnaged"
-          }
-      },      
+      },     
       "AirflowEnvironmentExecutionIamPolicy": {
         "Type": "AWS::IAM::Policy",
         "Properties": {
@@ -315,7 +308,7 @@
           "WebserverAccessMode": "PUBLIC_ONLY"
         }
       },
-      "SendGridSMTPAPIkeySecretsManagerSecret": {
+      "BitbucketAccessTokenSecretsManagerSecret": {
         "Type": "AWS::SecretsManager::Secret",
         "Properties": {
           "Description": {
