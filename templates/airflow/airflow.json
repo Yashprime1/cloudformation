@@ -283,12 +283,12 @@
             "SubnetIds": [
               {
                 "Fn::ImportValue": {
-                    "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                    "Fn::Sub": "${RegionPrefix}-private-subnet-1-id"
                 }
               },
               {
                 "Fn::ImportValue": {
-                    "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                    "Fn::Sub": "${RegionPrefix}-private-subnet-2-id"
                 }
               }
             ],
