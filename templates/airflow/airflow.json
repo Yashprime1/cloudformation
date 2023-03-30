@@ -172,18 +172,6 @@
               {
                 "Effect": "Allow",
                 "Action": [
-                  "ssm:*"
-                ],
-                "Resource": [
-                  {
-                    "Ref":"BitbucketAccessToken"
-                  }
-                ],
-                "Sid": "AllowAirflowToFetchSecretsFromParameterStore"
-              },
-              {
-                "Effect": "Allow",
-                "Action": [
                   "secretsmanager:GetSecretValue"
                 ],
                 "Resource": [
