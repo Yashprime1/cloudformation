@@ -136,7 +136,7 @@
           },
           "MaxWorkers": 3,
           "MinWorkers": 1,
-          "Name": "AirflowEnvironment3",
+          "Name": "AirflowEnvironment4",
           "NetworkConfiguration": {
             "SubnetIds": [
               {
