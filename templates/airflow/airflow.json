@@ -52,26 +52,7 @@
               {
                 "Effect": "Deny",
                 "Action": "s3:ListAllMyBuckets",
-                "Resource": [
-                  {
-                    "Fn::ImportValue": {
-                        "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    
-                    }
-                  },
-                  {
-                    "Fn::Join": [
-                      "/",
-                      [
-                        {
-                            "Fn::ImportValue": {
-                                "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    
-                            }
-                        },
-                        "*"
-                      ]
-                    ]
-                  }
-                ]
+                "Resource": "*"
               },
               {
                 "Effect": "Allow",
@@ -80,26 +61,7 @@
                   "s3:GetBucket*",
                   "s3:List*"
                 ],
-                "Resource": [
-                  {
-                    "Fn::ImportValue": {
-                        "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                                        
-                    }
-                  },
-                  {
-                    "Fn::Join": [
-                      "/",
-                      [
-                        {
-                            "Fn::ImportValue": {
-                                "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    
-                            }
-                        },
-                        "*"
-                      ]
-                    ]
-                  }
-                ]
+                "Resource": "*"
               },
               {
                 "Effect": "Allow",
@@ -146,11 +108,7 @@
                 "Action": [
                   "secretsmanager:GetSecretValue"
                 ],
-                "Resource": [
-                  {
-                    "Ref": "BitbucketAccessTokenSecretsManagerSecret"
-                  }
-                ],
+                "Resource": "*",
                 "Sid": "AllowAirflowToFetchSecretsFromSecretManager"
               },
               {
