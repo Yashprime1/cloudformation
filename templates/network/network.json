@@ -455,7 +455,7 @@
         "RegionPrivateSubnet1Id":{
             "Export":{
                 "Name":{
-                    "Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-private-subnet-2-id"]]
+                    "Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-private-subnet-1-id"]]
                 }
             },
             "Value":{
