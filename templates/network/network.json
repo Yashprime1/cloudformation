@@ -440,7 +440,7 @@
                 ]
             }
         },
-        "RegionPrivateSubnetRouteTable" : {
+        "RegionPrivateSubnet1RouteTable" : {
             "Type" : "AWS::EC2::RouteTable",
             "Properties" : {
               "VpcId" : {
@@ -456,7 +456,7 @@
                                     {
                                         "Ref":"RegionPrefix"
                                     },
-                                    "-private-subnet-route-table"
+                                    "-private-subnet-1-route-table"
                                 ]
                             ]
                         }
@@ -464,15 +464,51 @@
                 ]
             }
         },
-        "RegionPrivateSubnetRouteTableNatGatewayRoute" : {
+        "RegionPrivateSubnet1RouteTableNatGatewayRoute" : {
             "Type" : "AWS::EC2::Route",
             "Properties" : {
               "RouteTableId" : {
-                "Ref" : "RegionPrivateSubnetRouteTable"
+                "Ref" : "RegionPrivateSubnet1RouteTable"
               },
               "DestinationCidrBlock" : "0.0.0.0/0",
               "NatGatewayId" : {
-                "Ref" : "AirFlowEnvironmentAzANatGateway"
+                "Ref" : "RegionPrivateSubnet1NatGateway"
+              }
+            }
+        },
+        "RegionPrivateSubnet2RouteTable" : {
+            "Type" : "AWS::EC2::RouteTable",
+            "Properties" : {
+              "VpcId" : {
+                "Ref" : "RegionVPC"
+              },
+              "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-private-subnet-2-route-table"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPrivateSubnet2RouteTableNatGatewayRoute" : {
+            "Type" : "AWS::EC2::Route",
+            "Properties" : {
+              "RouteTableId" : {
+                "Ref" : "RegionPrivateSubnet2RouteTable"
+              },
+              "DestinationCidrBlock" : "0.0.0.0/0",
+              "NatGatewayId" : {
+                "Ref" : "RegionPrivateSubnet2NatGateway"
               }
             }
         },
@@ -483,7 +519,7 @@
                     "Ref":"RegionPrivateSubnet1"
                 },
                 "RouteTableId":{
-                    "Ref":"RegionPrivateSubnetRouteTable"
+                    "Ref":"RegionPrivateSubnet1RouteTable"
                 }
             }
         },
@@ -494,18 +530,7 @@
                     "Ref":"RegionPrivateSubnet2"
                 },
                 "RouteTableId":{
-                    "Ref":"RegionPrivateSubnetRouteTable"
-                }
-            }
-        },
-        "RegionPrivateSubnet3RouteTableAssociation":{   
-            "Type":"AWS::EC2::SubnetRouteTableAssociation",
-            "Properties":{
-                "SubnetId":{
-                    "Ref":"RegionPrivateSubnet3"
-                },
-                "RouteTableId":{
-                    "Ref":"RegionPrivateSubnetRouteTable"
+                    "Ref":"RegionPrivateSubnet2RouteTable"
                 }
             }
         }
