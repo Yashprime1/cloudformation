@@ -31,8 +31,8 @@
                 ]
             },
             {
-                "stackname":"mum-mongo-instance-security-group-ingress",
-                "template":"templates/security-groups/ingress/MongoInstanceSecurityGroup.json",
+                "stackname":"mum-airflow",
+                "template":"templates/airflow/airflow.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
@@ -41,39 +41,6 @@
                     }
                 ]
             },
-            {
-                "stackname":"mum-iris-instance-security-group-ingress",
-                "template":"templates/security-groups/ingress/IRISInstanceSecurityGroup.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
-                "stackname":"mum-iris-loadbalancer-security-group-ingress",
-                "template":"templates/security-groups/ingress/IRISLoadBalancerSecurityGroup.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
-                "stackname":"mum-batch",
-                "template":"templates/batch/batch.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            }
         ]
     }
 ]

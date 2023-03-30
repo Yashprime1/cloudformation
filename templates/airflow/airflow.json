@@ -1,0 +1,341 @@
+{
+    "Parameters": {
+        "RegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }   
+    },
+    "Resources": {
+      "AirflowEnvironmentDagsS3Bucket": {
+        "Type": "AWS::S3::Bucket",
+        "Properties": {
+          "BucketEncryption": {
+            "ServerSideEncryptionConfiguration": [
+              {
+                "BucketKeyEnabled": true,
+                "ServerSideEncryptionByDefault": {
+                  "SSEAlgorithm": "AES256"
+                }
+              }
+            ]
+          },
+          "VersioningConfiguration" : {
+            "Status" : "Enabled"
+          },
+          "PublicAccessBlockConfiguration" : {
+            "BlockPublicAcls" : true,
+            "BlockPublicPolicy" : true,
+            "IgnorePublicAcls" : true,
+            "RestrictPublicBuckets" : true
+          }
+        }
+      },
+      "AirflowEnvironmentExecutionIamRole": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+          "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": [
+                    "airflow.amazonaws.com",
+                    "airflow-env.amazonaws.com"
+                  ]
+                },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          },
+          "Path": "/"
+        }
+      },
+      "BitbucketAccessToken":{
+        "Type" : "AWS::SSM::Parameter",
+        "Properties" : {
+            "Type" : "String",
+            "Value" : "Will be CHnaged"
+          }
+      },      
+      "AirflowEnvironmentExecutionIamPolicy": {
+        "Type": "AWS::IAM::Policy",
+        "Properties": {
+          "PolicyName": {
+            "Fn::Join": [
+              "-",
+              [
+                {
+                  "Ref": "AWS::StackName"
+                },
+                "AirflowEnvironmentExecutionIamPolicy"
+              ]
+            ]
+          },
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "airflow:PublishMetrics",
+                "Resource": "*"
+              },
+              {
+                "Effect": "Deny",
+                "Action": "s3:ListAllMyBuckets",
+                "Resource": [
+                  {
+                    "Fn::GetAtt": [
+                      "AirflowEnvironmentDagsS3Bucket",
+                      "Arn"
+                    ]
+                  },
+                  {
+                    "Fn::Join": [
+                      "/",
+                      [
+                        {
+                          "Fn::GetAtt": [
+                            "AirflowEnvironmentDagsS3Bucket",
+                            "Arn"
+                          ]
+                        },
+                        "*"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "s3:GetObject*",
+                  "s3:GetBucket*",
+                  "s3:List*"
+                ],
+                "Resource": [
+                  {
+                    "Fn::GetAtt": [
+                      "AirflowEnvironmentDagsS3Bucket",
+                      "Arn"
+                    ]
+                  },
+                  {
+                    "Fn::Join": [
+                      "/",
+                      [
+                        {
+                          "Fn::GetAtt": [
+                            "AirflowEnvironmentDagsS3Bucket",
+                            "Arn"
+                          ]
+                        },
+                        "*"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "logs:CreateLogStream",
+                  "logs:CreateLogGroup",
+                  "logs:PutLogEvents",
+                  "logs:GetLogEvents",
+                  "logs:GetLogRecord",
+                  "logs:GetLogGroupFields",
+                  "logs:GetQueryResults"
+                ],
+                "Resource": "*"
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "logs:DescribeLogGroups"
+                ],
+                "Resource": "*"
+              },
+              {
+                "Effect": "Allow",
+                "Action": "cloudwatch:PutMetricData",
+                "Resource": "*"
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "kms:Decrypt",
+                  "kms:DescribeKey",
+                  "kms:GenerateDataKey*",
+                  "kms:Encrypt",
+                  "kms:CreateGrant",
+                  "kms:ListGrants",
+                  "kms:RevokeGrant"
+                ],
+                "Resource": [
+                  "arn:aws:kms:*:*"
+                ]
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "ssm:*"
+                ],
+                "Resource": [
+                  {
+                    "Ref":"BitbucketAccessToken"
+                  }
+                ],
+                "Sid": "AllowAirflowToFetchSecretsFromParameterStore"
+              }
+            ]
+          },
+          "Roles": [
+            {
+              "Ref": "AirflowEnvironmentExecutionIamRole"
+            }
+          ]
+        }
+      },
+      "AirflowEnvironmentKMSKey": {
+        "Type": "AWS::KMS::Key",
+        "Properties": {
+          "Description": "KeyUsedForEncryptingAirflowEnvironment",
+          "Enabled": true,
+          "EnableKeyRotation": true,
+          "KeyPolicy": {
+            "Version": "2012-10-17",
+            "Id": "key-default-1",
+            "Statement": [
+              {
+                "Sid": "EnableIAMPoliciesToGiveIAMUsersAndRolesInTheAccountAccessToThisCMK",
+                "Effect": "Allow",
+                "Principal": {
+                  "AWS": {
+                    "Fn::Join": [
+                      ":",
+                      [
+                        "arn:aws:iam:",
+                        {
+                          "Ref": "AWS::AccountId"
+                        },
+                        "root"
+                      ]
+                    ]
+                  }
+                },
+                "Action": "kms:*",
+                "Resource": "*"
+              },
+              {
+                "Sid": "AllowS3AndAirFlowToUseThisKey",
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": [
+                    "logs.amazonaws.com"
+                  ]
+                },
+                "Action": [
+                  "kms:Decrypt*",
+                  "kms:Describe*",
+                  "kms:GenerateDataKey*",
+                  "kms:Encrypt*",
+                  "kms:ReEncrypt*",
+                  "kms:PutKeyPolicy"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      },
+      "AirflowEnvironment": {
+        "Type": "AWS::MWAA::Environment",
+        "Properties": {
+          "AirflowVersion": "2.2.2",
+          "DagS3Path": "dags",
+          "EnvironmentClass": "mw1.small",
+          "ExecutionRoleArn": {
+            "Fn::GetAtt": [
+              "AirflowEnvironmentExecutionIamRole",
+              "Arn"
+            ]
+          },
+          "KmsKey": {
+            "Fn::GetAtt": [
+              "AirflowEnvironmentKMSKey",
+              "Arn"
+            ]
+          },
+          "LoggingConfiguration": {
+            "TaskLogs" : {
+              "LogLevel": "INFO",
+              "Enabled" : true
+            }
+          },
+          "MaxWorkers": 3,
+          "MinWorkers": 1,
+          "Name": "AirflowEnvironment",
+          "NetworkConfiguration": {
+            "SubnetIds": [
+              {
+                "Fn::ImportValue": {
+                    "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                }
+              },
+              {
+                "Fn::ImportValue": {
+                    "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
+                }
+              },
+              {
+                "Fn::ImportValue": {
+                    "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
+                }
+              }
+            ],
+            "SecurityGroupIds": [
+            "Fn::ImportValue": 
+                {
+                    "Fn::Sub": "${RegionPrefix}-AirflowInstanceSecurityGroupId"
+                }
+            ]
+          },
+          "RequirementsS3Path": "requirements.txt",
+          "RequirementsS3ObjectVersion": "nVWqY9kAN3mtjNvxi30kS15G3FDexsdV",
+          "Schedulers": 2,
+          "SourceBucketArn": {
+            "Fn::GetAtt": [
+              "AirflowEnvironmentDagsS3Bucket",
+              "Arn"
+            ]
+          },
+          "WebserverAccessMode": "PUBLIC_ONLY"
+        }
+      },
+      "SendGridSMTPAPIkeySecretsManagerSecret": {
+        "Type": "AWS::SecretsManager::Secret",
+        "Properties": {
+          "Description": {
+            "Fn::Sub": "This is a Secrets Manager secret for ${AWS::StackName}-SendGridSMTPAPIkeySecretsManagerSecret"
+          },
+          "SecretString": "replaceItWithSendGridSMTPAPIkey"
+        }
+      }
+    },
+    "Outputs": {
+      "AirflowEnvironmentDagsS3BucketArn": {
+        "Export": {
+          "Name": {
+            "Fn::Sub": "${AWS::StackName}-AirflowEnvironmentDagsS3BucketArn"
+          }
+        },
+        "Value": {
+          "Fn::GetAtt": [
+            "AirflowEnvironmentDagsS3Bucket",
+            "Arn"
+          ]
+        }
+      }
+    }
+  }

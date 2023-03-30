@@ -16,6 +16,15 @@
                 }
             }
         },
+        "AirflowInstanceSecurityGroup":{
+            "Type":"AWS::EC2::SecurityGroup",
+            "Properties":{
+                "GroupDescription":"Airflow Instance Security Group",
+                "VpcId":{
+                    "Fn::ImportValue": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]}
+                }
+            }
+        },
         "IRISInstanceSecurityGroup":{
             "Type":"AWS::EC2::SecurityGroup",
             "Properties":{
@@ -53,6 +62,25 @@
             },
             "Value":{
                 "Ref":"MongoInstanceSecurityGroup"
+            }
+        },
+        "AirflowInstanceSecurityGroupId":{
+            "Description":"Airflow Instance Security Group Id",
+            "Export":{
+                "Name":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "AirflowInstanceSecurityGroupId"
+                        ]
+                    ]
+                }
+            },
+            "Value":{
+                "Ref":"AirflowInstanceSecurityGroup"
             }
         },
         "IRISInstanceSecurityGroupId":{
