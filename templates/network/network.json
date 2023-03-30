@@ -177,138 +177,6 @@
                 ]
             }
         },
-        "RegionPrivateSubnet1":{
-            "Type":"AWS::EC2::Subnet",
-            "Properties":{
-                "VpcId":{
-                    "Ref":"RegionVPC"
-                },
-                "CidrBlock":{
-                    "Fn::Join": [
-                        "",
-                        [
-                            {
-                                "Ref":"VpcCidrPrefix"
-                            },
-                            ".4.0/24"
-                        ]
-                    ]
-                },
-                "AvailabilityZone":{
-                    "Fn::Select": [
-                        0,
-                        {
-                            "Fn::GetAZs": {"Ref":"AWS::Region"}
-                        }
-                    ]
-                },
-                "MapPublicIpOnLaunch": true,
-                "Tags":[
-                    {
-                        "Key":"Name",
-                        "Value":{
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref":"RegionPrefix"
-                                    },
-                                    "-private-subnet-1"
-                                ]
-                            ]
-                        }
-                    }
-                ]
-            }
-        },
-        "RegionPrivateSubnet2":{
-            "Type":"AWS::EC2::Subnet",
-            "Properties":{
-                "VpcId":{
-                    "Ref":"RegionVPC"
-                },
-                "CidrBlock":{
-                    "Fn::Join": [
-                        "",
-                        [
-                            {
-                                "Ref":"VpcCidrPrefix"
-                            },
-                            ".5.0/24"
-                        ]
-                    ]
-                },
-                "AvailabilityZone":{
-                    "Fn::Select": [
-                        1,
-                        {
-                            "Fn::GetAZs": {"Ref":"AWS::Region"}
-                        }
-                    ]
-                },
-                "MapPublicIpOnLaunch": true,
-                "Tags":[
-                    {
-                        "Key":"Name",
-                        "Value":{
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref":"RegionPrefix"
-                                    },
-                                    "-private-subnet-2"
-                                ]
-                            ]
-                        }
-                    }
-                ]
-            }
-        },
-        "RegionPrivateSubnet3":{
-            "Type":"AWS::EC2::Subnet",
-            "Properties":{
-                "VpcId":{
-                    "Ref":"RegionVPC"
-                },
-                "CidrBlock":{
-                    "Fn::Join": [
-                        "",
-                        [
-                            {
-                                "Ref":"VpcCidrPrefix"
-                            },
-                            ".6.0/24"
-                        ]
-                    ]
-                },
-                "AvailabilityZone":{
-                    "Fn::Select": [
-                        2,
-                        {
-                            "Fn::GetAZs": {"Ref":"AWS::Region"}
-                        }
-                    ]
-                },
-                "MapPublicIpOnLaunch": true,
-                "Tags":[
-                    {
-                        "Key":"Name",
-                        "Value":{
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref":"RegionPrefix"
-                                    },
-                                    "-private-subnet-3"
-                                ]
-                            ]
-                        }
-                    }
-                ]
-            }
-        },
         "RegionInternetGateway":{
             "Type":"AWS::EC2::InternetGateway",
             "Properties":{
@@ -407,6 +275,237 @@
                 },
                 "RouteTableId":{
                     "Ref":"RegionPublicSubnetRouteTable"
+                }
+            }
+        },
+        "RegionPrivateSubnet1Eip" : {
+            "Type" : "AWS::EC2::EIP",
+            "Properties" : {
+              "Domain" : "vpc"
+            }
+        },
+        "RegionPrivateSubnet1NatGateway" : {
+            "Type" : "AWS::EC2::NatGateway",
+            "Properties" : {
+              "AllocationId" : {
+                "Fn::GetAtt" : [
+                  "RegionPrivateSubnet1Eip",
+                  "AllocationId"
+                ]
+              },
+              "SubnetId" : {
+                "Ref" : "RegionPublicSubnet1"
+              },
+              "Tags": [
+              {
+                "Key":"Name",
+                "Value":{
+                        "Fn::Join": [
+                            "-",
+                            [
+                                {
+                                    "Ref":"RegionPrefix"
+                                },
+                                "private-subnet-1",
+                                "NatGateway"
+                            ]
+                        ]
+                    }
+                }
+              ]
+            }
+        },
+        "RegionPrivateSubnet2Eip" : {
+            "Type" : "AWS::EC2::EIP",
+            "Properties" : {
+              "Domain" : "vpc"
+            }
+        },
+        "RegionPrivateSubnet2NatGateway" : {
+            "Type" : "AWS::EC2::NatGateway",
+            "Properties" : {
+              "AllocationId" : {
+                "Fn::GetAtt" : [
+                  "RegionPrivateSubnet2Eip",
+                  "AllocationId"
+                ]
+              },
+              "SubnetId" : {
+                "Ref" : "RegionPublicSubnet2"
+              },
+              "Tags": [
+              {
+                "Key":"Name",
+                "Value":{
+                        "Fn::Join": [
+                            "-",
+                            [
+                                {
+                                    "Ref":"RegionPrefix"
+                                },
+                                "private-subnet-2",
+                                "NatGateway"
+                            ]
+                        ]
+                    }
+                }
+              ]
+            }
+        },
+        "RegionPrivateSubnet1":{
+            "Type":"AWS::EC2::Subnet",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "CidrBlock":{
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref":"VpcCidrPrefix"
+                            },
+                            ".4.0/24"
+                        ]
+                    ]
+                },
+                "AvailabilityZone":{
+                    "Fn::Select": [
+                        0,
+                        {
+                            "Fn::GetAZs": {"Ref":"AWS::Region"}
+                        }
+                    ]
+                },
+                "MapPublicIpOnLaunch": false,
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-private-subnet-1"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPrivateSubnet2":{
+            "Type":"AWS::EC2::Subnet",
+            "Properties":{
+                "VpcId":{
+                    "Ref":"RegionVPC"
+                },
+                "CidrBlock":{
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref":"VpcCidrPrefix"
+                            },
+                            ".5.0/24"
+                        ]
+                    ]
+                },
+                "AvailabilityZone":{
+                    "Fn::Select": [
+                        1,
+                        {
+                            "Fn::GetAZs": {"Ref":"AWS::Region"}
+                        }
+                    ]
+                },
+                "MapPublicIpOnLaunch": false,
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-private-subnet-2"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPrivateSubnetRouteTable" : {
+            "Type" : "AWS::EC2::RouteTable",
+            "Properties" : {
+              "VpcId" : {
+                "Ref" : "RegionVPC"
+              },
+              "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":{
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref":"RegionPrefix"
+                                    },
+                                    "-private-subnet-route-table"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "RegionPrivateSubnetRouteTableNatGatewayRoute" : {
+            "Type" : "AWS::EC2::Route",
+            "Properties" : {
+              "RouteTableId" : {
+                "Ref" : "RegionPrivateSubnetRouteTable"
+              },
+              "DestinationCidrBlock" : "0.0.0.0/0",
+              "NatGatewayId" : {
+                "Ref" : "AirFlowEnvironmentAzANatGateway"
+              }
+            }
+        },
+        "RegionPrivateSubnet1RouteTableAssociation":{   
+            "Type":"AWS::EC2::SubnetRouteTableAssociation",
+            "Properties":{
+                "SubnetId":{
+                    "Ref":"RegionPrivateSubnet1"
+                },
+                "RouteTableId":{
+                    "Ref":"RegionPrivateSubnetRouteTable"
+                }
+            }
+        },
+        "RegionPrivateSubnet2RouteTableAssociation":{   
+            "Type":"AWS::EC2::SubnetRouteTableAssociation",
+            "Properties":{
+                "SubnetId":{
+                    "Ref":"RegionPrivateSubnet2"
+                },
+                "RouteTableId":{
+                    "Ref":"RegionPrivateSubnetRouteTable"
+                }
+            }
+        },
+        "RegionPrivateSubnet3RouteTableAssociation":{   
+            "Type":"AWS::EC2::SubnetRouteTableAssociation",
+            "Properties":{
+                "SubnetId":{
+                    "Ref":"RegionPrivateSubnet3"
+                },
+                "RouteTableId":{
+                    "Ref":"RegionPrivateSubnetRouteTable"
                 }
             }
         }
