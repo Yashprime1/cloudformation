@@ -55,7 +55,7 @@
                 "Resource": [
                   {
                     "Fn::ImportValue": {
-                        "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
+                        "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    
                     }
                   },
                   {
@@ -63,7 +63,7 @@
                       "/",
                       [
                         "Fn::ImportValue": {
-                            "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
+                            "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    
                         },
                         "*"
                       ]
@@ -81,8 +81,7 @@
                 "Resource": [
                   {
                     "Fn::ImportValue": {
-                        "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
-                    }
+                        "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                                        }
                   },
                   {
                     "Fn::Join": [
@@ -90,7 +89,7 @@
                       [
                         {
                             "Fn::ImportValue": {
-                                "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
+                                "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    
                             }
                         },
                         "*"
@@ -275,7 +274,7 @@
           "Schedulers": 2,
           "SourceBucketArn": {
             "Fn::ImportValue": {
-                "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
+                "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    
             }
           },
           "WebserverAccessMode": "PUBLIC_ONLY"
