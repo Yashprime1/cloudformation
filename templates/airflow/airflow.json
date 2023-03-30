@@ -295,10 +295,12 @@
               }
             ],
             "SecurityGroupIds": [
-            "Fn::ImportValue": 
-                {
-                    "Fn::Sub": "${RegionPrefix}-AirflowInstanceSecurityGroupId"
-                }
+            {
+                "Fn::ImportValue": 
+                    {
+                        "Fn::Sub": "${RegionPrefix}-AirflowInstanceSecurityGroupId"
+                    }
+            }
             ]
           },
           "RequirementsS3Path": "requirements.txt",
