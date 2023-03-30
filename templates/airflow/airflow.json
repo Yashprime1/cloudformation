@@ -180,6 +180,32 @@
                   }
                 ],
                 "Sid": "AllowAirflowToFetchSecretsFromParameterStore"
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "secretsmanager:GetSecretValue"
+                ],
+                "Resource": [
+                  {
+                    "Ref": "BitbucketAccessTokenSecretsManagerSecret"
+                  }
+                ],
+                "Sid": "AllowAirflowToFetchSecretsFromSecretManager"
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "secretsmanager:DescribeSecret",
+                  "secretsmanager:ListSecrets",
+                  "secretsmanager:ListSecretVersionIds"
+                ],
+                "Resource": [
+                  {
+                    "Ref" : "BitbucketAccessTokenSecretsManagerSecret"
+                  }
+                ],
+                "Sid": "AllowAirflowToListSecretsBitbucketTokenSecretsManagerSecret"
               }
             ]
           },
