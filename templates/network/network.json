@@ -595,16 +595,6 @@
             "Value":{
                 "Ref":"RegionPrivateSubnet2"
             }
-        },
-        "RegionPrivateSubnet3Id":{
-            "Export":{
-                "Name":{
-                    "Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-private-subnet-3-id"]]
-                }
-            },
-            "Value":{
-                "Ref":"RegionPrivateSubnet3"
-            }
         }
     }
 }
