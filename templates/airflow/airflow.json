@@ -6,30 +6,6 @@
         }   
     },
     "Resources": {
-      "AirflowEnvironmentDagsS3Bucket": {
-        "Type": "AWS::S3::Bucket",
-        "Properties": {
-          "BucketEncryption": {
-            "ServerSideEncryptionConfiguration": [
-              {
-                "BucketKeyEnabled": true,
-                "ServerSideEncryptionByDefault": {
-                  "SSEAlgorithm": "AES256"
-                }
-              }
-            ]
-          },
-          "VersioningConfiguration" : {
-            "Status" : "Enabled"
-          },
-          "PublicAccessBlockConfiguration" : {
-            "BlockPublicAcls" : true,
-            "BlockPublicPolicy" : true,
-            "IgnorePublicAcls" : true,
-            "RestrictPublicBuckets" : true
-          }
-        }
-      },
       "AirflowEnvironmentExecutionIamRole": {
         "Type": "AWS::IAM::Role",
         "Properties": {
@@ -78,20 +54,16 @@
                 "Action": "s3:ListAllMyBuckets",
                 "Resource": [
                   {
-                    "Fn::GetAtt": [
-                      "AirflowEnvironmentDagsS3Bucket",
-                      "Arn"
-                    ]
+                    "Fn::ImportValue": {
+                        "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
+                    }
                   },
                   {
                     "Fn::Join": [
                       "/",
                       [
-                        {
-                          "Fn::GetAtt": [
-                            "AirflowEnvironmentDagsS3Bucket",
-                            "Arn"
-                          ]
+                        "Fn::ImportValue": {
+                            "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
                         },
                         "*"
                       ]
@@ -108,20 +80,18 @@
                 ],
                 "Resource": [
                   {
-                    "Fn::GetAtt": [
-                      "AirflowEnvironmentDagsS3Bucket",
-                      "Arn"
-                    ]
+                    "Fn::ImportValue": {
+                        "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
+                    }
                   },
                   {
                     "Fn::Join": [
                       "/",
                       [
                         {
-                          "Fn::GetAtt": [
-                            "AirflowEnvironmentDagsS3Bucket",
-                            "Arn"
-                          ]
+                            "Fn::ImportValue": {
+                                "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
+                            }
                         },
                         "*"
                       ]
@@ -256,6 +226,7 @@
         "Type": "AWS::MWAA::Environment",
         "Properties": {
           "AirflowVersion": "2.2.2",
+          "DagS3Path": "dags",
           "EnvironmentClass": "mw1.small",
           "ExecutionRoleArn": {
             "Fn::GetAtt": [
@@ -300,12 +271,12 @@
             }
             ]
           },
+          "RequirementsS3Path": "requirements.txt",
           "Schedulers": 2,
           "SourceBucketArn": {
-            "Fn::GetAtt": [
-              "AirflowEnvironmentDagsS3Bucket",
-              "Arn"
-            ]
+            "Fn::ImportValue": {
+                "Fn::Sub": "${RegionPrefix}-AirflowEnvironmentDagsS3BucketArn"                    ]
+            }
           },
           "WebserverAccessMode": "PUBLIC_ONLY"
         }
@@ -317,21 +288,6 @@
             "Fn::Sub": "This is a Secrets Manager secret for ${AWS::StackName}-SendGridSMTPAPIkeySecretsManagerSecret"
           },
           "SecretString": "replaceItWithSendGridSMTPAPIkey"
-        }
-      }
-    },
-    "Outputs": {
-      "AirflowEnvironmentDagsS3BucketArn": {
-        "Export": {
-          "Name": {
-            "Fn::Sub": "${AWS::StackName}-AirflowEnvironmentDagsS3BucketArn"
-          }
-        },
-        "Value": {
-          "Fn::GetAtt": [
-            "AirflowEnvironmentDagsS3Bucket",
-            "Arn"
-          ]
         }
       }
     }

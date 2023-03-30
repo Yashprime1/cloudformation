@@ -42,6 +42,17 @@
                 ]
             },
             {
+                "stackname":"mum-airflow-bucket",
+                "template":"templates/airflow/airflow-bucket.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
                 "stackname":"mum-airflow",
                 "template":"templates/airflow/airflow.json",
                 "parameters":[
