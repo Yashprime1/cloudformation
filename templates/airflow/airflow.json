@@ -200,11 +200,7 @@
                   "secretsmanager:ListSecrets",
                   "secretsmanager:ListSecretVersionIds"
                 ],
-                "Resource": [
-                  {
-                    "Ref" : "BitbucketAccessTokenSecretsManagerSecret"
-                  }
-                ],
+                "Resource": "*",
                 "Sid": "AllowAirflowToListSecretsBitbucketTokenSecretsManagerSecret"
               }
             ]
