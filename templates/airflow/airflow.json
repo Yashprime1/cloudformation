@@ -290,11 +290,6 @@
                 "Fn::ImportValue": {
                     "Fn::Sub": "${RegionPrefix}-public-subnet-2-id"
                 }
-              },
-              {
-                "Fn::ImportValue": {
-                    "Fn::Sub": "${RegionPrefix}-public-subnet-3-id"
-                }
               }
             ],
             "SecurityGroupIds": [
