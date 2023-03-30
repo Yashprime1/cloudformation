@@ -303,7 +303,7 @@
             ]
           },
           "RequirementsS3Path": "requirements.txt",
-          "RequirementsS3ObjectVersion": "nVWqY9kAN3mtjNvxi30kS15G3FDexsdV",
+          "RequirementsS3ObjectVersion": "A3fNjcVuydH8ji3j4xUJu_3WZMfv88wO",
           "Schedulers": 2,
           "SourceBucketArn": {
             "Fn::GetAtt": [
