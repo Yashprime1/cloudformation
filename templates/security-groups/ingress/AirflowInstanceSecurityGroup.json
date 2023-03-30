@@ -50,6 +50,38 @@
                 "ToPort":"22",
                 "CidrIp":"0.0.0.0/0"
             }
-        }
+        },
+        "AirFlowEnvironmentSecurityGroupIngress": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+              "IpProtocol": "-1",
+              "SourceSecurityGroupId": {
+                "Fn::ImportValue":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "AirflowInstanceSecurityGroupId"
+                        ]
+                    ]
+                }
+              },
+              "GroupId": {
+                "Fn::ImportValue":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "AirflowInstanceSecurityGroupId"
+                        ]
+                    ]
+                }
+              }
+            }
+          }
     }
 }
