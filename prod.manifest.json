@@ -42,6 +42,17 @@
                 ]
             },
             {
+                "stackname":"mum-security-group-airflow2-ingress",
+                "template":"templates/security-groups/ingress/AirflowInstanceSecurityGroup2.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
+            },
+            {
                 "stackname":"mum-airflow-bucket",
                 "template":"templates/airflow/airflow-bucket.json",
                 "parameters":[
