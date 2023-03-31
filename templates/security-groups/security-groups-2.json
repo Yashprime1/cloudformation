@@ -1,0 +1,41 @@
+{
+    "AWSTemplateFormatVersion":"2010-09-09",
+    "Parameters":{
+        "RegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }
+    },
+    "Resources":{
+        "AirflowInstanceSecurityGroup2":{
+            "Type":"AWS::EC2::SecurityGroup",
+            "Properties":{
+                "GroupDescription":"Airflow Instance Security Group",
+                "VpcId":{
+                    "Fn::ImportValue": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]}
+                }
+            }
+        }
+    },
+    "Outputs":{
+        "AirflowInstanceSecurityGroup2Id":{
+            "Description":"Airflow Instance Security Group Id",
+            "Export":{
+                "Name":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "AirflowInstanceSecurityGroup2Id"
+                        ]
+                    ]
+                }
+            },
+            "Value":{
+                "Ref":"AirflowInstanceSecurityGroup2"
+            }
+        }
+    }
+}
