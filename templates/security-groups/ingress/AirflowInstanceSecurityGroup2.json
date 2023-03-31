@@ -18,7 +18,7 @@
                                 {
                                     "Ref":"RegionPrefix"
                                 },
-                                "AirflowInstanceSecurityGroupId"
+                                "AirflowInstanceSecurityGroup2Id"
                             ]
                         ]
                     }
@@ -40,7 +40,7 @@
                                 {
                                     "Ref":"RegionPrefix"
                                 },
-                                "AirflowInstanceSecurityGroupId"
+                                "AirflowInstanceSecurityGroup2Id"
                             ]
                         ]
                     }
@@ -63,7 +63,7 @@
                             {
                                 "Ref":"RegionPrefix"
                             },
-                            "AirflowInstanceSecurityGroupId"
+                            "AirflowInstanceSecurityGroup2Id"
                         ]
                     ]
                 }
@@ -76,7 +76,7 @@
                             {
                                 "Ref":"RegionPrefix"
                             },
-                            "AirflowInstanceSecurityGroupId"
+                            "AirflowInstanceSecurityGroup2Id"
                         ]
                     ]
                 }
