@@ -154,7 +154,7 @@
             {
                 "Fn::ImportValue": 
                     {
-                        "Fn::Sub": "${RegionPrefix}-AirflowInstanceSecurityGroupId"
+                        "Fn::Sub": "${RegionPrefix}-AirflowInstanceSecurityGroup2Id"
                     }
             }
             ]

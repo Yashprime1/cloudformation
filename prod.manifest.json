@@ -20,8 +20,8 @@
                 ]
             },
             {
-                "stackname":"mum-security-group",
-                "template":"templates/security-groups/security-groups.json",
+                "stackname":"mum-security-group-2",
+                "template":"templates/security-groups/security-groups-2.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
