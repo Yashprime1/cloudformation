@@ -175,7 +175,7 @@
           "Description": {
             "Fn::Sub": "This is a Secrets Manager secret for ${AWS::StackName}-SendGridSMTPAPIkeySecretsManagerSecret"
           },
-          "SecretString": "replaceItWithSendGridSMTPAPIkey"
+          "SecretString": "replaceItWithkey"
         }
       }
     }
