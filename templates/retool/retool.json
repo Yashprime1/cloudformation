@@ -39,7 +39,7 @@
                                 "NAME": "DATABASE_URL"
                                 "Value": "postgres://admin:123@13.127.193.148:5432/postgres"
                             }
-                        ]
+                        ],
                         "Command": [
                             "--watch",
                             "--enhance-graphiql"
