@@ -37,8 +37,6 @@
                         "Command": [
                             "--connection",
                             "postgres://admin:123@13.127.193.148:5432/postgres",
-                            "--schema",
-                            "forum_example",
                             "--watch",
                             "--enhance-graphiql"
                         ],
