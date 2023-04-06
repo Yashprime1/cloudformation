@@ -20,8 +20,8 @@
                 ]
             },
             {
-                "stackname":"mum-security-group-2",
-                "template":"templates/security-groups/security-groups-2.json",
+                "stackname":"mum-security-group",
+                "template":"templates/security-groups/security-groups.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
@@ -31,8 +31,8 @@
                 ]
             },
             {
-                "stackname":"mum-security-group-airflow-ingress",
-                "template":"templates/security-groups/ingress/AirflowInstanceSecurityGroup.json",
+                "stackname":"mum-security-group-ingress-retool",
+                "template":"templates/security-groups/ingress/RetoolInstanceSecurityGroup.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
@@ -42,8 +42,8 @@
                 ]
             },
             {
-                "stackname":"mum-security-group-airflow2-ingress",
-                "template":"templates/security-groups/ingress/AirflowInstanceSecurityGroup2.json",
+                "stackname":"mum-security-group-ingress-retool",
+                "template":"templates/security-groups/ingress/RetoolInstanceSecurityGroup.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
@@ -53,19 +53,8 @@
                 ]
             },
             {
-                "stackname":"mum-airflow-bucket",
-                "template":"templates/airflow/airflow-bucket.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
-                "stackname":"mum-airflow",
-                "template":"templates/airflow/airflow.json",
+                "stackname":"mum-retool",
+                "template":"templates/retool/retool.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",

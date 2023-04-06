@@ -16,6 +16,15 @@
                 }
             }
         },
+        "RetoolInstanceSecurityGroup":{
+            "Type":"AWS::EC2::SecurityGroup",
+            "Properties":{
+                "GroupDescription":"Retool Instance Security Group",
+                "VpcId":{
+                    "Fn::ImportValue": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]}
+                }
+            }
+        },
         "AirflowInstanceSecurityGroup":{
             "Type":"AWS::EC2::SecurityGroup",
             "Properties":{
@@ -62,6 +71,25 @@
             },
             "Value":{
                 "Ref":"MongoInstanceSecurityGroup"
+            }
+        },
+        "RetoolInstanceSecurityGroupId":{
+            "Description":"Retool Instance Security Group Id",
+            "Export":{
+                "Name":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "RetoolInstanceSecurityGroupId"
+                        ]
+                    ]
+                }
+            },
+            "Value":{
+                "Ref":"RetoolInstanceSecurityGroup"
             }
         },
         "AirflowInstanceSecurityGroupId":{

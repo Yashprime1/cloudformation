@@ -1,0 +1,257 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters":{
+        "RegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }        
+    },
+    "Mappings": {
+        "AWSAMIMapping": {
+           "ap-south-1": {
+              "HVM64" : "ami-0e742cca61fb65051"
+           },
+           "ap-northeast-2": {
+              "HVM64": "ami-0994dc69c39c35834"
+           },
+           "eu-west-1": {
+              "HVM64": "ami-04bf55d5e589debe9"
+           }
+        }
+     },
+    "Resources":{
+        "RetoolEcsCluster":{
+            "Type":"AWS::ECS::Cluster",
+            "Properties":{
+                "ClusterName":"RetoolEcsCluster"
+            }
+        },
+        "RetoolEcsTaskDefinition":{
+            "Type":"AWS::ECS::TaskDefinition",
+            "Properties":{
+                "Family":"RetoolEcsTaskDefinition",
+                "ContainerDefinitions":[
+                    {
+                        "Name":"PostGraphile",
+                        "Image":"graphile/postgraphile",
+                        "Command": [
+                            "--connection",
+                            "postgres://admin:123@13.127.193.148:5432/postgres",
+                            "--schema",
+                            "forum_example",
+                            "--watch"
+                        ],
+                        "PortMappings":[
+                            {
+                                "ContainerPort":5000,
+                                "HostPort":5000
+                            }
+                        ],
+                        "Memory":256,
+                        "Cpu":128,
+                        "LogConfiguration":{
+                            "LogDriver":"awslogs",
+                            "Options":{
+                                "awslogs-group":"/ecs/RetoolEcsCluster",
+                                "awslogs-region":{
+                                    "Ref":"AWS::Region"
+                                },
+                                "awslogs-create-group": "true",
+                                "awslogs-stream-prefix":"ecs"
+                            }
+                        }
+                    },
+                    {
+                        "Name":"Cloudflare",
+                        "Image":"cloudflare/cloudflared",
+                        "Command": [
+                            "--no-autoupdate",
+                            "--hello-world"
+                        ],
+                        "PortMappings":[
+                            {
+                                "ContainerPort":6000,
+                                "HostPort":6000
+                            }
+                        ],
+                        "Memory":128,
+                        "Cpu":256,
+                        "LogConfiguration":{
+                            "LogDriver":"awslogs",
+                            "Options":{
+                                "awslogs-group":"/ecs/RetoolEcsCluster",
+                                "awslogs-region":{
+                                    "Ref":"AWS::Region"
+                                },
+                                "awslogs-create-group": "true",
+                                "awslogs-stream-prefix":"ecs"
+                            }
+                        }
+                    }
+                ],
+                "NetworkMode":"host"
+            }
+        },
+        "RetoolEcsService":{
+            "Type":"AWS::ECS::Service",
+            "Properties":{
+                "Cluster":{
+                    "Ref":"RetoolEcsCluster"
+                },
+                "DesiredCount":1,
+                "LaunchType":"EC2",
+                "DeploymentController":{"Type" :"ECS"},
+                "DeploymentConfiguration": {
+                    "MaximumPercent": 100,
+                    "MinimumHealthyPercent": 0
+                },
+                "PlacementConstraints":[
+                    {
+                        "Type":"memberOf",
+                        "Expression":{
+                                        "Fn::Join":
+                                            [
+                                                "",
+                                                [
+                                                    "ec2InstanceId",
+                                                    "==",
+                                                    {"Ref" : "RetoolInstancePrimary"}
+                                                ]
+                                            ]
+                                    }
+                    }
+                ],
+                "TaskDefinition":{
+                    "Ref":"RetoolEcsTaskDefinition"
+                }
+            }
+        },
+        "RetoolInstacneIamRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Path": "/",
+                "Policies": [
+                    {
+                        "PolicyName": "RetoolInstanceIamRolePolicy",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                                "ec2:DescribeInstances",
+                                                "ec2-instance-connect:SendSSHPublicKey",
+                                                "ec2:DescribeInstances",
+                                                "ec2:DescribeTags",
+                                                "ec2:CreateTags",
+                                                "ecs:RegisterContainerInstance",
+                                                "ecs:DeregisterContainerInstance",
+                                                "ecs:DescribeContainerInstances",
+                                                "ecs:DiscoverPollEndpoint",
+                                                "ecs:*",
+                                                "ec2:*",
+                                                "logs:*"
+                                        ],
+                                    "Resource": [
+                                        "arn:aws:ec2:*:*:instance/*",
+                                        "arn:aws:ecs:*:*:cluster/*",
+                                        "*"
+                                    ]
+                                 }
+                                ]
+                            }
+                    }
+                ]
+            }
+        },
+        "RetoolInstacneIamProfile":{
+            "Type":"AWS::IAM::InstanceProfile",
+            "Properties":{
+                "Path":"/",
+                "Roles":[
+                    {
+                        "Ref":"RetoolInstacneIamRole"
+                    }
+                ]
+            }
+        },
+        "RetoolInstanceKeyPair": {
+            "Type": "AWS::EC2::KeyPair",
+            "Properties": {
+                "KeyName": "MyKeyPair"
+            }
+        },
+        "RetoolInstancePrimary":{
+            "Type":"AWS::EC2::Instance",
+            "Properties":{
+                "ImageId":{
+                    "Fn::FindInMap": [
+                        "AWSAMIMapping",
+                        { "Ref": "AWS::Region" },
+                        "HVM64"
+                    ]
+                },
+                "InstanceType":"t2.micro",
+                "IamInstanceProfile": {
+                    "Ref": "RetoolInstacneIamProfile"
+                },
+                "UserData":{
+                    "Fn::Base64":{
+                        "Fn::Join":[
+                            "",
+                            [
+                                "#!/bin/bash\n",
+                                "mkdir -p /etc/ecs\n",  
+                                "echo ECS_CLUSTER=RetoolEcsCluster >> /etc/ecs/ecs.config\n",
+                                "amazon-linux-extras install -y ecs\n",
+                                "systemctl enable --now --no-block ecs\n",
+                                "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
+                            ]
+                        ]
+                    }
+                },
+                "KeyName": {
+                    "Ref": "RetoolInstanceKeyPair"
+                },
+                "NetworkInterfaces": [ {
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [     {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-RetoolInstanceSecurityGroupId"
+                            }
+                    }],
+                    "SubnetId":  {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                            }
+                    }
+                  } ],
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"RetoolInstancePrimary"
+                    }
+                ]
+            }
+        }
+    }
+}
