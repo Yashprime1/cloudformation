@@ -40,6 +40,7 @@
                             "--schema",
                             "forum_example",
                             "--watch"
+                            "--enhance-graphiql"
                         ],
                         "PortMappings":[
                             {
