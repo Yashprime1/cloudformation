@@ -34,9 +34,13 @@
                     {
                         "Name":"PostGraphile",
                         "Image":"graphile/postgraphile",
+                        "Environment":[
+                            {
+                                "NAME": "DATABASE_URL"
+                                "Value": "postgres://admin:123@13.127.193.148:5432/postgres"
+                            }
+                        ]
                         "Command": [
-                            "--connection",
-                            "postgres://admin:123@13.127.193.148:5432/postgres",
                             "--watch",
                             "--enhance-graphiql"
                         ],
