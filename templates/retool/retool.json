@@ -41,6 +41,8 @@
                             }
                         ],
                         "Command": [
+                            "--schema",
+                            "forum_example",
                             "--watch",
                             "--enhance-graphiql"
                         ],
@@ -68,8 +70,12 @@
                         "Name":"Cloudflare",
                         "Image":"cloudflare/cloudflared",
                         "Command": [
+                            "cloudflared",
+                            "tunnel",
+                            "--url",
+                            "http://localhost:5000",
                             "--no-autoupdate",
-                            "--hello-world"
+                            "run"
                         ],
                         "PortMappings":[
                             {
