@@ -70,12 +70,12 @@
                         "Name":"Cloudflare",
                         "Image":"cloudflare/cloudflared",
                         "Entrypoint": [
-                            "cloudflared ",
-                            "tunnel ",
-                            "--url ",
-                            "\"http://localhost:5000/\" ",
-                            "--no-autoupdate ",
-                            "run "
+                            "cloudflared",
+                            "tunnel",
+                            "--url",
+                            "http://localhost:5000/",
+                            "--no-autoupdate",
+                            "run"
                         ],
                         "PortMappings":[
                             {
