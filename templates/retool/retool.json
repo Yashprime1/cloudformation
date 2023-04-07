@@ -26,6 +26,15 @@
                 "ClusterName":"RetoolEcsCluster"
             }
         },
+        "RetoolCloudflareSecretsManagerSecret":{
+          "Type":"AWS::SecretsManager::Secret",
+          "Properties":{
+             "Name":"RetoolCloudflareSecretsManagerSecret",
+             "SecretString":{
+                "chnageme"
+             }
+          }
+        },
         "RetoolEcsTaskDefinition":{
             "Type":"AWS::ECS::TaskDefinition",
             "Properties":{
@@ -69,6 +78,14 @@
                     {
                         "Name":"Cloudflare",
                         "Image":"cloudflare/cloudflared",
+                        "Secrets":[
+                            {
+                                "Name":"CLOUDFLARE_API_TOKEN",
+                                "ValueFrom":{
+                                    "Ref":"RetoolCloudflareSecretsManagerSecret"
+                                }
+                            }
+                        ],
                         "Entrypoint": [
                             "cloudflared",
                             "tunnel",
@@ -76,7 +93,8 @@
                             "http://localhost:5000/",
                             "--no-autoupdate",
                             "run",
-                            "Yashprime-Website"
+                            "--token",
+                            "${CLOUDFLARE_API_TOKEN}"
                         ],
                         "PortMappings":[
                             {
