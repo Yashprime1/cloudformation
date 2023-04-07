@@ -80,7 +80,7 @@
                         "Image":"cloudflare/cloudflared",
                         "Secrets":[
                             {
-                                "Name":"CLOUDFLARE_API_TOKEN",
+                                "Name":"TUNNEL_TOKEN",
                                 "ValueFrom":{
                                     "Ref":"RetoolCloudflareSecretsManagerSecret"
                                 }
@@ -92,9 +92,7 @@
                             "--url",
                             "http://localhost:5000/",
                             "--no-autoupdate",
-                            "run",
-                            "--token",
-                            "${CLOUDFLARE_API_TOKEN}"
+                            "run"
                         ],
                         "PortMappings":[
                             {
