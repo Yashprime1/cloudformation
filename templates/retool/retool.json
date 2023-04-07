@@ -72,6 +72,8 @@
                         "Command": [
                             "cloudflared",
                             "tunnel",
+                            "--url",
+                            "localhost:5000"
                             "--no-autoupdate",
                             "run"
                         ],
