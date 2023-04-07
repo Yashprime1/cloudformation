@@ -208,7 +208,7 @@
                                                 "ecs:*",
                                                 "ec2:*",
                                                 "logs:*",
-                                                "SecretsManager:*",
+                                                "SecretsManager:*"
                                         ],
                                     "Resource": [
                                         "arn:aws:ec2:*:*:instance/*",
