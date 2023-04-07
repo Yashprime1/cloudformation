@@ -207,7 +207,8 @@
                                                 "ecs:DiscoverPollEndpoint",
                                                 "ecs:*",
                                                 "ec2:*",
-                                                "logs:*"
+                                                "logs:*",
+                                                "SecretsManager:*",
                                         ],
                                     "Resource": [
                                         "arn:aws:ec2:*:*:instance/*",
