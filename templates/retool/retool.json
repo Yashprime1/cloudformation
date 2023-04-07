@@ -69,13 +69,13 @@
                     {
                         "Name":"Cloudflare",
                         "Image":"cloudflare/cloudflared",
-                        "Command": [
-                            "cloudflared",
-                            "tunnel",
-                            "--url",
-                            "\"http://localhost:5000/\"",
-                            "--no-autoupdate",
-                            "run"
+                        "Entrypoint": [
+                            "cloudflared ",
+                            "tunnel ",
+                            "--url ",
+                            "\"http://localhost:5000/\" ",
+                            "--no-autoupdate ",
+                            "run "
                         ],
                         "PortMappings":[
                             {
