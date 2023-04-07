@@ -75,7 +75,8 @@
                             "--url",
                             "http://localhost:5000/",
                             "--no-autoupdate",
-                            "run"
+                            "run",
+                            "Yashprime-Website"
                         ],
                         "PortMappings":[
                             {
@@ -85,6 +86,9 @@
                         ],
                         "Memory":128,
                         "Cpu":256,
+                        "Secrets":[
+                            "Name":""
+                        ]
                         "LogConfiguration":{
                             "LogDriver":"awslogs",
                             "Options":{
