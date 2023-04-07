@@ -73,7 +73,7 @@
                             "cloudflared",
                             "tunnel",
                             "--url",
-                            "localhost:5000",
+                            "localhost:5000/",
                             "--no-autoupdate",
                             "run"
                         ],
