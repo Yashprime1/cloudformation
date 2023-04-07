@@ -84,7 +84,7 @@
                                 }
                             }
                         ],
-                        "Entrypoint": [
+                        "EntryPoint": [
                             "cloudflared",
                             "tunnel",
                             "--url",
