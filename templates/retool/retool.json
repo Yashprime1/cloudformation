@@ -113,7 +113,7 @@
                         }
                     }
                 ],
-                "NetworkMode":"host"
+                "NetworkMode":"host",
                 "RequiresCompatibilities":[
                     "EC2"
                 ],
