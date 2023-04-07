@@ -86,9 +86,6 @@
                         ],
                         "Memory":128,
                         "Cpu":256,
-                        "Secrets":[
-                            "Name":""
-                        ]
                         "LogConfiguration":{
                             "LogDriver":"awslogs",
                             "Options":{
