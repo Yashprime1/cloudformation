@@ -272,7 +272,6 @@
                     "Ref": "RetoolInstanceKeyPair"
                 },
                 "NetworkInterfaces": [ {
-                    "AssociatePublicIpAddress": "true",
                     "DeviceIndex": "0",
                     "GroupSet": [     {
                         "Fn::ImportValue": 
