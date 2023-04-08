@@ -62,28 +62,6 @@
                         "ResolvedValue": "string"
                     }
                 ]
-            },
-            {
-                "stackname":"mum-security-group-ingress-batch",
-                "template":"templates/security-groups/ingress/MongoInstanceSecurityGroup.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
-                "stackname":"mum--batch",
-                "template":"templates/batch/batch.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
             }
         ]
     }
