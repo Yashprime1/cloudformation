@@ -62,6 +62,17 @@
                         "ResolvedValue": "string"
                     }
                 ]
+            },
+            {
+                "stackname":"mum-batch",
+                "template":"templates/batch/batch.json",
+                "parameters":[
+                    {
+                        "ParameterKey":"RegionPrefix",
+                        "ParameterValue":"mum",
+                        "ResolvedValue": "string"
+                    }
+                ]
             }
         ]
     }
