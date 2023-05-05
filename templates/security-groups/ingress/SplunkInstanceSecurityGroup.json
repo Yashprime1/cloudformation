@@ -1,0 +1,31 @@
+{
+    "AWSTemplateFormatVersion":"2010-09-09",
+    "Parameters":{
+        "RegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }
+    },
+    "Resources":{
+        "MyIpAllTrafficToSplunkInstanceSecurityGroupIngressRule":{
+            "Type":"AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+                "GroupId":{
+                    "Fn::ImportValue":{
+                        "Fn::Join":[
+                            "-",
+                            [
+                                {
+                                    "Ref":"RegionPrefix"
+                                },
+                                "SplunkInstanceSecurityGroupId"
+                            ]
+                        ]
+                    }
+                },
+                "CidrIp":"0.0.0.0/0",
+                "IpProtocol":"-1"
+            }
+        }   
+    }
+}

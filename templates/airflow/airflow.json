@@ -28,7 +28,7 @@
         }
       },     
       "AirflowEnvironmentExecutionIamPolicy": {
-        "Type": "AWS::IAM::Policy",
+        "Type": "AWS::IAM::Policy",``
         "Properties": {
           "PolicyName": {
             "Fn::Join": [

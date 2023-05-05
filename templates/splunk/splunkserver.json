@@ -1,0 +1,241 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters":{
+        "RegionPrefix":{
+            "Type":"String",
+            "Default":""
+        }        
+    },
+    "Mappings": {
+        "AWSAMIMapping": {
+           "ap-south-1": {
+              "HVM64" : "ami-0e742cca61fb65051"
+           },
+           "ap-northeast-2": {
+              "HVM64": "ami-0994dc69c39c35834"
+           },
+           "eu-west-1": {
+              "HVM64": "ami-04bf55d5e589debe9"
+           }
+        }
+     },
+    "Resources":{
+        "SplunkInstacneIamRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Path": "/",
+                "Policies": [
+                    {
+                        "PolicyName": "MongoInstanceIamRolePolicy",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                                "ec2:DescribeInstances",
+                                                "ec2-instance-connect:SendSSHPublicKey",
+                                                "ec2:DescribeInstances",
+                                                "ec2:DescribeTags",
+                                                "ec2:CreateTags",
+                                                "ecs:RegisterContainerInstance",
+                                                "ecs:DeregisterContainerInstance",
+                                                "ecs:DescribeContainerInstances",
+                                                "ecs:DiscoverPollEndpoint",
+                                                "ecs:*",
+                                                "ec2:*",
+                                                "logs:*"
+                                        ],
+                                    "Resource": [
+                                        "arn:aws:ec2:*:*:instance/*",
+                                        "arn:aws:ecs:*:*:cluster/*",
+                                        "*"
+                                    ]
+                                 }
+                                ]
+                            }
+                    }
+                ]
+            }
+        },
+        "SplunkInstacneIamProfile":{
+            "Type":"AWS::IAM::InstanceProfile",
+            "Properties":{
+                "Path":"/",
+                "Roles":[
+                    {
+                        "Ref":"SplunkInstacneIamRole"
+                    }
+                ]
+            }
+        },
+        "SplunkInstanceKeyPair": {
+            "Type": "AWS::EC2::KeyPair",
+            "Properties": {
+                "KeyName": "SplunkInstanceKeyPair"
+            }
+        },
+        "SplunkEcsCluster":{
+            "Type":"AWS::ECS::Cluster",
+            "Properties":{
+                "ClusterName":"SplunkEcsCluster"
+            }
+        },
+        "SplunkEcsTaskDefinition":{
+            "Type":"AWS::ECS::TaskDefinition",
+            "Properties":{
+                "Family":"SplunkEcsTaskDefinition",
+                "ContainerDefinitions":[
+                    {
+                        "Name":"SplunkEcsContainer",
+                        "Image":"splunk/splunk:latest",
+                        "PortMappings":[
+                            {
+                                "ContainerPort":9997,
+                                "HostPort":9997
+                            },
+                            {
+                                "ContainerPort":8000,
+                                "HostPort":8000
+                            },
+                            {
+                                "ContainerPort":8088,
+                                "HostPort":8088
+                            }
+                        ],
+                        "Environment":[
+                            {
+                                "Name":"SPLUNK_START_ARGS",
+                                "Value": "--accept-license"
+                            },
+                            {
+                                "Name":"SPLUNK_PASSWORD",
+                                "Value": "12345678"
+                            }
+                        ],
+                        "Memory":512,
+                        "Cpu":256,
+                        "LogConfiguration":{
+                            "LogDriver":"awslogs",
+                            "Options":{
+                                "awslogs-group":"/ecs/SplunkEcsCluster",
+                                "awslogs-region":{
+                                    "Ref":"AWS::Region"
+                                },
+                                "awslogs-create-group": "true",
+                                "awslogs-stream-prefix":"ecs"
+                            }
+                        }
+                    }
+                ],
+                "NetworkMode":"host"
+            }
+        },
+        "SplunkEcsService":{
+            "Type":"AWS::ECS::Service",
+            "Properties":{
+                "Cluster":{
+                    "Ref":"SplunkEcsCluster"
+                },
+                "DesiredCount":1,
+                "LaunchType":"EC2",
+                "DeploymentController":{"Type" :"ECS"},
+                "DeploymentConfiguration": {
+                    "MaximumPercent": 100,
+                    "MinimumHealthyPercent": 0
+                },
+                "PlacementConstraints":[
+                    {
+                        "Type":"memberOf",
+                        "Expression":{
+                                        "Fn::Join":
+                                            [
+                                                "",
+                                                [
+                                                    "ec2InstanceId",
+                                                    "==",
+                                                    {"Ref" : "SplunkInstance"}
+                                                ]
+                                            ]
+                                    }
+                    }
+                ],
+                "TaskDefinition":{
+                    "Ref":"SplunkEcsTaskDefinition"
+                }
+            }
+        },
+        "SplunkInstance":{
+            "Type":"AWS::EC2::Instance",
+            "Properties":{
+                "ImageId":{
+                    "Fn::FindInMap": [
+                        "AWSAMIMapping",
+                        { "Ref": "AWS::Region" },
+                        "HVM64"
+                    ]
+                },
+                "InstanceType":"t2.micro",
+                "IamInstanceProfile": {
+                    "Ref": "SplunkInstacneIamProfile"
+                },
+                "UserData":{
+                    "Fn::Base64":{
+                        "Fn::Join":[
+                            "",
+                            [
+                                "#!/bin/bash\n",
+                                "mkdir -p /etc/ecs\n",  
+                                "echo ECS_CLUSTER=SplunkEcsCluster >> /etc/ecs/ecs.config\n",
+                                "amazon-linux-extras install -y ecs\n",
+                                "systemctl enable --now --no-block ecs\n",
+                                "curl -s http://localhost:51678/v1/metadata | python -mjson.tool\n"
+                            ]
+                        ]
+                    }
+                },
+                "KeyName": {
+                    "Ref": "SplunkInstanceKeyPair"
+                },
+                "NetworkInterfaces": [ {
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [     {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-MongoInstanceSecurityGroupId"
+                            }
+                    }],
+                    "SubnetId":  {
+                        "Fn::ImportValue": 
+                            {
+                                "Fn::Sub": "${RegionPrefix}-public-subnet-1-id"
+                            }
+                    }
+                  } ],
+                "Tags":[
+                    {
+                        "Key":"Name",
+                        "Value":"SplunkInstance"
+                    }
+                ]
+            }
+        }
+    }
+}

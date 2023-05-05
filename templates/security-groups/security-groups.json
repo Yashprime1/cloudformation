@@ -16,6 +16,15 @@
                 }
             }
         },
+        "SplunkInstanceSecurityGroup":{
+            "Type":"AWS::EC2::SecurityGroup",
+            "Properties":{
+                "GroupDescription":"Splunk Instance Security Group",
+                "VpcId":{
+                    "Fn::ImportValue": {"Fn::Join": ["", [{"Ref":"RegionPrefix"}, "-vpc-id"]]}
+                }
+            }
+        },
         "RetoolInstanceSecurityGroup":{
             "Type":"AWS::EC2::SecurityGroup",
             "Properties":{
@@ -71,6 +80,25 @@
             },
             "Value":{
                 "Ref":"MongoInstanceSecurityGroup"
+            }
+        },
+        "SplunkInstanceSecurityGroupId":{
+            "Description":"Splunk Instance Security Group Id",
+            "Export":{
+                "Name":{
+                    "Fn::Join":[
+                        "-",
+                        [
+                            {
+                                "Ref":"RegionPrefix"
+                            },
+                            "SplunkInstanceSecurityGroupId"
+                        ]
+                    ]
+                }
+            },
+            "Value":{
+                "Ref":"SplunkInstanceSecurityGroup"
             }
         },
         "RetoolInstanceSecurityGroupId":{

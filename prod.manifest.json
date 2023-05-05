@@ -31,8 +31,8 @@
                 ]
             },
             {
-                "stackname":"mum-security-group-ingress-retool",
-                "template":"templates/security-groups/ingress/RetoolInstanceSecurityGroup.json",
+                "stackname":"mum-security-group-ingress-splunk",
+                "template":"templates/security-groups/ingress/SplunkInstanceSecurityGroup.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
@@ -42,30 +42,8 @@
                 ]
             },
             {
-                "stackname":"mum-security-group-ingress-retool",
-                "template":"templates/security-groups/ingress/RetoolInstanceSecurityGroup.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
-                "stackname":"mum-retool",
-                "template":"templates/retool/retool.json",
-                "parameters":[
-                    {
-                        "ParameterKey":"RegionPrefix",
-                        "ParameterValue":"mum",
-                        "ResolvedValue": "string"
-                    }
-                ]
-            },
-            {
-                "stackname":"mum-batch",
-                "template":"templates/batch/batch.json",
+                "stackname":"mum-splunk-server",
+                "template":"templates/splunk/splunkserver.json",
                 "parameters":[
                     {
                         "ParameterKey":"RegionPrefix",
